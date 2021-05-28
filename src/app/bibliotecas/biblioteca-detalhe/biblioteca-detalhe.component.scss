@@ -9,7 +9,7 @@ h2 {
 
 .informacao-container {
   display: grid;
-  grid-template-columns: 20% auto;
+  grid-template-columns: max(120px, 20%) auto;
   gap: 1rem;
 }
 
