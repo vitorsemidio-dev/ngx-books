@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
-import { LoginService } from './../login/login.service';
+import { BibliotecaService } from './../biblioteca.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -13,7 +14,8 @@ export class CadastroComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private bibliotecaService: LoginService,
+    private bibliotecaService: BibliotecaService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -25,16 +27,13 @@ export class CadastroComponent implements OnInit {
       name: ['Angular Ngx Books', [Validators.required]],
       email: ['angular@ngxbooks.com', [Validators.required, Validators.email]],
       password: ['123456', [Validators.required]],
-      passwordConfirmation: ['123456', [Validators.required]],
     });
   }
 
   onSubmit() {
-    this.bibliotecaService.fazerLogin(this.formulario.value).subscribe(
+    this.bibliotecaService.criar(this.formulario.value).subscribe(
       (response) => {
-        const nomeChave = '@ngx-books:biblioteca';
-        const dadosLoginBiblioteca = JSON.stringify(response);
-        localStorage.setItem(nomeChave, dadosLoginBiblioteca);
+        this.router.navigate(['/login']);
       },
       (error) => {},
     );
