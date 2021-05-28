@@ -12,8 +12,13 @@ export class CardItemComponent implements OnInit {
   @Input() slug: string;
 
   @Input() textoBotao = 'Clique aqui';
+  @Input() tipoBotaoCta: 'Link' | 'Botao' = 'Link';
 
   constructor() {}
 
   ngOnInit(): void {}
+
+  onClick() {
+    console.log('button');
+  }
 }
