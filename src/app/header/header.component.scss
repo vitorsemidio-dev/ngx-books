@@ -6,6 +6,10 @@ header {
   width: 100%;
   max-width: 61.25rem;
   padding: 0.5rem 1rem;
+
+  @media (max-width: 768px) {
+    gap: 2rem;
+  }
 }
 
 header > :last-child {
