@@ -30,4 +30,8 @@ export class BibliotecaService {
   buscarPorSlug(slug: string) {
     return this.http.get<Biblioteca>(`${this.apiUrl}/libraries/${slug}`);
   }
+
+  listarCatalogo(idBiblioteca: string) {
+    return this.http.get<any>(`${this.apiUrl}/libraries/stock/${idBiblioteca}`);
+  }
 }

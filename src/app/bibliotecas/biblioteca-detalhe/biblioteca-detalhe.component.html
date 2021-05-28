@@ -11,6 +11,17 @@
       />
     </div>
 
-    <aside>Lista de livros disponíveis</aside>
+    <aside>
+      <h4>Lista de livros disponíveis</h4>
+
+      <div *ngIf="catalogo">
+        <div *ngIf="catalogo?.length > 0; else semCatalogo">
+          {{ catalogo | json }}
+        </div>
+        <ng-template #semCatalogo>
+          Nenhum livro encontrado nesta biblioteca
+        </ng-template>
+      </div>
+    </aside>
   </div>
 </div>

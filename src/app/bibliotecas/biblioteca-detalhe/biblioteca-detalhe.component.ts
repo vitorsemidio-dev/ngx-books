@@ -11,6 +11,7 @@ import { BibliotecaService } from './../../biblioteca.service';
 export class BibliotecaDetalheComponent implements OnInit {
   private slug: string;
   private _biblioteca: Biblioteca;
+  catalogo: any[];
 
   get biblioteca() {
     return this._biblioteca;
@@ -42,5 +43,16 @@ export class BibliotecaDetalheComponent implements OnInit {
       .toPromise()
       .then((response) => (this.biblioteca = response))
       .catch((error) => {});
+
+    this.carregarCatalogo(this.biblioteca.id);
+  }
+
+  private carregarCatalogo(idBiblioteca: string) {
+    this.bibliotecaService.listarCatalogo(idBiblioteca).subscribe(
+      (response) => {
+        this.catalogo = response;
+      },
+      (error) => {},
+    );
   }
 }
