@@ -55,4 +55,8 @@ export class BibliotecaDetalheComponent implements OnInit {
       (error) => {},
     );
   }
+
+  handleAlugar(evento: any) {
+    console.log(evento);
+  }
 }

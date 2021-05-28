@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-card-item',
@@ -14,11 +14,13 @@ export class CardItemComponent implements OnInit {
   @Input() textoBotao = 'Clique aqui';
   @Input() tipoBotaoCta: 'Link' | 'Botao' = 'Link';
 
+  @Output() onClickCta = new EventEmitter<string>();
+
   constructor() {}
 
   ngOnInit(): void {}
 
-  onClick() {
-    console.log('button');
+  emitirOnClickCta() {
+    this.onClickCta.emit(this.slug);
   }
 }

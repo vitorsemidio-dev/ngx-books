@@ -23,8 +23,10 @@
             <app-card-item
               [titulo]="livro.name"
               [imgUrl]="livro.imgUrl"
+              [slug]="livro.slug"
               [textoBotao]="'alugar'"
               [tipoBotaoCta]="'Botao'"
+              (onClickCta)="handleAlugar($event)"
             >
             </app-card-item>
           </li>
