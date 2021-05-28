@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 
 import { environment } from 'src/environments/environment';
 
+import { Biblioteca } from './bibliotecas/biblioteca.model';
+
 interface IBiblioteca {
   name: string;
   email: string;
@@ -22,6 +24,6 @@ export class BibliotecaService {
   }
 
   listar() {
-    return this.http.get(`${this.apiUrl}/libraries`);
+    return this.http.get<Biblioteca[]>(`${this.apiUrl}/libraries`);
   }
 }
