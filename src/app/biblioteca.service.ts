@@ -20,4 +20,8 @@ export class BibliotecaService {
   criar(biblioteca: IBiblioteca) {
     return this.http.post(`${this.apiUrl}/libraries`, { ...biblioteca });
   }
+
+  listar() {
+    return this.http.get(`${this.apiUrl}/libraries`);
+  }
 }
