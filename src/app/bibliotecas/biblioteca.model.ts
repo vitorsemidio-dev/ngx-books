@@ -4,6 +4,7 @@ export class Biblioteca {
   slug: string;
   email: string;
   avatar: string;
+  imgUrl: string;
   created_at: Date;
   updated_at: Date;
 }
