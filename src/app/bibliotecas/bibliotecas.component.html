@@ -4,7 +4,8 @@
   <ul class="listagem-biblioteca">
     <li *ngFor="let biblioteca of listagemBibliotecas">
       <!-- {{ biblioteca.name }} -->
-      <app-card-item></app-card-item>
+      <app-card-item [titulo]="biblioteca.name" [textoBotao]="'Visitar'">
+      </app-card-item>
     </li>
   </ul>
 </section>

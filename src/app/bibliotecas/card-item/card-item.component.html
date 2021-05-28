@@ -6,9 +6,9 @@
     <h3 class="card-titulo">
       {{ titulo }}
     </h3>
-    <small> {{ subtitulo }} </small>
-    <button class="btn btn-primary card-btn">
+    <small class="card-subtitulo" *ngIf="subtitulo"> {{ subtitulo }} </small>
+    <a class="btn btn-primary card-btn" href="/bibliotecas/id">
       {{ textoBotao }}
-    </button>
+    </a>
   </div>
 </div>
