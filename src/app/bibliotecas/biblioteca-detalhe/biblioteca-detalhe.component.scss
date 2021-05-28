@@ -10,7 +10,7 @@ h2 {
 .informacao-container {
   display: grid;
   grid-template-columns: max(120px, 20%) auto;
-  gap: 1rem;
+  gap: 2rem;
 }
 
 .img-container {
@@ -22,4 +22,9 @@ h2 {
     max-width: 100%;
     object-fit: cover;
   }
+}
+
+.listagem-catalogo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
 }

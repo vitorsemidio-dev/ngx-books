@@ -15,9 +15,19 @@
       <h4>Lista de livros disponíveis</h4>
 
       <div *ngIf="catalogo">
-        <div *ngIf="catalogo?.length > 0; else semCatalogo">
-          {{ catalogo | json }}
-        </div>
+        <ul
+          class="listagem-catalogo"
+          *ngIf="catalogo?.length > 0; else semCatalogo"
+        >
+          <li *ngFor="let livro of catalogo">
+            <app-card-item
+              [titulo]="livro.name"
+              [imgUrl]="livro.imgUrl"
+              [textoBotao]="'alugar'"
+            >
+            </app-card-item>
+          </li>
+        </ul>
         <ng-template #semCatalogo>
           Nenhum livro encontrado nesta biblioteca
         </ng-template>
