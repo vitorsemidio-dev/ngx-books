@@ -4,7 +4,12 @@
   </h2>
 
   <div class="informacao-container">
-    <div class="img-container">imagem biblioteca</div>
+    <div class="img-container">
+      <img
+        [src]="biblioteca.imgUrl"
+        alt="{{ 'Imagem Biblioteca ' + biblioteca.name }}"
+      />
+    </div>
 
     <aside>Lista de livros disponíveis</aside>
   </div>

@@ -4,4 +4,22 @@
 
 h2 {
   font-size: 2.5rem;
+  margin-bottom: 0.5em;
+}
+
+.informacao-container {
+  display: grid;
+  grid-template-columns: 20% auto;
+  gap: 1rem;
+}
+
+.img-container {
+  width: 100%;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    max-width: 100%;
+    object-fit: cover;
+  }
 }
