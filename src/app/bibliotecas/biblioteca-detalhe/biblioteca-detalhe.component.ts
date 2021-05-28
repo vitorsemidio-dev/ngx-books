@@ -9,7 +9,7 @@ import { BibliotecaService } from './../../biblioteca.service';
   styleUrls: ['./biblioteca-detalhe.component.scss'],
 })
 export class BibliotecaDetalheComponent implements OnInit {
-  private slug: string;
+  slug: string;
   biblioteca: Biblioteca;
 
   constructor(
@@ -24,15 +24,17 @@ export class BibliotecaDetalheComponent implements OnInit {
   carregarTela() {
     this.route.params.subscribe((params) => {
       this.slug = params['slug'];
-      console.log(params);
       this.carregarDadosBiblioteca(this.slug);
     });
   }
 
-  carregarDadosBiblioteca(slug: string) {
-    this.bibliotecaService.buscarPorSlug(slug).subscribe(
-      (response) => console.log(response),
-      (error) => {},
-    );
+  private carregarDadosBiblioteca(slug: string) {
+    this.bibliotecaService
+      .buscarPorSlug(slug)
+      .subscribe(this.setBiblioteca, (error) => {});
+  }
+
+  private setBiblioteca(dadosBiblioteca: Biblioteca) {
+    this.biblioteca = dadosBiblioteca;
   }
 }
