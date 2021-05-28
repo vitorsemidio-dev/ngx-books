@@ -2,7 +2,7 @@
   <aside class="aside-container">
     <img src="assets/img-cadastro-biblioteca.svg" alt="Cadastro Biblioteca" />
     <p>Já criou sua conta?</p>
-    <a class="btn btn-outline-info" href="/login">Entrar agora</a>
+    <a class="btn btn-outline-info" [routerLink]="['login']">Entrar agora</a>
   </aside>
 
   <form class="formulario-login" novalidate [formGroup]="formulario">
@@ -39,6 +39,6 @@
       Cadastrar
     </button>
 
-    <a href="/usuario"> Entrar como usuário </a>
+    <a [routerLink]="['usuario']"> Entrar como usuário </a>
   </form>
 </div>

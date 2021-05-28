@@ -1,0 +1,31 @@
+* {
+  color: #fff;
+}
+
+h2 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5em;
+}
+
+.informacao-container {
+  display: grid;
+  grid-template-columns: max(120px, 20%) auto;
+  gap: 2rem;
+}
+
+.img-container {
+  width: 100%;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    max-width: 100%;
+    object-fit: cover;
+  }
+}
+
+.listagem-catalogo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+}

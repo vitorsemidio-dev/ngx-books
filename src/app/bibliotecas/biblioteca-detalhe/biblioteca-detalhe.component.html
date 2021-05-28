@@ -1,0 +1,41 @@
+<div *ngIf="biblioteca">
+  <h2>
+    {{ biblioteca.name }}
+  </h2>
+
+  <div class="informacao-container">
+    <div class="img-container">
+      <img
+        [src]="biblioteca.imgUrl"
+        alt="{{ 'Imagem Biblioteca ' + biblioteca.name }}"
+      />
+    </div>
+
+    <aside>
+      <h4>Lista de livros disponíveis</h4>
+
+      <div *ngIf="catalogo">
+        <ul
+          class="listagem-catalogo"
+          *ngIf="catalogo?.length > 0; else semCatalogo"
+        >
+          <li *ngFor="let livro of catalogo">
+            <app-card-item
+              [titulo]="livro.name"
+              subtitulo="{{ 'Escrito por ' + livro.author }}"
+              [imgUrl]="livro.imgUrl"
+              [slug]="livro.slug"
+              [textoBotao]="'alugar'"
+              [tipoBotaoCta]="'Botao'"
+              (onClickCta)="handleAlugar($event)"
+            >
+            </app-card-item>
+          </li>
+        </ul>
+        <ng-template #semCatalogo>
+          Nenhum livro encontrado nesta biblioteca
+        </ng-template>
+      </div>
+    </aside>
+  </div>
+</div>

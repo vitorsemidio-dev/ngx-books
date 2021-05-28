@@ -18,6 +18,13 @@ const routes: Routes = [
     path: 'cadastro',
     component: CadastroComponent,
   },
+  {
+    path: 'bibliotecas',
+    loadChildren: () =>
+      import('./bibliotecas/bibliotecas.module').then(
+        (m) => m.BibliotecasModule,
+      ),
+  },
 ];
 
 @NgModule({
