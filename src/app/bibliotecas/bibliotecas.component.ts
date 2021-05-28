@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { BibliotecaService } from './../biblioteca.service';
+
 @Component({
   selector: 'app-bibliotecas',
   templateUrl: './bibliotecas.component.html',
@@ -29,7 +31,15 @@ export class BibliotecasComponent implements OnInit {
     'Biblioteca 20',
   ];
 
-  constructor() {}
+  constructor(private bibliotecaService: BibliotecaService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.carregarListagem();
+  }
+
+  carregarListagem() {
+    this.bibliotecaService
+      .listar()
+      .subscribe((response) => console.log(response));
+  }
 }
