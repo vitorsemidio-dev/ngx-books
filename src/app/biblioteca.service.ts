@@ -12,6 +12,12 @@ interface IBiblioteca {
   password: string;
 }
 
+interface IAluguelLivro {
+  userId: string;
+  bookId: string;
+  libraryId: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -36,5 +42,19 @@ export class BibliotecaService {
     return this.http.get<Livro[]>(
       `${this.apiUrl}/libraries/stock/${idBiblioteca}`,
     );
+  }
+
+  alugarLivro(infoAlugar: IAluguelLivro) {
+    const {
+      bookId: book_id,
+      libraryId: library_id,
+      userId: user_id,
+    } = infoAlugar;
+
+    return this.http.post(`${this.apiUrl}/libraries/rent`, {
+      book_id,
+      library_id,
+      user_id,
+    });
   }
 }

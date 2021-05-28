@@ -57,7 +57,26 @@ export class BibliotecaDetalheComponent implements OnInit {
     );
   }
 
-  handleAlugar(evento: any) {
-    console.log(evento);
+  handleAlugar(evento: string) {
+    const localStorageData = JSON.parse(
+      localStorage.getItem('@ngx-books:biblioteca'),
+    ) as { library: Biblioteca };
+
+    const userData = localStorageData.library;
+
+    const bookId = evento;
+    const userId = userData.id;
+    const libraryId = this.biblioteca.id;
+
+    this.bibliotecaService
+      .alugarLivro({
+        bookId,
+        userId,
+        libraryId,
+      })
+      .subscribe(
+        (response) => console.log(response),
+        (error) => {},
+      );
   }
 }
