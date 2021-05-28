@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Biblioteca } from './biblioteca.model';
 import { BibliotecaService } from './../biblioteca.service';
 
 @Component({
@@ -8,28 +9,7 @@ import { BibliotecaService } from './../biblioteca.service';
   styleUrls: ['./bibliotecas.component.scss'],
 })
 export class BibliotecasComponent implements OnInit {
-  listagemBibliotecas: string[] = [
-    'Biblioteca 1',
-    'Biblioteca 2',
-    'Biblioteca 3',
-    'Biblioteca 4',
-    'Biblioteca 5',
-    'Biblioteca 6',
-    'Biblioteca 7',
-    'Biblioteca 8',
-    'Biblioteca 9',
-    'Biblioteca 10',
-    'Biblioteca 11',
-    'Biblioteca 12',
-    'Biblioteca 13',
-    'Biblioteca 14',
-    'Biblioteca 15',
-    'Biblioteca 16',
-    'Biblioteca 17',
-    'Biblioteca 18',
-    'Biblioteca 19',
-    'Biblioteca 20',
-  ];
+  listagemBibliotecas: Biblioteca[] = [];
 
   constructor(private bibliotecaService: BibliotecaService) {}
 
@@ -38,8 +18,11 @@ export class BibliotecasComponent implements OnInit {
   }
 
   carregarListagem() {
-    this.bibliotecaService
-      .listar()
-      .subscribe((response) => console.log(response));
+    this.bibliotecaService.listar().subscribe(
+      (response) => {
+        this.listagemBibliotecas = response;
+      },
+      (error) => {},
+    );
   }
 }
