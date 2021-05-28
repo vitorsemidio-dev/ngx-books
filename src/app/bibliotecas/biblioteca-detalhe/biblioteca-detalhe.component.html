@@ -22,6 +22,7 @@
           <li *ngFor="let livro of catalogo">
             <app-card-item
               [titulo]="livro.name"
+              subtitulo="{{ 'Escrito por ' + livro.author }}"
               [imgUrl]="livro.imgUrl"
               [slug]="livro.slug"
               [textoBotao]="'alugar'"

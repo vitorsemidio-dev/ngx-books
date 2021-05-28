@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Biblioteca } from './../biblioteca.model';
 import { BibliotecaService } from './../../biblioteca.service';
+import { Livro } from '../livro.model';
 @Component({
   selector: 'app-biblioteca-detalhe',
   templateUrl: './biblioteca-detalhe.component.html',
@@ -11,7 +12,7 @@ import { BibliotecaService } from './../../biblioteca.service';
 export class BibliotecaDetalheComponent implements OnInit {
   private slug: string;
   private _biblioteca: Biblioteca;
-  catalogo: any[];
+  catalogo: Livro[];
 
   get biblioteca() {
     return this._biblioteca;
