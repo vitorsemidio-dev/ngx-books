@@ -1,0 +1,41 @@
+$blue-purple: #1c2056;
+$light-blue: #6aaddd;
+
+.grid {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  background-color: $blue-purple;
+}
+
+img {
+  max-width: 100%;
+}
+
+.formulario-login {
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  label {
+    color: #fff;
+  }
+
+  .form-group + .form-group {
+    margin-top: 1rem;
+  }
+
+  .form-group + .btn {
+    margin-top: 2rem;
+  }
+
+  * + a {
+    color: $light-blue;
+    align-self: center;
+    margin-top: 2rem;
+
+    &:hover {
+      filter: brightness(1.2);
+    }
+  }
+}
