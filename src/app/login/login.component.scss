@@ -6,6 +6,11 @@ $light-blue: #6aaddd;
   grid-template-columns: 3fr 2fr;
   background-color: $blue-purple;
   border-radius: 16px;
+
+  @media (max-width: 578px) {
+    display: flex;
+    flex-direction: column-reverse;
+  }
 }
 
 .aside-container {
@@ -19,6 +24,10 @@ $light-blue: #6aaddd;
     display: block;
     margin: 0 auto;
     max-width: 85%;
+  }
+
+  @media (max-width: 768px) {
+    padding: 1.5rem;
   }
 }
 
@@ -48,5 +57,9 @@ $light-blue: #6aaddd;
     &:hover {
       filter: brightness(1.2);
     }
+  }
+
+  @media (max-width: 768px) {
+    padding: 1.5rem;
   }
 }
