@@ -36,10 +36,11 @@ export class BibliotecaDetalheComponent implements OnInit {
     });
   }
 
-  private carregarDadosBiblioteca(slug: string) {
-    this.bibliotecaService.buscarPorSlug(slug).subscribe(
-      (response) => (this.biblioteca = response),
-      (error) => {},
-    );
+  private async carregarDadosBiblioteca(slug: string) {
+    await this.bibliotecaService
+      .buscarPorSlug(slug)
+      .toPromise()
+      .then((response) => (this.biblioteca = response))
+      .catch((error) => {});
   }
 }
