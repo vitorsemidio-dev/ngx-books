@@ -26,4 +26,8 @@ export class BibliotecaService {
   listar() {
     return this.http.get<Biblioteca[]>(`${this.apiUrl}/libraries`);
   }
+
+  buscarPorSlug(slug: string) {
+    return this.http.get<Biblioteca>(`${this.apiUrl}/libraries/${slug}`);
+  }
 }
