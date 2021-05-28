@@ -9,8 +9,16 @@ import { BibliotecaService } from './../../biblioteca.service';
   styleUrls: ['./biblioteca-detalhe.component.scss'],
 })
 export class BibliotecaDetalheComponent implements OnInit {
-  slug: string;
-  biblioteca: Biblioteca;
+  private slug: string;
+  private _biblioteca: Biblioteca;
+
+  get biblioteca() {
+    return this._biblioteca;
+  }
+
+  set biblioteca(dadosBiblioteca: Biblioteca) {
+    this._biblioteca = dadosBiblioteca;
+  }
 
   constructor(
     private bibliotecaService: BibliotecaService,
@@ -29,12 +37,9 @@ export class BibliotecaDetalheComponent implements OnInit {
   }
 
   private carregarDadosBiblioteca(slug: string) {
-    this.bibliotecaService
-      .buscarPorSlug(slug)
-      .subscribe(this.setBiblioteca, (error) => {});
-  }
-
-  private setBiblioteca(dadosBiblioteca: Biblioteca) {
-    this.biblioteca = dadosBiblioteca;
+    this.bibliotecaService.buscarPorSlug(slug).subscribe(
+      (response) => (this.biblioteca = response),
+      (error) => {},
+    );
   }
 }
