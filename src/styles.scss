@@ -9,3 +9,14 @@ body {
   min-height: 100vh;
   background-color: $dark-blue;
 }
+
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
