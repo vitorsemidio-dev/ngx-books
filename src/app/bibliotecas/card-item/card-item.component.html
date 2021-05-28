@@ -1,1 +1,14 @@
-<p>card-item works!</p>
+<div class="card-container">
+  <div class="img-container">
+    <img [src]="imgUrl" [alt]="'Capa da biblioteca xyz'" />
+  </div>
+  <div class="content">
+    <h3>
+      {{ titulo }}
+    </h3>
+    <small> {{ subtitulo }} </small>
+    <button class="btn btn-primary">
+      {{ textoBotao }}
+    </button>
+  </div>
+</div>
