@@ -31,9 +31,16 @@
 
     <ul class="listagem-card" *ngIf="catalogo">
       <li *ngFor="let livro of catalogo">
-        <p>
-          {{ livro.name }}
-        </p>
+        <div class="item-container">
+          <div class="img-container">
+            <img [src]="livro.imgUrl || imgUrlDefault" alt="" />
+          </div>
+          <div class="content">
+            <h4>
+              {{ livro.name }}
+            </h4>
+          </div>
+        </div>
       </li>
     </ul>
   </aside>

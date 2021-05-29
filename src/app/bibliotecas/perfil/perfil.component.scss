@@ -10,11 +10,18 @@ h2 {
 .grid {
   display: grid;
   grid-template-columns: auto 30%;
+  align-items: flex-start;
   gap: 1rem;
 
   > * {
     background-color: rgba(255, 255, 255, 0.05);
     border-radius: 8px;
+  }
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: stretch;
   }
 }
 
@@ -62,5 +69,35 @@ h2 {
 ul {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: 1rem 0.5rem;
+}
+
+.item-container {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+
+  .content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transition: transform 300ms;
+    transform: translateY(120%);
+    background-image: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.7),
+      rgba(0, 0, 0, 0.05)
+    );
+  }
+
+  &:hover .content {
+    transform: translateY(0);
+  }
+}
+
+.img-container img {
+  width: 100%;
+  max-width: 100%;
 }
