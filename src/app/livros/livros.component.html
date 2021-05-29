@@ -1,1 +1,16 @@
-<p>livros works!</p>
+<section>
+  <h2>Listagem de livros</h2>
+
+  <ul class="listagem-livro">
+    <li *ngFor="let livro of listagemLivro">
+      <app-card-item
+        [key]="livro.id"
+        [titulo]="livro.name"
+        [imgUrl]="livro.imgUrl"
+        [textoBotao]="'Alugar'"
+        [tipoBotaoCta]="'Botao'"
+        (onClickCta)="handleAlugar($event)"
+      ></app-card-item>
+    </li>
+  </ul>
+</section>
