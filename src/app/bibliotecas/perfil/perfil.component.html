@@ -23,15 +23,18 @@
     </div>
   </div>
 
-  <div class="listagem-container">
-    <header>
-      <h3>Informação lista</h3>
+  <aside class="listagem-container">
+    <header class="header-listagem">
+      <h3>Catálogo</h3>
+      <button class="btn btn-sm btn-outline-primary">+</button>
     </header>
 
-    <div class="listagem-card">
-      <p>Card1</p>
-      <p>Card2</p>
-      <p>Card3</p>
-    </div>
-  </div>
+    <ul class="listagem-card" *ngIf="catalogo">
+      <li *ngFor="let livro of catalogo">
+        <p>
+          {{ livro.name }}
+        </p>
+      </li>
+    </ul>
+  </aside>
 </div>

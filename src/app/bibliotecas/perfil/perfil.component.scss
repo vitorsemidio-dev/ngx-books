@@ -38,3 +38,29 @@ h2 {
     margin-left: 0.5rem;
   }
 }
+
+.header-listagem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .btn {
+    margin-left: 0.5rem;
+  }
+
+  h3 {
+    flex-grow: 1;
+
+    max-width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 0.5rem;
+}
