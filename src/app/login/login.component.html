@@ -1,9 +1,12 @@
 <div class="grid">
-  <aside class="aside-container">
-    <img src="assets/img-autenticacao.svg" alt="Autenticação" />
-    <p>Ainda não possui um registro?</p>
-    <a class="btn btn-outline-info" [routerLink]="['cadastro']">Criar conta</a>
-  </aside>
+  <app-aside-item
+    [imgUrl]="'assets/img-autenticacao.svg'"
+    [imgAltTexto]="'Autenticação'"
+    [texto]="'Ainda não possui um registro?'"
+    [url]="'/cadastro'"
+    [linkTexto]="'Criar conta'"
+  >
+  </app-aside-item>
 
   <form class="formulario-login" novalidate [formGroup]="formulario">
     <div class="form-group">
