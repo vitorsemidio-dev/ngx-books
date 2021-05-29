@@ -3,7 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Biblioteca } from './../biblioteca.model';
 import { BibliotecaService } from './../../biblioteca.service';
-import { Livro } from '../livro.model';
+import { Livro } from '../../livros/livro.model';
+
 @Component({
   selector: 'app-biblioteca-detalhe',
   templateUrl: './biblioteca-detalhe.component.html',
