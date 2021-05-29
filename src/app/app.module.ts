@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { CadastroComponent } from './cadastro/cadastro.component';
 import { LivrosComponent } from './livros/livros.component';
 import { SharedModule } from './shared/shared.module';
+import { CardItemLivroComponent } from './livros/card-item-livro/card-item-livro.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { SharedModule } from './shared/shared.module';
     LoginComponent,
     CadastroComponent,
     LivrosComponent,
+    CardItemLivroComponent,
   ],
   imports: [
     BrowserModule,

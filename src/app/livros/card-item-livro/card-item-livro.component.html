@@ -1,0 +1,8 @@
+<app-card-item
+  [key]="livro.id"
+  [titulo]="livro.name"
+  [imgUrl]="livro.imgUrl"
+  [textoBotao]="'Alugar'"
+  [tipoBotaoCta]="'Botao'"
+  (onClickCta)="emitirClickCtaLivro()"
+></app-card-item>

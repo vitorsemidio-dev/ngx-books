@@ -3,14 +3,10 @@
 
   <ul class="listagem-livro">
     <li *ngFor="let livro of listagemLivro">
-      <app-card-item
-        [key]="livro.id"
-        [titulo]="livro.name"
-        [imgUrl]="livro.imgUrl"
-        [textoBotao]="'Alugar'"
-        [tipoBotaoCta]="'Botao'"
-        (onClickCta)="handleAlugar($event)"
-      ></app-card-item>
+      <app-card-item-livro
+        [livro]="livro"
+        (onClickCtaLivro)="handleAlugar($event)"
+      ></app-card-item-livro>
     </li>
   </ul>
 </section>

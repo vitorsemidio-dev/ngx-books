@@ -26,7 +26,7 @@ export class LivrosComponent implements OnInit {
     );
   }
 
-  handleAlugar(evento: any) {
+  handleAlugar(evento: Livro) {
     console.log(evento);
   }
 }
