@@ -9,10 +9,11 @@ export class CardItemComponent implements OnInit {
   @Input() imgUrl: string;
   @Input() titulo: string;
   @Input() subtitulo: string;
-  @Input() slug: string;
+  @Input() key: string;
+  @Input() url: string;
 
   @Input() textoBotao = 'Clique aqui';
-  @Input() tipoBotaoCta: 'Link' | 'Botao' = 'Link';
+  @Input() tipoBotaoCta: 'Link' | 'Botao' | 'Desativado' = 'Link';
 
   @Output() onClickCta = new EventEmitter<string>();
 
@@ -21,6 +22,6 @@ export class CardItemComponent implements OnInit {
   ngOnInit(): void {}
 
   emitirOnClickCta() {
-    this.onClickCta.emit(this.slug);
+    this.onClickCta.emit(this.key);
   }
 }

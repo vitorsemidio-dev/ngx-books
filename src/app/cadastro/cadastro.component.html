@@ -1,9 +1,12 @@
 <div class="grid">
-  <aside class="aside-container">
-    <img src="assets/img-cadastro-biblioteca.svg" alt="Cadastro Biblioteca" />
-    <p>Já criou sua conta?</p>
-    <a class="btn btn-outline-info" [routerLink]="['/login']">Entrar agora</a>
-  </aside>
+  <app-aside-item
+    [imgUrl]="'assets/img-cadastro-biblioteca.svg'"
+    [imgAltTexto]="'Cadastro Biblioteca'"
+    [texto]="'Já criou sua conta?'"
+    [url]="'/login'"
+    [linkTexto]="'Entrar agora'"
+  >
+  </app-aside-item>
 
   <form class="formulario-login" novalidate [formGroup]="formulario">
     <div class="form-group">

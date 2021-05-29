@@ -13,25 +13,6 @@ $light-blue: #6aaddd;
   }
 }
 
-.aside-container {
-  padding: 2rem 3rem;
-  p {
-    font-size: 1.25rem;
-    max-width: 15ch;
-    color: #fff;
-    margin-top: 1rem;
-  }
-  img {
-    display: block;
-    margin: 0 auto;
-    max-width: 85%;
-  }
-
-  @media (max-width: 768px) {
-    padding: 1.5rem;
-  }
-}
-
 .formulario-login {
   padding: 3rem;
   display: flex;

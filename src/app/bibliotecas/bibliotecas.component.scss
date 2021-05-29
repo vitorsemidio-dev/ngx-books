@@ -8,11 +8,8 @@ h2 {
   font-size: 2.5rem;
 }
 
-section {
-  margin-top: 1.5rem;
-}
-
 .listagem-biblioteca {
+  margin-top: 1.5rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1.5rem 1rem;
