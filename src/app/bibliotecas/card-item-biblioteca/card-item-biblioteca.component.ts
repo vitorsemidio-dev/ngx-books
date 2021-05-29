@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { Biblioteca } from '../biblioteca.model';
 
@@ -9,8 +9,13 @@ import { Biblioteca } from '../biblioteca.model';
 })
 export class CardItemBibliotecaComponent implements OnInit {
   @Input() biblioteca: Biblioteca;
+  @Output() onClickCtaBiblioteca = new EventEmitter<Biblioteca>();
 
   constructor() {}
 
   ngOnInit(): void {}
+
+  emitirClickCtaBiblioteca() {
+    this.onClickCtaBiblioteca.emit(this.biblioteca);
+  }
 }
