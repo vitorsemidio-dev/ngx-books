@@ -3,13 +3,9 @@
 <section>
   <ul class="listagem-biblioteca">
     <li *ngFor="let biblioteca of listagemBibliotecas">
-      <app-card-item
-        [titulo]="biblioteca.name"
-        [textoBotao]="'Visitar'"
-        [imgUrl]="biblioteca.imgUrl"
-        [slug]="biblioteca.slug"
-      >
-      </app-card-item>
+      <app-card-item-biblioteca
+        [biblioteca]="biblioteca"
+      ></app-card-item-biblioteca>
     </li>
   </ul>
 </section>
