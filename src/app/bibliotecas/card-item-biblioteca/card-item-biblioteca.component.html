@@ -1,0 +1,9 @@
+<app-card-item
+  [key]="biblioteca.id"
+  [titulo]="biblioteca.name"
+  [textoBotao]="'Visitar'"
+  [imgUrl]="biblioteca.imgUrl"
+  [url]="biblioteca.slug"
+  (onClickCta)="emitirClickCtaBiblioteca()"
+>
+</app-card-item>
