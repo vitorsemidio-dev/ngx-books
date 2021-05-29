@@ -2,6 +2,11 @@ div {
   color: #fff;
 }
 
+h2 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5em;
+}
+
 .grid {
   display: grid;
   grid-template-columns: auto 30%;
@@ -10,5 +15,26 @@ div {
   > * {
     background-color: rgba(255, 255, 255, 0.05);
     border-radius: 8px;
+  }
+}
+
+.conteudo-container {
+  display: grid;
+  grid-template-columns: max(80px, 15%) auto;
+
+  gap: 0.5rem;
+  .img-container {
+    img {
+      max-width: 100%;
+    }
+  }
+}
+
+:where(footer, .footer) {
+  display: flex;
+  justify-content: flex-end;
+
+  .btn + .btn {
+    margin-left: 0.5rem;
   }
 }

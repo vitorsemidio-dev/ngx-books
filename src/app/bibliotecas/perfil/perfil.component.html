@@ -1,11 +1,25 @@
 <div class="grid">
-  <div class="informacao-container">
-    <h2>Informação</h2>
+  <div class="informacao-container" *ngIf="biblioteca">
+    <h2>Informações perfil</h2>
     <div class="conteudo-container">
-      <h3>Nome</h3>
-      <p>Informação 1</p>
-      <p>Informação 2</p>
-      <p>Informação 3</p>
+      <div class="img-container">
+        <img
+          [src]="biblioteca.imgUrl || imgUrlDefault"
+          alt="'Capa biblioteca' + {{ biblioteca.name }}"
+        />
+      </div>
+      <div class="conteudo">
+        <h3>
+          {{ biblioteca.name }}
+        </h3>
+        <p>Email: {{ biblioteca.email }}</p>
+        <p>Publicação: {{ biblioteca.created_at | date: 'dd/MM/yyyy' }}</p>
+
+        <footer class="footer">
+          <button class="btn btn-warning">Editar</button>
+          <button class="btn btn-danger">Excluir</button>
+        </footer>
+      </div>
     </div>
   </div>
 
