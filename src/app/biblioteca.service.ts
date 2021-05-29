@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
 import { Biblioteca } from './bibliotecas/biblioteca.model';
-import { Livro } from './bibliotecas/livro.model';
+import { Livro } from './livros/livro.model';
 
 interface IBiblioteca {
   name: string;
