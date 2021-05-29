@@ -1,10 +1,9 @@
-<h4>card biblioteca</h4>
-
 <app-card-item
+  [key]="biblioteca.id"
   [titulo]="biblioteca.name"
   [textoBotao]="'Visitar'"
   [imgUrl]="biblioteca.imgUrl"
-  [slug]="biblioteca.slug"
+  [url]="biblioteca.slug"
   (onClickCta)="emitirClickCtaBiblioteca()"
 >
 </app-card-item>
