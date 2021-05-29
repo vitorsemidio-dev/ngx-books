@@ -7,5 +7,6 @@ import { CardItemComponent } from './card-item/card-item.component';
 @NgModule({
   declarations: [CardItemComponent],
   imports: [CommonModule, RouterModule],
+  exports: [CardItemComponent],
 })
 export class SharedModule {}
