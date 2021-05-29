@@ -6,12 +6,14 @@ import { BibliotecasComponent } from './bibliotecas.component';
 import { BibliotecaDetalheComponent } from './biblioteca-detalhe/biblioteca-detalhe.component';
 import { CardItemBibliotecaComponent } from './card-item-biblioteca/card-item-biblioteca.component';
 import { SharedModule } from '../shared/shared.module';
+import { PerfilComponent } from './perfil/perfil.component';
 
 @NgModule({
   declarations: [
     BibliotecasComponent,
     BibliotecaDetalheComponent,
     CardItemBibliotecaComponent,
+    PerfilComponent,
   ],
   imports: [CommonModule, BibliotecasRoutingModule, SharedModule],
 })
