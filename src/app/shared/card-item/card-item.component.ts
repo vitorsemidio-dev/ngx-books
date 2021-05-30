@@ -6,8 +6,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./card-item.component.scss'],
 })
 export class CardItemComponent implements OnInit {
-  imgUrlDefault = 'https://via.placeholder.com/150';
-
   @Input() imgUrl: string;
   @Input() titulo: string;
   @Input() subtitulo: string;

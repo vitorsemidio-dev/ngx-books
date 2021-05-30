@@ -9,7 +9,6 @@ import { LivrosService } from 'src/app/livros/livros.service';
   styleUrls: ['./livro-detalhe.component.scss'],
 })
 export class LivroDetalheComponent implements OnInit {
-  imgUrlDefault = 'https://via.placeholder.com/150';
   slug: string;
 
   livro: Livro;

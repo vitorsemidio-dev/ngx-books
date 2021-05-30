@@ -2,10 +2,10 @@
   <h2>Informações perfil</h2>
   <div class="conteudo-container">
     <div class="img-container">
-      <img
-        [src]="livro.imgUrl || imgUrlDefault"
+      <app-img-item
+        [src]="livro.imgUrl"
         alt="'Capa biblioteca' + {{ livro.name }}"
-      />
+      ></app-img-item>
     </div>
     <div class="conteudo">
       <h3>
