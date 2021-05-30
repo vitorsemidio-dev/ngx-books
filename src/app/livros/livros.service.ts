@@ -20,4 +20,10 @@ export class LivrosService {
   buscarPorSlug(slug: string) {
     return this.http.get<Livro>(`${this.apiUrl}/books/${slug}`);
   }
+
+  atualizar(livro: Livro) {
+    return this.http.put<Livro>(`${this.apiUrl}/books`, {
+      livro,
+    });
+  }
 }
