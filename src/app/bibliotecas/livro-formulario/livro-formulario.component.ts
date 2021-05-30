@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+
 import { Livro } from 'src/app/livros/livro.model';
 
 @Component({
@@ -15,16 +15,15 @@ export class LivroFormularioComponent implements OnInit {
   constructor(private fb: FormBuilder, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.montarFormulario();
     this.route.data.subscribe((resolve: { livro: Livro }) => {
-      console.log(resolve.livro);
+      this.montarFormulario(resolve.livro);
     });
   }
 
-  montarFormulario() {
+  montarFormulario(dadosIniciais?: Livro) {
     this.formularioLivro = this.fb.group({
       name: [
-        'nome livro',
+        dadosIniciais.name,
         [
           Validators.required,
           Validators.minLength(3),
@@ -32,7 +31,7 @@ export class LivroFormularioComponent implements OnInit {
         ],
       ],
       author: [
-        'autor livro',
+        dadosIniciais.author,
         [
           Validators.required,
           Validators.minLength(3),
@@ -40,10 +39,13 @@ export class LivroFormularioComponent implements OnInit {
         ],
       ],
       pages: [
-        350,
+        dadosIniciais.pages,
         [Validators.required, Validators.min(0), Validators.max(1000)],
       ],
-      quantity: [10, [Validators.required, Validators.min(0)]],
+      quantity: [
+        dadosIniciais.quantity,
+        [Validators.required, Validators.min(0)],
+      ],
     });
   }
 }
