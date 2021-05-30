@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { Livro } from 'src/app/livros/livro.model';
 
 @Component({
   selector: 'app-livro-formulario',
@@ -14,11 +16,9 @@ export class LivroFormularioComponent implements OnInit {
 
   ngOnInit() {
     this.montarFormulario();
-    // console.log(this.route.data);
-    // this.route.data.subscribe((response) => console.log(response));
-    // this.route.data['livro'].su
-    const data = this.route.snapshot.data;
-    console.log(data);
+    this.route.data.subscribe((resolve: { livro: Livro }) => {
+      console.log(resolve.livro);
+    });
   }
 
   montarFormulario() {
