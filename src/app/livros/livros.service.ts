@@ -16,4 +16,18 @@ export class LivrosService {
   listar() {
     return this.http.get<Livro[]>(`${this.apiUrl}/books`);
   }
+
+  buscarPorSlug(slug: string) {
+    return this.http.get<Livro>(`${this.apiUrl}/books/${slug}`);
+  }
+
+  atualizar(livro: Livro) {
+    return this.http.put<Livro>(`${this.apiUrl}/books/${livro.id}`, {
+      livro,
+    });
+  }
+
+  remover(livroId: string) {
+    return this.http.delete(`${this.apiUrl}/books/${livroId}`);
+  }
 }

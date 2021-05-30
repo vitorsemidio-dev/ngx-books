@@ -16,8 +16,8 @@
       <p>Quantidade disponível: {{ livro.quantity }}</p>
 
       <footer class="footer">
-        <button class="btn btn-warning">Editar</button>
-        <button class="btn btn-danger">Excluir</button>
+        <a class="btn btn-warning" [routerLink]="['editar']">Editar</a>
+        <button class="btn btn-danger" (click)="onExcluir()">Excluir</button>
       </footer>
     </div>
   </div>

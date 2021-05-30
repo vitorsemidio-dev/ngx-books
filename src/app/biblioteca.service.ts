@@ -57,4 +57,28 @@ export class BibliotecaService {
       user_id,
     });
   }
+
+  // TODO: Passar token
+  adicionarLivroAoCatalogo({ name, pages, quantity, author }: Livro) {
+    const book = { name, pages, author };
+    const library_id = this.getLibraryId();
+    return this.http.post(`${this.apiUrl}/libraries/register-book`, {
+      library_id,
+      book,
+      quantity,
+    });
+  }
+
+  // TODO: Refatorar para conseguir de maneira melhor e passar por HEADERS
+  private getLibraryId() {
+    const dadosLocalStorage = JSON.parse(
+      localStorage.getItem('@ngx-books:biblioteca'),
+    ) as {
+      library: Biblioteca;
+    };
+
+    const library_id = dadosLocalStorage.library.id;
+
+    return library_id;
+  }
 }

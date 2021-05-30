@@ -36,4 +36,16 @@ export class LivroDetalheComponent implements OnInit {
       this.livro = responseLivro;
     });
   }
+
+  onExcluir() {
+    this.confirmacao();
+    this.livrosService.remover(this.livro.id).subscribe(
+      (response) => {},
+      (error) => {},
+    );
+  }
+
+  private confirmacao() {
+    console.log('Deseja realmente excluir?');
+  }
 }

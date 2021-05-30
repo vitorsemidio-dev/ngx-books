@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { BibliotecasRoutingModule } from './bibliotecas-routing.module';
 import { BibliotecasComponent } from './bibliotecas.component';
@@ -9,6 +10,7 @@ import { SharedModule } from '../shared/shared.module';
 import { PerfilComponent } from './perfil/perfil.component';
 import { PerfilDetalheComponent } from './perfil-detalhe/perfil-detalhe.component';
 import { LivroDetalheComponent } from './livro-detalhe/livro-detalhe.component';
+import { LivroFormularioComponent } from './livro-formulario/livro-formulario.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,13 @@ import { LivroDetalheComponent } from './livro-detalhe/livro-detalhe.component';
     PerfilComponent,
     PerfilDetalheComponent,
     LivroDetalheComponent,
+    LivroFormularioComponent,
   ],
-  imports: [CommonModule, BibliotecasRoutingModule, SharedModule],
+  imports: [
+    CommonModule,
+    BibliotecasRoutingModule,
+    ReactiveFormsModule,
+    SharedModule,
+  ],
 })
 export class BibliotecasModule {}
