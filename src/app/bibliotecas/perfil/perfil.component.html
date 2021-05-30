@@ -13,7 +13,6 @@
           {{ biblioteca.name }}
         </h3>
         <p>Email: {{ biblioteca.email }}</p>
-        <p>Publicação: {{ biblioteca.created_at | date: 'dd/MM/yyyy' }}</p>
 
         <footer class="footer">
           <button class="btn btn-warning">Editar</button>
@@ -31,7 +30,7 @@
 
     <ul class="listagem-card" *ngIf="catalogo">
       <li *ngFor="let livro of catalogo">
-        <div class="item-container">
+        <a class="item-container" [routerLink]="[livro.slug]">
           <div class="img-container">
             <img [src]="livro.imgUrl || imgUrlDefault" alt="" />
           </div>
@@ -40,7 +39,7 @@
               {{ livro.name }}
             </h4>
           </div>
-        </div>
+        </a>
       </li>
     </ul>
   </aside>

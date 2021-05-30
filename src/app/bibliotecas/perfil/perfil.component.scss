@@ -77,6 +77,8 @@ ul {
   position: relative;
   overflow: hidden;
   cursor: pointer;
+  display: block;
+  border-radius: 0.5rem;
 
   .content {
     position: absolute;
