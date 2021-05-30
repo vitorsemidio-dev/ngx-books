@@ -26,4 +26,8 @@ export class LivrosService {
       livro,
     });
   }
+
+  remover(livroId: string) {
+    return this.http.delete(`${this.apiUrl}/books/${livroId}`);
+  }
 }
