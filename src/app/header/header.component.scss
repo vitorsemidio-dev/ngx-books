@@ -57,3 +57,20 @@ header > :last-child {
     transform: scaleX(1);
   }
 }
+
+.avatar-usuario {
+  $primary: #66feed;
+  $tamanho: 60px;
+  display: block;
+  border-radius: 50%;
+  width: $tamanho;
+  height: $tamanho;
+  overflow: hidden;
+
+  border: 4px solid $primary;
+
+  > img {
+    width: 100%;
+    max-width: 100%;
+  }
+}

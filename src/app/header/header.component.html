@@ -17,5 +17,17 @@
     </ul>
   </nav>
 
-  <a class="btn btn-info" [routerLink]="['login']">Login/Cadastro</a>
+  <a *ngIf="!usuarioLogado" class="btn btn-info" [routerLink]="['login']"
+    >Login/Cadastro</a
+  >
+  <a
+    class="avatar-usuario"
+    [routerLink]="['/bibliotecas/perfil']"
+    *ngIf="usuarioLogado"
+  >
+    <img
+      [src]="usuarioLogado.imgUrl || imgUrlDefault"
+      alt="Avatar do usuario logado {{ usuarioLogado.name }}"
+    />
+  </a>
 </header>
