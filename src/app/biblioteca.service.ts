@@ -1,10 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { environment } from 'src/environments/environment';
-
 import { Biblioteca } from './bibliotecas/biblioteca.model';
 import { Livro } from './livros/livro.model';
+import { CrudService } from './shared/services/crud.service';
 
 interface IBiblioteca {
   name: string;
@@ -21,21 +20,13 @@ interface IAluguelLivro {
 @Injectable({
   providedIn: 'root',
 })
-export class BibliotecaService {
-  private readonly apiUrl = environment.baseApiUrl;
-
-  constructor(private http: HttpClient) {}
-
-  criar(biblioteca: IBiblioteca) {
-    return this.http.post(`${this.apiUrl}/libraries`, { ...biblioteca });
-  }
-
-  listar() {
-    return this.http.get<Biblioteca[]>(`${this.apiUrl}/libraries`);
+export class BibliotecaService extends CrudService<Biblioteca> {
+  constructor(protected http: HttpClient) {
+    super(http, 'libraries');
   }
 
   buscarPorSlug(slug: string) {
-    return this.http.get<Biblioteca>(`${this.apiUrl}/libraries/${slug}`);
+    return this.http.get<Biblioteca>(`${this.apiUrl}/${this.recurso}/${slug}`);
   }
 
   listarCatalogo(idBiblioteca: string) {
