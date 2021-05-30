@@ -25,7 +25,7 @@ export class BibliotecaService extends CrudService<Biblioteca> {
 
   listarCatalogo(idBiblioteca: string) {
     return this.http.get<Livro[]>(
-      `${this.apiUrl}/libraries/stock/${idBiblioteca}`,
+      `${this.apiUrl}/${this.recurso}/stock/${idBiblioteca}`,
     );
   }
 
@@ -36,7 +36,7 @@ export class BibliotecaService extends CrudService<Biblioteca> {
       userId: user_id,
     } = infoAlugar;
 
-    return this.http.post(`${this.apiUrl}/libraries/rent`, {
+    return this.http.post(`${this.apiUrl}/${this.recurso}/rent`, {
       book_id,
       library_id,
       user_id,
@@ -47,7 +47,7 @@ export class BibliotecaService extends CrudService<Biblioteca> {
   adicionarLivroAoCatalogo({ name, pages, quantity, author }: Livro) {
     const book = { name, pages, author };
     const library_id = this.getLibraryId();
-    return this.http.post(`${this.apiUrl}/libraries/register-book`, {
+    return this.http.post(`${this.apiUrl}/${this.recurso}/register-book`, {
       library_id,
       book,
       quantity,

@@ -31,9 +31,8 @@ export class LivroDetalheComponent implements OnInit {
   }
 
   private carregarDadosLivro() {
-    this.livrosService.listar().subscribe((response) => {
-      const responseLivro = response.find((item) => item.slug === this.slug);
-      this.livro = responseLivro;
+    this.livrosService.buscarPorSlug(this.slug).subscribe((response) => {
+      this.livro = response;
     });
   }
 
