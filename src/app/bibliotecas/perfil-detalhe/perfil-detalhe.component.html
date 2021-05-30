@@ -1,32 +1,3 @@
-<!-- <div class="informacao-container" *ngIf="livro; else livroNaoEncontrado">
-  <h2>Informações perfil</h2>
-  <div class="conteudo-container">
-    <div class="img-container">
-      <img
-        [src]="livro.imgUrl || imgUrlDefault"
-        alt="'Capa biblioteca' + {{ livro.name }}"
-      />
-    </div>
-    <div class="conteudo">
-      <h3>
-        {{ livro.name }}
-      </h3>
-      <p>Autor: {{ livro.author }}</p>
-      <p>Páginas: {{ livro.pages }}</p>
-      <p>Quantidade disponível: {{ livro.quantity }}</p>
-
-      <footer class="footer">
-        <button class="btn btn-warning">Editar</button>
-        <button class="btn btn-danger">Excluir</button>
-      </footer>
-    </div>
-  </div>
-</div>
-
-<ng-template #livroNaoEncontrado>
-  <div>Livro não encontrado</div>
-</ng-template> -->
-
 <div class="informacao-container" *ngIf="biblioteca">
   <h2>Informações perfil</h2>
   <div class="conteudo-container">

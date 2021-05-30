@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { BibliotecaService } from 'src/app/biblioteca.service';
+
 import { Livro } from 'src/app/livros/livro.model';
-import { LivrosService } from 'src/app/livros/livros.service';
 import { Biblioteca } from '../biblioteca.model';
 
 @Component({
@@ -15,7 +13,7 @@ export class PerfilDetalheComponent implements OnInit {
   catalogo: Livro[];
   imgUrlDefault = 'https://via.placeholder.com/150';
 
-  constructor(private bibliotecaService: BibliotecaService) {}
+  constructor() {}
 
   ngOnInit(): void {
     this.carregarTela();
@@ -23,7 +21,6 @@ export class PerfilDetalheComponent implements OnInit {
 
   carregarTela() {
     this.carregarDadosPerfil();
-    // this.carregarCatalogo();
   }
 
   private carregarDadosPerfil() {
@@ -35,11 +32,4 @@ export class PerfilDetalheComponent implements OnInit {
 
     this.biblioteca = dadosPerfil.library;
   }
-
-  // private carregarCatalogo() {
-  //   this.bibliotecaService.listarCatalogo(this.biblioteca.id).subscribe(
-  //     (response) => (this.catalogo = response),
-  //     (error) => {},
-  //   );
-  // }
 }
