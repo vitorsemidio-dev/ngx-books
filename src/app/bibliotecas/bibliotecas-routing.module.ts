@@ -26,6 +26,10 @@ const routes: Routes = [
         path: ':slug',
         component: LivroDetalheComponent,
       },
+      {
+        path: ':slug/editar',
+        component: LivroFormularioComponent,
+      },
     ],
   },
   { path: 'perfil/:slug', component: LivroDetalheComponent },
