@@ -20,3 +20,7 @@ ol {
 a {
   text-decoration: none;
 }
+
+router-outlet {
+  display: none;
+}
