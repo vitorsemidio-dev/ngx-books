@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-livro-formulario',
@@ -9,10 +10,15 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class LivroFormularioComponent implements OnInit {
   formularioLivro: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.montarFormulario();
+    // console.log(this.route.data);
+    // this.route.data.subscribe((response) => console.log(response));
+    // this.route.data['livro'].su
+    const data = this.route.snapshot.data;
+    console.log(data);
   }
 
   montarFormulario() {
