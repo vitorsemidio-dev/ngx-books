@@ -22,8 +22,10 @@ export class LivrosService {
   }
 
   atualizar(livro: Livro) {
+    const { name, pages } = livro;
     return this.http.put<Livro>(`${this.apiUrl}/books/${livro.id}`, {
-      livro,
+      name,
+      pages,
     });
   }
 
