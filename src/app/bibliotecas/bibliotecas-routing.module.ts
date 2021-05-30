@@ -12,11 +12,16 @@ const routes: Routes = [
   {
     path: 'perfil',
     component: PerfilComponent,
-    // children: [
-    //   {
-    //     path: ':slug', component: LivroDetalheComponent
-    //   }
-    // ]
+    children: [
+      {
+        path: '',
+        component: PerfilDetalheComponent,
+      },
+      {
+        path: ':slug',
+        component: LivroDetalheComponent,
+      },
+    ],
   },
   { path: 'perfil/:slug', component: LivroDetalheComponent },
   { path: ':slug', component: BibliotecaDetalheComponent },
