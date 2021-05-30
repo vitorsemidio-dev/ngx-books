@@ -1,15 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { Biblioteca } from './bibliotecas/biblioteca.model';
-import { Livro } from './livros/livro.model';
-import { CrudService } from './shared/services/crud.service';
-
-interface IBiblioteca {
-  name: string;
-  email: string;
-  password: string;
-}
+import { Biblioteca } from '../biblioteca.model';
+import { Livro } from '../../livros/livro.model';
+import { CrudService } from '../../shared/services/crud.service';
 
 interface IAluguelLivro {
   userId: string;

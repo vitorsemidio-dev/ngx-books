@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { BibliotecaService } from './../biblioteca.service';
+import { BibliotecaService } from '../bibliotecas/services/biblioteca.service';
 
 @Component({
   selector: 'app-cadastro',
