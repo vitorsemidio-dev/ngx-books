@@ -22,7 +22,7 @@ export class LivrosService {
   }
 
   atualizar(livro: Livro) {
-    return this.http.put<Livro>(`${this.apiUrl}/books`, {
+    return this.http.put<Livro>(`${this.apiUrl}/books/${livro.id}`, {
       livro,
     });
   }
