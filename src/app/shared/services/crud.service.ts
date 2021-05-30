@@ -2,9 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 export class CrudService<T> {
-  private apiUrl = environment.baseApiUrl;
+  protected apiUrl = environment.baseApiUrl;
 
-  constructor(protected http: HttpClient, private recurso: string) {}
+  constructor(protected http: HttpClient, protected recurso: string) {}
 
   listar() {
     return this.http.get<T[]>(`${this.apiUrl}/${this.recurso}`);

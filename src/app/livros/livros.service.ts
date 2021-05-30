@@ -1,35 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { environment } from 'src/environments/environment';
+import { CrudService } from '../shared/services/crud.service';
 
 import { Livro } from './livro.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class LivrosService {
-  private readonly apiUrl = environment.baseApiUrl;
-
-  constructor(private http: HttpClient) {}
-
-  listar() {
-    return this.http.get<Livro[]>(`${this.apiUrl}/books`);
+export class LivrosService extends CrudService<Livro> {
+  constructor(protected http: HttpClient) {
+    super(http, 'books');
   }
 
   buscarPorSlug(slug: string) {
-    return this.http.get<Livro>(`${this.apiUrl}/books/${slug}`);
-  }
-
-  atualizar(livro: Livro) {
-    const { name, pages } = livro;
-    return this.http.put<Livro>(`${this.apiUrl}/books/${livro.id}`, {
-      name,
-      pages,
-    });
-  }
-
-  remover(livroId: string) {
-    return this.http.delete(`${this.apiUrl}/books/${livroId}`);
+    return this.http.get<Livro>(`${this.apiUrl}/${this.recurso}/${slug}`);
   }
 }
