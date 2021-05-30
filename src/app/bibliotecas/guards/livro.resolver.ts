@@ -9,22 +9,13 @@ import { LivrosService } from 'src/app/livros/livros.service';
 export class LivroResolver implements Resolve<Livro> {
   constructor(private livrosService: LivrosService) {}
 
-  resolve(route: ActivatedRouteSnapshot): Observable<Livro> | Livro {
+  resolve(route: ActivatedRouteSnapshot): Observable<Livro> {
     const slug = route.params['slug'];
 
     if (slug) {
-      // return of(new Livro());
-      return new Livro();
-      // this.livrosService.listar().subscribe(
-      //   (response) => {
-      //     const livro = response.find((item) => item.slug === slug);
-      //     return of(livro);
-      //   },
-      //   (error) => {},
-      // );
+      return this.livrosService.buscarPorSlug(slug);
     }
 
-    // return of(new Livro());
-    return new Livro();
+    return of(new Livro());
   }
 }
