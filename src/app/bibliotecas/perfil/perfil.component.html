@@ -1,0 +1,26 @@
+<div class="grid">
+  <!-- Rotas para detalhes -->
+  <router-outlet></router-outlet>
+
+  <aside class="listagem-container">
+    <header class="header-listagem">
+      <h3>Catálogo</h3>
+      <button class="btn btn-sm btn-outline-primary">+</button>
+    </header>
+
+    <ul class="listagem-catalogo" *ngIf="catalogo">
+      <li *ngFor="let livro of catalogo">
+        <a class="item-container" [routerLink]="[livro.slug]">
+          <div class="img-container">
+            <img [src]="livro.imgUrl || imgUrlDefault" alt="" />
+          </div>
+          <div class="content">
+            <h4>
+              {{ livro.name }}
+            </h4>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </aside>
+</div>

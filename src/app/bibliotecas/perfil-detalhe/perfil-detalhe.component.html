@@ -1,0 +1,22 @@
+<div class="informacao-container" *ngIf="biblioteca">
+  <h2>Informações perfil</h2>
+  <div class="conteudo-container">
+    <div class="img-container">
+      <img
+        [src]="biblioteca.imgUrl || imgUrlDefault"
+        alt="'Capa biblioteca' + {{ biblioteca.name }}"
+      />
+    </div>
+    <div class="conteudo">
+      <h3>
+        {{ biblioteca.name }}
+      </h3>
+      <p>Email: {{ biblioteca.email }}</p>
+
+      <footer class="footer">
+        <button class="btn btn-warning">Editar</button>
+        <button class="btn btn-danger">Excluir</button>
+      </footer>
+    </div>
+  </div>
+</div>
