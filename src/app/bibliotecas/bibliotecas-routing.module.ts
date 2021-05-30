@@ -22,6 +22,9 @@ const routes: Routes = [
       {
         path: 'criar-livro',
         component: LivroFormularioComponent,
+        resolve: {
+          livro: LivroResolver,
+        },
       },
       {
         path: ':slug',
