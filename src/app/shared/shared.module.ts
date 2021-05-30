@@ -5,10 +5,11 @@ import { RouterModule } from '@angular/router';
 
 import { CardItemComponent } from './card-item/card-item.component';
 import { AsideItemComponent } from './aside-item/aside-item.component';
+import { ImgItemComponent } from './img-item/img-item.component';
 
 @NgModule({
-  declarations: [CardItemComponent, AsideItemComponent],
+  declarations: [CardItemComponent, AsideItemComponent, ImgItemComponent],
   imports: [CommonModule, RouterModule, ReactiveFormsModule],
-  exports: [CardItemComponent, AsideItemComponent],
+  exports: [CardItemComponent, AsideItemComponent, ImgItemComponent],
 })
 export class SharedModule {}
