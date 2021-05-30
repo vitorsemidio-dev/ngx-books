@@ -30,7 +30,7 @@ const routes: Routes = [
       {
         path: ':slug/editar',
         component: LivroFormularioComponent,
-        data: {
+        resolve: {
           livro: LivroResolver,
         },
       },
