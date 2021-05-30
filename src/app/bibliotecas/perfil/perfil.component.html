@@ -8,7 +8,7 @@
       <button class="btn btn-sm btn-outline-primary">+</button>
     </header>
 
-    <ul class="listagem-card" *ngIf="catalogo">
+    <ul class="listagem-catalogo" *ngIf="catalogo">
       <li *ngFor="let livro of catalogo">
         <a class="item-container" [routerLink]="[livro.slug]">
           <div class="img-container">

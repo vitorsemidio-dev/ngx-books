@@ -16,6 +16,13 @@
   }
 }
 
+// Listagem
+
+.listagem-container {
+  color: #fff;
+  padding: 1rem;
+}
+
 .header-listagem {
   display: flex;
   justify-content: space-between;
@@ -36,7 +43,11 @@
   }
 }
 
-ul {
+.listagem-catalogo {
+  * + & {
+    margin-top: 1rem;
+  }
+
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
@@ -49,6 +60,7 @@ ul {
   cursor: pointer;
   display: block;
   border-radius: 0.5rem;
+  color: #fff;
 
   .content {
     position: absolute;
