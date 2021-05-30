@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { BibliotecaService } from 'src/app/biblioteca.service';
 
 import { Livro } from 'src/app/livros/livro.model';
 
@@ -12,7 +13,11 @@ import { Livro } from 'src/app/livros/livro.model';
 export class LivroFormularioComponent implements OnInit {
   formularioLivro: FormGroup;
 
-  constructor(private fb: FormBuilder, private route: ActivatedRoute) {}
+  constructor(
+    private bibliotecaService: BibliotecaService,
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+  ) {}
 
   ngOnInit() {
     this.route.data.subscribe((resolve: { livro: Livro }) => {
@@ -47,5 +52,18 @@ export class LivroFormularioComponent implements OnInit {
         [Validators.required, Validators.min(0)],
       ],
     });
+  }
+
+  onSalvar() {
+    this.bibliotecaService
+      .adicionarLivroAoCatalogo(this.formularioLivro.value)
+      .subscribe(
+        (response) => {
+          console.log('sucesso');
+        },
+        (error) => {
+          console.log('error');
+        },
+      );
   }
 }
