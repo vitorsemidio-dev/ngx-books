@@ -100,7 +100,7 @@ export class LivroFormularioComponent implements OnInit {
       .atualizarImagem(imagem, this.formularioLivro.value['id'])
       .subscribe(
         (response) => {
-          console.log('atualizou');
+          console.log('atualizado');
           console.log(response);
         },
         (error) => {
