@@ -95,21 +95,22 @@ export class LivroFormularioComponent implements OnInit {
   }
 
   onImagemSelecionada(evento: any) {
-    console.log(typeof evento);
     const listaArquivos = <FileList>evento.srcElement.files;
     const imagem = listaArquivos[0];
     console.log(imagem);
-    const preview = URL.createObjectURL(imagem);
+
+    this.criarPreviewImagem(imagem);
+
+    // this.atualizarImagemLivro(imagem)
+  }
+
+  private criarPreviewImagem(imagem: File) {
     const fileReader = new FileReader();
     fileReader.readAsDataURL(imagem);
-    // fileReader.target.result
-    this.previewImg;
 
     fileReader.onload = (e) => {
       this.previewImg = e.target.result;
     };
-
-    // this.atualizarImagemLivro(imagem)
   }
 
   private atualizarImagemLivro(imagem: File) {
