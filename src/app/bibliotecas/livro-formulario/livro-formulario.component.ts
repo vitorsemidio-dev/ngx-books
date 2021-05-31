@@ -14,7 +14,7 @@ import { LivrosService } from 'src/app/livros/livros.service';
 export class LivroFormularioComponent implements OnInit {
   formularioLivro: FormGroup;
   livro: Livro;
-  previewImg: any;
+  previewImg: any = 'https://via.placeholder.com/150';
 
   constructor(
     private bibliotecaService: BibliotecaService,
@@ -97,11 +97,12 @@ export class LivroFormularioComponent implements OnInit {
   onImagemSelecionada(evento: any) {
     const listaArquivos = <FileList>evento.srcElement.files;
     const imagem = listaArquivos[0];
-    console.log(imagem);
 
     this.criarPreviewImagem(imagem);
 
-    // this.atualizarImagemLivro(imagem)
+    if (this.livro.id) {
+      this.atualizarImagemLivro(imagem);
+    }
   }
 
   private criarPreviewImagem(imagem: File) {
@@ -114,16 +115,14 @@ export class LivroFormularioComponent implements OnInit {
   }
 
   private atualizarImagemLivro(imagem: File) {
-    this.livrosService
-      .atualizarImagem(imagem, this.formularioLivro.value['id'])
-      .subscribe(
-        (response) => {
-          console.log('atualizado');
-          console.log(response);
-        },
-        (error) => {
-          console.log('error ao atualizar');
-        },
-      );
+    this.livrosService.atualizarImagem(imagem, this.livro.id).subscribe(
+      (response) => {
+        console.log('atualizado');
+        console.log(response);
+      },
+      (error) => {
+        console.log('error ao atualizar');
+      },
+    );
   }
 }
