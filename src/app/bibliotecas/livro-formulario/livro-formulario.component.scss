@@ -36,6 +36,10 @@
 }
 
 .preview-image-container {
+  $primary: #66feed;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid $primary;
   img {
     width: 100%;
     max-width: 100%;
@@ -112,5 +116,19 @@
     &:hover {
       background: #ffbf00;
     }
+  }
+}
+
+.formulario-imagem-container {
+  align-self: flex-start;
+  position: relative;
+  min-width: 40px;
+  min-height: 40px;
+
+  label {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border: 2px solid #fff;
   }
 }
