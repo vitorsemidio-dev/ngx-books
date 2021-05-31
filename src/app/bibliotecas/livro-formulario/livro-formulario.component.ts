@@ -13,6 +13,8 @@ import { LivrosService } from 'src/app/livros/livros.service';
 })
 export class LivroFormularioComponent implements OnInit {
   formularioLivro: FormGroup;
+  livro: Livro;
+  previewImg: any;
 
   constructor(
     private bibliotecaService: BibliotecaService,
@@ -24,6 +26,7 @@ export class LivroFormularioComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe((resolve: { livro: Livro }) => {
       this.montarFormulario(resolve.livro);
+      this.livro = resolve.livro;
     });
   }
 
@@ -96,6 +99,20 @@ export class LivroFormularioComponent implements OnInit {
     const listaArquivos = <FileList>evento.srcElement.files;
     const imagem = listaArquivos[0];
     console.log(imagem);
+    const preview = URL.createObjectURL(imagem);
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(imagem);
+    // fileReader.target.result
+    this.previewImg;
+
+    fileReader.onload = (e) => {
+      this.previewImg = e.target.result;
+    };
+
+    // this.atualizarImagemLivro(imagem)
+  }
+
+  private atualizarImagemLivro(imagem: File) {
     this.livrosService
       .atualizarImagem(imagem, this.formularioLivro.value['id'])
       .subscribe(
