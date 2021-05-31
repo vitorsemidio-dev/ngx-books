@@ -90,4 +90,22 @@ export class LivroFormularioComponent implements OnInit {
       },
     );
   }
+
+  onImagemSelecionada(evento: any) {
+    console.log(typeof evento);
+    const listaArquivos = <FileList>evento.srcElement.files;
+    const imagem = listaArquivos[0];
+    console.log(imagem);
+    this.livrosService
+      .atualizarImagem(imagem, this.formularioLivro.value['id'])
+      .subscribe(
+        (response) => {
+          console.log('atualizou');
+          console.log(response);
+        },
+        (error) => {
+          console.log('error ao atualizar');
+        },
+      );
+  }
 }
