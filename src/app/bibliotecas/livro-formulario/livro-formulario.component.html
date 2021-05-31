@@ -9,8 +9,10 @@
       <!-- <app-img-item [src]=""></app-img-item> -->
       <img [src]="previewImg || livro.imgUrl" />
     </div>
-    <div class="form-group">
-      <label class="btn btn-primary" for="imagem">Selecionar imagem</label>
+
+    <label class="label-imagem-container" for="imagem">
+      <!-- Trocar imagem -->
+      <img [src]="'assets/ant-design_camera-outlined.svg'" />
       <input
         class="hidden"
         type="file"
@@ -18,7 +20,7 @@
         id="imagem"
         (change)="onImagemSelecionada($event)"
       />
-    </div>
+    </label>
   </fieldset>
   <fieldset>
     <div class="form-group">

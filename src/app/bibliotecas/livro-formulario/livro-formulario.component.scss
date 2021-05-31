@@ -41,3 +41,76 @@
     max-width: 100%;
   }
 }
+
+.label-imagem-container {
+  background-color: #ff9000;
+  cursor: pointer;
+  border-radius: 50%;
+  overflow: hidden;
+  padding: 0.5rem;
+  border-radius: 2px solid black;
+  width: fit-content;
+  height: fit-content;
+
+  input {
+    display: none;
+  }
+
+  img {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+.avatar-container {
+  margin-bottom: 32px;
+  position: relative;
+
+  align-self: center;
+
+  img {
+    width: 186px;
+    height: 186px;
+    border-radius: 50%;
+  }
+
+  label {
+    /* Position */
+    position: absolute;
+    right: 0;
+    bottom: 0;
+
+    /* Size */
+    width: 48px;
+    height: 48px;
+
+    /* Styles */
+    background: #ff9000;
+    border: 0;
+    border-radius: 50%;
+    cursor: pointer;
+
+    /* Flex */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Child */
+    svg {
+      width: 20px;
+      height: 20px;
+      color: #312e38;
+    }
+
+    input {
+      display: none;
+    }
+
+    /* Animation */
+    transition: background-color 0.3s;
+
+    &:hover {
+      background: #ffbf00;
+    }
+  }
+}
