@@ -9,7 +9,6 @@ import { Biblioteca } from '../bibliotecas/biblioteca.model';
 })
 export class HeaderComponent implements OnInit {
   usuarioLogado: Biblioteca;
-  imgUrlDefault = 'https://via.placeholder.com/150';
 
   constructor() {}
 

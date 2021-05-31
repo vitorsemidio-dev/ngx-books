@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Biblioteca } from './biblioteca.model';
-import { BibliotecaService } from './../biblioteca.service';
+import { BibliotecaService } from './services/biblioteca.service';
 
 @Component({
   selector: 'app-bibliotecas',

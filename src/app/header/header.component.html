@@ -25,9 +25,9 @@
     [routerLink]="['/bibliotecas/perfil']"
     *ngIf="usuarioLogado"
   >
-    <img
-      [src]="usuarioLogado.imgUrl || imgUrlDefault"
+    <app-img-item
+      [src]="usuarioLogado.imgUrl"
       alt="Avatar do usuario logado {{ usuarioLogado.name }}"
-    />
+    ></app-img-item>
   </a>
 </header>

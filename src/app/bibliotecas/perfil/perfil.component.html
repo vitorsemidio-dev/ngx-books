@@ -14,7 +14,10 @@
       <li *ngFor="let livro of catalogo">
         <a class="item-container" [routerLink]="[livro.slug]">
           <div class="img-container">
-            <img [src]="livro.imgUrl || imgUrlDefault" alt="" />
+            <app-img-item
+              [src]="livro.imgUrl"
+              alt="Capa do livro {{ livro.name }}"
+            ></app-img-item>
           </div>
           <div class="content">
             <h4>

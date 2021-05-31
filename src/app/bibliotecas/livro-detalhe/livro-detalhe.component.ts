@@ -9,7 +9,6 @@ import { LivrosService } from 'src/app/livros/livros.service';
   styleUrls: ['./livro-detalhe.component.scss'],
 })
 export class LivroDetalheComponent implements OnInit {
-  imgUrlDefault = 'https://via.placeholder.com/150';
   slug: string;
 
   livro: Livro;
@@ -31,9 +30,8 @@ export class LivroDetalheComponent implements OnInit {
   }
 
   private carregarDadosLivro() {
-    this.livrosService.listar().subscribe((response) => {
-      const responseLivro = response.find((item) => item.slug === this.slug);
-      this.livro = responseLivro;
+    this.livrosService.buscarPorSlug(this.slug).subscribe((response) => {
+      this.livro = response;
     });
   }
 

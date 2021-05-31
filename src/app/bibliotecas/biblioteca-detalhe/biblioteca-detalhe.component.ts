@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Biblioteca } from './../biblioteca.model';
-import { BibliotecaService } from './../../biblioteca.service';
+import { BibliotecaService } from '../services/biblioteca.service';
 import { Livro } from '../../livros/livro.model';
 
 @Component({

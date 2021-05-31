@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { BibliotecaService } from 'src/app/biblioteca.service';
+import { BibliotecaService } from 'src/app/bibliotecas/services/biblioteca.service';
 import { Livro } from 'src/app/livros/livro.model';
 import { Biblioteca } from '../biblioteca.model';
 
@@ -12,7 +12,6 @@ import { Biblioteca } from '../biblioteca.model';
 export class PerfilComponent implements OnInit {
   biblioteca: Biblioteca;
   catalogo: Livro[];
-  imgUrlDefault = 'https://via.placeholder.com/150';
 
   constructor(private bibliotecaService: BibliotecaService) {}
 

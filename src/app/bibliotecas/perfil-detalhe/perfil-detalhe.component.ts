@@ -11,7 +11,6 @@ import { Biblioteca } from '../biblioteca.model';
 export class PerfilDetalheComponent implements OnInit {
   biblioteca: Biblioteca;
   catalogo: Livro[];
-  imgUrlDefault = 'https://via.placeholder.com/150';
 
   constructor() {}
 
