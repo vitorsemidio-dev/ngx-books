@@ -27,6 +27,9 @@ export class LivroFormularioComponent implements OnInit {
     this.route.data.subscribe((resolve: { livro: Livro }) => {
       this.montarFormulario(resolve.livro);
       this.livro = resolve.livro;
+      if (this.livro.imgUrl) {
+        this.previewImg = this.livro.imgUrl;
+      }
     });
   }
 
