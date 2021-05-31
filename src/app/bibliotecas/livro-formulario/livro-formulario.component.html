@@ -6,15 +6,12 @@
 <form class="formulario-livro" autocomplete="off" [formGroup]="formularioLivro">
   <fieldset class="formulario-imagem-container">
     <div class="preview-image-container">
-      <!-- <app-img-item [src]=""></app-img-item> -->
       <img [src]="previewImg || livro.imgUrl" />
     </div>
 
     <label class="label-imagem-container" for="imagem">
-      <!-- Trocar imagem -->
       <img [src]="'assets/ant-design_camera-outlined.svg'" />
       <input
-        class="hidden"
         type="file"
         name="image"
         id="imagem"
@@ -22,6 +19,7 @@
       />
     </label>
   </fieldset>
+
   <fieldset>
     <div class="form-group">
       <label for="nome">Nome</label>
