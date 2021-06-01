@@ -16,14 +16,16 @@ export class AuthService {
       return null;
     }
 
-    const { library, token } = JSON.parse(dadosLocalStorage) as {
+    const { library, token, user } = JSON.parse(dadosLocalStorage) as {
       library: Biblioteca;
       token: string;
+      user: any;
     };
 
     return {
       library,
       token,
+      user,
     };
   }
 

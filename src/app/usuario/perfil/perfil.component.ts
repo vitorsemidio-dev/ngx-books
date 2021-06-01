@@ -12,7 +12,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   styleUrls: ['./perfil.component.scss'],
 })
 export class PerfilComponent implements OnInit {
-  biblioteca: Biblioteca;
+  usuario: any;
   catalogo: Livro[];
 
   constructor(
@@ -36,7 +36,7 @@ export class PerfilComponent implements OnInit {
       return;
     }
 
-    this.biblioteca = dadosSessao.library;
+    this.usuario = dadosSessao.user;
   }
 
   onSair() {
