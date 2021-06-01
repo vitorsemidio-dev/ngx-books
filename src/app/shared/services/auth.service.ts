@@ -26,4 +26,13 @@ export class AuthService {
       token,
     };
   }
+
+  salvarInformacaoUsuarioLogado(informacao: {
+    token: string;
+    library: Biblioteca;
+  }) {
+    const nomeChave = Chave.chaveUsuarioLogado;
+    const dadosLoginBiblioteca = JSON.stringify(informacao);
+    localStorage.setItem(nomeChave, dadosLoginBiblioteca);
+  }
 }

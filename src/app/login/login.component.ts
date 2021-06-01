@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { LoginService } from './login.service';
 
 @Component({
@@ -16,6 +17,7 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private loginService: LoginService,
     private router: Router,
+    private authService: AuthService,
   ) {}
 
   ngOnInit(): void {
@@ -32,9 +34,7 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.loginService.fazerLogin(this.formulario.value).subscribe(
       (response) => {
-        const nomeChave = '@ngx-books:biblioteca';
-        const dadosLoginBiblioteca = JSON.stringify(response);
-        localStorage.setItem(nomeChave, dadosLoginBiblioteca);
+        this.authService.salvarInformacaoUsuarioLogado(response);
         this.redirecionarRota('/bibliotecas/perfil');
       },
       (error) => {},
