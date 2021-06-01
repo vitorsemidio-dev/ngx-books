@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { BibliotecaService } from './../bibliotecas/services/biblioteca.service';
+
 import { Livro } from './livro.model';
 import { LivrosService } from './livros.service';
 
@@ -11,7 +13,10 @@ import { LivrosService } from './livros.service';
 export class LivrosComponent implements OnInit {
   listagemLivro: Livro[];
 
-  constructor(private livrosService: LivrosService) {}
+  constructor(
+    private livrosService: LivrosService,
+    private bibliotecaService: BibliotecaService,
+  ) {}
 
   ngOnInit(): void {
     this.carregarTela();
@@ -27,6 +32,15 @@ export class LivrosComponent implements OnInit {
   }
 
   handleAlugar(evento: Livro) {
-    console.log(evento);
+    this.bibliotecaService
+      .alugarLivro({
+        bookId: evento.id,
+        libraryId: 'libraryId',
+        userId: 'userId',
+      })
+      .subscribe((result) => {
+        console.log('[Response Alugar Livro]');
+        console.table(result);
+      });
   }
 }
