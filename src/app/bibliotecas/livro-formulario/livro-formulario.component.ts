@@ -77,6 +77,12 @@ export class LivroFormularioComponent implements OnInit {
     }
   }
 
+  onCancelar() {
+    this.router.navigate(['..'], {
+      relativeTo: this.activatedRoute,
+    });
+  }
+
   private adicionarLivroAoCatalogo() {
     this.bibliotecaService
       .adicionarLivroAoCatalogo(this.formularioLivro.value)
