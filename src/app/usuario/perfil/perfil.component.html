@@ -1,22 +1,8 @@
-<div class="informacao-container" *ngIf="usuario">
-  <h2>Informações perfil usuário</h2>
-  <div class="conteudo-container">
-    <div class="img-container">
-      <app-img-item
-        [src]="usuario.imgUrl"
-        alt="'Capa biblioteca' + {{ usuario.name }}"
-      ></app-img-item>
-    </div>
-    <div class="conteudo">
-      <h3>
-        {{ usuario.name }}
-      </h3>
-      <p>Email: {{ usuario.email }}</p>
-
-      <footer class="footer">
-        <button class="btn btn-warning">Editar</button>
-        <button class="btn btn-danger" (click)="onSair()">Sair</button>
-      </footer>
-    </div>
-  </div>
-</div>
+<app-perfil-detalhe-item
+  [name]="usuario?.name"
+  [imgUrl]="usuario?.imgUrl"
+  [email]="usuario?.email"
+  imgDescricao="Avatar Usuario {{ usuario?.name }}"
+  (onSair)="onSair()"
+>
+</app-perfil-detalhe-item>

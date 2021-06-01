@@ -17,5 +17,7 @@ export class PerfilDetalheItemComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  handleSair() {}
+  handleSair() {
+    this.onSair.emit();
+  }
 }
