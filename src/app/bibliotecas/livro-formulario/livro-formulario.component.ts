@@ -20,11 +20,11 @@ export class LivroFormularioComponent implements OnInit {
     private bibliotecaService: BibliotecaService,
     private livrosService: LivrosService,
     private fb: FormBuilder,
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
   ) {}
 
   ngOnInit() {
-    this.route.data.subscribe((resolve: { livro: Livro }) => {
+    this.activatedRoute.data.subscribe((resolve: { livro: Livro }) => {
       this.montarFormulario(resolve.livro);
       this.livro = resolve.livro;
       if (this.livro.imgUrl) {
