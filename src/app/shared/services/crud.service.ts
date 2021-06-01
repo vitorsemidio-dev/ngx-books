@@ -22,14 +22,14 @@ export class CrudService<T> {
     return this.http.put<T>(
       `${this.apiUrl}/${this.recurso}/${entidade['id']}`,
       {
-        entidade,
+        ...entidade,
       },
     );
   }
 
   criar(entidade: T) {
     return this.http.post<T>(`${this.apiUrl}/${this.recurso}`, {
-      entidade,
+      ...entidade,
     });
   }
 }
