@@ -1,0 +1,29 @@
+<aside class="listagem-container">
+  <header class="header-listagem">
+    <h3>{{ titulo }}</h3>
+    <ng-content select=".btn-cta"> </ng-content>
+  </header>
+
+  <ul
+    class="listagem-catalogo"
+    *ngIf="lista && lista.length > 0; else listaVazia"
+  >
+    <li *ngFor="let item of lista">
+      <a class="item-container" [routerLink]="[item.slug]">
+        <div class="img-container">
+          <img [src]="item.imgUrl" alt="Capa do livro {{ item.name }}" />
+          <!-- <app-img-item
+            [src]="item.imgUrl"
+            alt="Capa do livro {{ item.name }}"
+          ></app-img-item> -->
+        </div>
+        <div class="content">
+          <h4>
+            {{ item.name }}
+          </h4>
+        </div>
+      </a>
+    </li>
+  </ul>
+  <ng-template #listaVazia> Nenhum livro alugado por enquanto. </ng-template>
+</aside>

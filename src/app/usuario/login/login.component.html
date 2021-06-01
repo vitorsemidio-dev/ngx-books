@@ -1,9 +1,9 @@
-<div class="grid">
+<div class="login-usuario-container">
   <app-aside-item
-    [imgUrl]="'assets/img-autenticacao.svg'"
+    [imgUrl]="'assets/img-usuario-autenticacao.svg'"
     [imgAltTexto]="'Autenticação'"
     [texto]="'Ainda não possui um registro?'"
-    [url]="'/cadastro'"
+    [url]="'/usuarios/cadastro'"
     [linkTexto]="'Criar conta'"
   >
   </app-aside-item>
@@ -33,6 +33,6 @@
       Entrar
     </button>
 
-    <a [routerLink]="['/usuarios/login']"> Entrar como usuário </a>
+    <a [routerLink]="['/usuarios/login']"> Entrar como biblioteca </a>
   </form>
 </div>

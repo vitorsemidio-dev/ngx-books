@@ -41,6 +41,13 @@ export class LoginService {
     );
   }
 
+  fazerLoginUsuario({ email, password }: ICredencial) {
+    return this.http.post<ILoginResponse>(`${this.baseUrl}/sessions`, {
+      email,
+      password,
+    });
+  }
+
   fazerLogout() {
     this.limparInformacaoUsuarioLogado();
     this.emitirAutenticacao(AcaoLogin.Logout);

@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { Biblioteca } from '../bibliotecas/biblioteca.model';
 import { LoginService } from '../login/login.service';
 import { AuthService } from '../shared/services/auth.service';
+import { Usuario } from '../usuario/usuario';
 
 @Component({
   selector: 'app-header',
@@ -11,8 +12,9 @@ import { AuthService } from '../shared/services/auth.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  usuarioLogado: Biblioteca;
   private acaoLogin$: Subscription;
+  usuarioLogado: Biblioteca | Usuario;
+  rotaPerfil: string;
 
   constructor(
     private authService: AuthService,
@@ -40,12 +42,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
     const dadosSessao = this.authService.buscarDadosSessao();
 
     if (!dadosSessao) {
+      this.rotaPerfil = '';
       this.usuarioLogado = null;
       return;
     }
 
-    const { library } = dadosSessao;
+    const { library, user } = dadosSessao;
 
-    this.usuarioLogado = library;
+    this.usuarioLogado = library || user;
+
+    this.rotaPerfil = library ? '/bibliotecas/perfil' : '/usuarios/perfil';
   }
 }

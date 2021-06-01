@@ -1,0 +1,16 @@
+<div class="perfil-container">
+  <app-perfil-detalhe-item
+    [name]="usuario?.name"
+    [imgUrl]="usuario?.imgUrl"
+    [email]="usuario?.email"
+    imgDescricao="Avatar Usuario {{ usuario?.name }}"
+    (onSair)="onSair()"
+  >
+  </app-perfil-detalhe-item>
+
+  <app-listagem-itens [titulo]="'Livros Alugados'" [lista]="livrosAlugados">
+    <a class="btn btn-sm btn-outline-primary btn-cta" [routerLink]="['/livros']"
+      >+</a
+    >
+  </app-listagem-itens>
+</div>
