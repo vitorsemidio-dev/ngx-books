@@ -70,9 +70,7 @@ export class LivroFormularioComponent implements OnInit {
   onSalvar() {
     if (this.formularioLivro.value['id']) {
       this.atualizarLivro();
-      console.log('Atualizar');
     } else {
-      console.log('Criar');
       this.adicionarLivroAoCatalogo();
     }
   }
@@ -88,27 +86,21 @@ export class LivroFormularioComponent implements OnInit {
       .adicionarLivroAoCatalogo(this.formularioLivro.value)
       .subscribe(
         (response) => {
-          console.log('sucesso');
           this.bibliotecaService.emitirAcao(AcaoBiblioteca.Criado);
           this.router.navigate(['/bibliotecas', 'perfil']);
         },
-        (error) => {
-          console.log('error');
-        },
+        (error) => {},
       );
   }
 
   private atualizarLivro() {
     this.livrosService.atualizar(this.formularioLivro.value).subscribe(
       (response) => {
-        console.log(response);
         const { slug } = response;
         this.livrosService.emitirAcao(AcaoLivro.Atualizado);
         this.router.navigate(['/bibliotecas', 'perfil', slug]);
       },
-      (error) => {
-        console.log('error');
-      },
+      (error) => {},
     );
   }
 
@@ -134,13 +126,8 @@ export class LivroFormularioComponent implements OnInit {
 
   private atualizarImagemLivro(imagem: File) {
     this.livrosService.atualizarImagem(imagem, this.livro.id).subscribe(
-      (response) => {
-        console.log('atualizado');
-        console.log(response);
-      },
-      (error) => {
-        console.log('error ao atualizar');
-      },
+      (response) => {},
+      (error) => {},
     );
   }
 }
