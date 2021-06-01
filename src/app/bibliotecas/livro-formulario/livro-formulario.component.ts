@@ -13,6 +13,8 @@ import { LivrosService } from 'src/app/livros/livros.service';
 })
 export class LivroFormularioComponent implements OnInit {
   formularioLivro: FormGroup;
+  livro: Livro;
+  previewImg: any = 'https://via.placeholder.com/150';
 
   constructor(
     private bibliotecaService: BibliotecaService,
@@ -24,6 +26,10 @@ export class LivroFormularioComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe((resolve: { livro: Livro }) => {
       this.montarFormulario(resolve.livro);
+      this.livro = resolve.livro;
+      if (this.livro.imgUrl) {
+        this.previewImg = this.livro.imgUrl;
+      }
     });
   }
 
@@ -87,6 +93,38 @@ export class LivroFormularioComponent implements OnInit {
       },
       (error) => {
         console.log('error');
+      },
+    );
+  }
+
+  onImagemSelecionada(evento: any) {
+    const listaArquivos = <FileList>evento.srcElement.files;
+    const imagem = listaArquivos[0];
+
+    this.criarPreviewImagem(imagem);
+
+    if (this.livro.id) {
+      this.atualizarImagemLivro(imagem);
+    }
+  }
+
+  private criarPreviewImagem(imagem: File) {
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(imagem);
+
+    fileReader.onload = (e) => {
+      this.previewImg = e.target.result;
+    };
+  }
+
+  private atualizarImagemLivro(imagem: File) {
+    this.livrosService.atualizarImagem(imagem, this.livro.id).subscribe(
+      (response) => {
+        console.log('atualizado');
+        console.log(response);
+      },
+      (error) => {
+        console.log('error ao atualizar');
       },
     );
   }

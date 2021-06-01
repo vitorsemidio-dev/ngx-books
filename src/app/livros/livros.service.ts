@@ -16,4 +16,14 @@ export class LivrosService extends CrudService<Livro> {
   buscarPorSlug(slug: string) {
     return this.http.get<Livro>(`${this.apiUrl}/${this.recurso}/${slug}`);
   }
+
+  atualizarImagem(imagem: File, book_id: string) {
+    const formData = new FormData();
+
+    formData.append('image', imagem);
+    return this.http.patch(
+      `${this.apiUrl}/${this.recurso}/${book_id}`,
+      formData,
+    );
+  }
 }
