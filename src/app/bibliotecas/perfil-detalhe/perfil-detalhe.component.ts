@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Livro } from 'src/app/livros/livro.model';
+import { LoginService } from 'src/app/login/login.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { Biblioteca } from '../biblioteca.model';
 
@@ -14,7 +15,11 @@ export class PerfilDetalheComponent implements OnInit {
   biblioteca: Biblioteca;
   catalogo: Livro[];
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private loginService: LoginService,
+  ) {}
 
   ngOnInit(): void {
     this.carregarTela();
@@ -35,12 +40,8 @@ export class PerfilDetalheComponent implements OnInit {
   }
 
   onSair() {
-    this.limparInformacaoUsuarioLogado();
+    this.loginService.fazerLogout();
     this.redirecionarRota('/login');
-  }
-
-  private limparInformacaoUsuarioLogado() {
-    localStorage.removeItem('@ngx-books:biblioteca');
   }
 
   private redirecionarRota(rota: string) {
