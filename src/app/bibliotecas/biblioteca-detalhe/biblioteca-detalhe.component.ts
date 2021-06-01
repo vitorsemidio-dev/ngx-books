@@ -71,13 +71,11 @@ export class BibliotecaDetalheComponent implements OnInit {
 
     const bookId = evento;
     const userId = userData.id;
-    const libraryId = this.biblioteca.id;
 
     this.bibliotecaService
       .alugarLivro({
         bookId,
         userId,
-        libraryId,
       })
       .subscribe(
         (response) => console.log(response),
