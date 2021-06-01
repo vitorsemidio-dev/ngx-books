@@ -1,6 +1,5 @@
 <h2>
-  Cadastrar um novo livro
-  <!-- Editar livro -->
+  {{ livro.id ? 'Editar livro' : 'Cadastrar um novo livro' }}
 </h2>
 
 <form class="formulario-livro" autocomplete="off" [formGroup]="formularioLivro">
