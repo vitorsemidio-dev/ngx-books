@@ -13,7 +13,7 @@ interface IAluguelLivro {
   libraryId: string;
 }
 
-enum AcaoBiblioteca {
+export enum AcaoBiblioteca {
   Criado = 'Criado',
   Atualizado = 'Atualizado',
   Removido = 'Removido',
