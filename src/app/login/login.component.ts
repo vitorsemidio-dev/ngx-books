@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.loginService.fazerLogin(this.formulario.value).subscribe(
       (response) => {
-        this.authService.salvarInformacaoUsuarioLogado(response);
+        this.authService.salvarDadosSessao(response);
         this.redirecionarRota('/bibliotecas/perfil');
       },
       (error) => {},

@@ -61,13 +61,13 @@ export class BibliotecaDetalheComponent implements OnInit {
   }
 
   handleAlugar(evento: string) {
-    const dadosAutenticacao = this.authService.buscarInformacaoUsuarioLogado();
+    const dadosSessao = this.authService.buscarDadosSessao();
 
-    if (!dadosAutenticacao) {
+    if (!dadosSessao) {
       return;
     }
 
-    const userData = dadosAutenticacao.library;
+    const userData = dadosSessao.library;
 
     const bookId = evento;
     const userId = userData.id;

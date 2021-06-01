@@ -58,7 +58,7 @@ export class BibliotecaService extends CrudService<Biblioteca> {
   // TODO: Refatorar para conseguir de maneira melhor e passar por HEADERS
   private getLibraryId() {
     const dadosLocalStorage = JSON.parse(
-      localStorage.getItem(Chave.chaveUsuarioLogado),
+      localStorage.getItem(Chave.chaveSessao),
     ) as {
       library: Biblioteca;
     };

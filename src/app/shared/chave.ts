@@ -1,3 +1,3 @@
 export enum Chave {
-  chaveUsuarioLogado = '@ngx-books:biblioteca',
+  chaveSessao = '@ngx-books:sessao',
 }

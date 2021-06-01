@@ -18,13 +18,13 @@ export class HeaderComponent implements OnInit {
   }
 
   carregarDadosUsuarioAutenticado() {
-    const dadosAutenticacao = this.authService.buscarInformacaoUsuarioLogado();
+    const dadosSessao = this.authService.buscarDadosSessao();
 
-    if (!dadosAutenticacao) {
+    if (!dadosSessao) {
       return;
     }
 
-    const { library } = dadosAutenticacao;
+    const { library } = dadosSessao;
 
     this.usuarioLogado = library;
   }

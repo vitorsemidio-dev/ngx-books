@@ -9,8 +9,8 @@ import { Chave } from '../chave';
 export class AuthService {
   constructor() {}
 
-  buscarInformacaoUsuarioLogado() {
-    const dadosLocalStorage = localStorage.getItem(Chave.chaveUsuarioLogado);
+  buscarDadosSessao() {
+    const dadosLocalStorage = localStorage.getItem(Chave.chaveSessao);
 
     if (!dadosLocalStorage) {
       return null;
@@ -27,12 +27,9 @@ export class AuthService {
     };
   }
 
-  salvarInformacaoUsuarioLogado(informacao: {
-    token: string;
-    library: Biblioteca;
-  }) {
-    const nomeChave = Chave.chaveUsuarioLogado;
-    const dadosLoginBiblioteca = JSON.stringify(informacao);
+  salvarDadosSessao(sessao: { token: string; library: Biblioteca }) {
+    const nomeChave = Chave.chaveSessao;
+    const dadosLoginBiblioteca = JSON.stringify(sessao);
     localStorage.setItem(nomeChave, dadosLoginBiblioteca);
   }
 }
