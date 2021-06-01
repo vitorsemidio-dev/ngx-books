@@ -1,1 +1,38 @@
-<p>login works!</p>
+<div class="login-usuario-container">
+  <app-aside-item
+    [imgUrl]="'assets/img-usuario-autenticacao.svg'"
+    [imgAltTexto]="'Autenticação'"
+    [texto]="'Ainda não possui um registro?'"
+    [url]="'/cadastro'"
+    [linkTexto]="'Criar conta'"
+  >
+  </app-aside-item>
+
+  <form class="formulario-login" novalidate [formGroup]="formulario">
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        placeholder="Informe seu email"
+        formControlName="email"
+      />
+    </div>
+    <div class="form-group">
+      <label for="senha">Senha</label>
+      <input
+        type="password"
+        class="form-control"
+        id="senha"
+        placeholder="Digite sua senha"
+        formControlName="password"
+      />
+    </div>
+    <button type="button" class="btn btn-primary" (click)="onSubmit()">
+      Entrar
+    </button>
+
+    <a [routerLink]="['/usuarios/login']"> Entrar como biblioteca </a>
+  </form>
+</div>
