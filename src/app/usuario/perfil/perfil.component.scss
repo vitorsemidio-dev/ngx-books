@@ -1,5 +1,12 @@
 .perfil-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: auto 30%;
+  align-items: flex-start;
   gap: 1rem;
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
 }
