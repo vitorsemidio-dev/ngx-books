@@ -1,8 +1,12 @@
-<app-perfil-detalhe-item
-  [name]="usuario?.name"
-  [imgUrl]="usuario?.imgUrl"
-  [email]="usuario?.email"
-  imgDescricao="Avatar Usuario {{ usuario?.name }}"
-  (onSair)="onSair()"
->
-</app-perfil-detalhe-item>
+<div class="perfil-container">
+  <app-perfil-detalhe-item
+    [name]="usuario?.name"
+    [imgUrl]="usuario?.imgUrl"
+    [email]="usuario?.email"
+    imgDescricao="Avatar Usuario {{ usuario?.name }}"
+    (onSair)="onSair()"
+  >
+  </app-perfil-detalhe-item>
+
+  <app-listagem-itens> </app-listagem-itens>
+</div>

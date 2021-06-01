@@ -7,6 +7,7 @@ import { CardItemComponent } from './card-item/card-item.component';
 import { AsideItemComponent } from './aside-item/aside-item.component';
 import { ImgItemComponent } from './img-item/img-item.component';
 import { PerfilDetalheItemComponent } from './perfil-detalhe-item/perfil-detalhe-item.component';
+import { ListagemItensComponent } from './listagem-itens/listagem-itens.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { PerfilDetalheItemComponent } from './perfil-detalhe-item/perfil-detalhe
     AsideItemComponent,
     ImgItemComponent,
     PerfilDetalheItemComponent,
+    ListagemItensComponent,
   ],
   imports: [CommonModule, RouterModule, ReactiveFormsModule],
   exports: [
@@ -21,6 +23,7 @@ import { PerfilDetalheItemComponent } from './perfil-detalhe-item/perfil-detalhe
     AsideItemComponent,
     ImgItemComponent,
     PerfilDetalheItemComponent,
+    ListagemItensComponent,
   ],
 })
 export class SharedModule {}
