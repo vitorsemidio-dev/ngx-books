@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 import { BibliotecaService } from 'src/app/bibliotecas/services/biblioteca.service';
 import { Livro } from 'src/app/livros/livro.model';
+import { LivrosService } from 'src/app/livros/livros.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { Biblioteca } from '../biblioteca.model';
 
@@ -13,10 +15,12 @@ import { Biblioteca } from '../biblioteca.model';
 export class PerfilComponent implements OnInit {
   biblioteca: Biblioteca;
   catalogo: Livro[];
+  subs: Subscription;
 
   constructor(
     private bibliotecaService: BibliotecaService,
     private authService: AuthService,
+    private livroService: LivrosService,
   ) {}
 
   ngOnInit(): void {
@@ -26,6 +30,14 @@ export class PerfilComponent implements OnInit {
   carregarTela() {
     this.carregarDadosPerfil();
     this.carregarCatalogo();
+    this.verificarAcoes();
+  }
+
+  private verificarAcoes() {
+    this.subs = this.livroService.acaoLivro.subscribe((acaoLivro) => {
+      console.log(`Acao Livro: [${acaoLivro}]`);
+      this.carregarCatalogo();
+    });
   }
 
   private carregarDadosPerfil() {
