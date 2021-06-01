@@ -44,8 +44,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const { library } = dadosSessao;
+    const { library, user } = dadosSessao;
 
-    this.usuarioLogado = library;
+    this.usuarioLogado = library || user;
   }
 }
