@@ -13,7 +13,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 })
 export class PerfilComponent implements OnInit {
   usuario: any;
-  catalogo: Livro[];
+  livrosAlugados = [];
 
   constructor(
     private router: Router,

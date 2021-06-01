@@ -8,5 +8,9 @@
   >
   </app-perfil-detalhe-item>
 
-  <app-listagem-itens> </app-listagem-itens>
+  <app-listagem-itens [titulo]="'Livros Alugados'" [lista]="livrosAlugados">
+    <a class="btn btn-sm btn-outline-primary btn-cta" [routerLink]="['/livros']"
+      >+</a
+    >
+  </app-listagem-itens>
 </div>
