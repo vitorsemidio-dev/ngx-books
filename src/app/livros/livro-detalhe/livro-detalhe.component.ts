@@ -12,8 +12,8 @@ import { AcaoLivro, LivrosService } from 'src/app/livros/livros.service';
 })
 export class LivroDetalheComponent implements OnInit {
   slug: string;
-
   livro: Livro;
+  isFooterBiblioteca = false;
 
   constructor(
     private livrosService: LivrosService,

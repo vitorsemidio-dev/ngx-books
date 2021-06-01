@@ -15,9 +15,12 @@
       <p>Páginas: {{ livro.pages }}</p>
       <p>Quantidade disponível: {{ livro.quantity }}</p>
 
-      <footer class="footer">
+      <footer class="footer" *ngIf="isFooterBiblioteca">
         <a class="btn btn-warning" [routerLink]="['editar']">Editar</a>
         <button class="btn btn-danger" (click)="onExcluir()">Excluir</button>
+      </footer>
+      <footer class="footer" *ngIf="!isFooterBiblioteca">
+        <button class="btn btn-info">Devolver Livro</button>
       </footer>
     </div>
   </div>
