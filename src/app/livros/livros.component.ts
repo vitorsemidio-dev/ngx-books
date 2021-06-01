@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { BibliotecaService } from './../bibliotecas/services/biblioteca.service';
+import { AuthService } from '../shared/services/auth.service';
 
 import { Livro } from './livro.model';
 import { LivrosService } from './livros.service';
@@ -16,6 +17,7 @@ export class LivrosComponent implements OnInit {
   constructor(
     private livrosService: LivrosService,
     private bibliotecaService: BibliotecaService,
+    private authService: AuthService,
   ) {}
 
   ngOnInit(): void {
@@ -32,11 +34,19 @@ export class LivrosComponent implements OnInit {
   }
 
   handleAlugar(evento: Livro) {
+    const dadosSessao = this.authService.buscarDadosSessao();
+
+    if (!dadosSessao) {
+      return;
+    }
+
+    const { user } = dadosSessao;
+
     this.bibliotecaService
       .alugarLivro({
         bookId: evento.id,
         libraryId: 'libraryId',
-        userId: 'userId',
+        userId: user.id,
       })
       .subscribe((result) => {
         console.log('[Response Alugar Livro]');
