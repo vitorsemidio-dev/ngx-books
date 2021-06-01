@@ -23,7 +23,7 @@ const routes: Routes = [
         //   import('../livros/livros.module').then((m) => m.LivrosModule),
       },
       {
-        path: 'livros',
+        path: '',
         // Livros
         loadChildren: () =>
           import('../livros/livros.module').then((m) => m.LivrosModule),
