@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { BibliotecaService } from 'src/app/bibliotecas/services/biblioteca.service';
@@ -12,10 +12,10 @@ import { Biblioteca } from '../biblioteca.model';
   templateUrl: './perfil.component.html',
   styleUrls: ['./perfil.component.scss'],
 })
-export class PerfilComponent implements OnInit {
+export class PerfilComponent implements OnInit, OnDestroy {
   biblioteca: Biblioteca;
   catalogo: Livro[];
-  subs: Subscription;
+  subs: Subscription = new Subscription();
 
   constructor(
     private bibliotecaService: BibliotecaService,
@@ -27,6 +27,12 @@ export class PerfilComponent implements OnInit {
     this.carregarTela();
   }
 
+  ngOnDestroy() {
+    if (this.subs || !this.subs.closed) {
+      this.subs.unsubscribe();
+    }
+  }
+
   carregarTela() {
     this.carregarDadosPerfil();
     this.carregarCatalogo();
@@ -34,10 +40,20 @@ export class PerfilComponent implements OnInit {
   }
 
   private verificarAcoes() {
-    this.subs = this.livroService.acaoLivro.subscribe((acaoLivro) => {
+    const subLivro = this.livroService.acaoLivro.subscribe((acaoLivro) => {
       console.log(`Acao Livro: [${acaoLivro}]`);
       this.carregarCatalogo();
     });
+
+    const subBiblioteca = this.bibliotecaService.acaoBiblioteca.subscribe(
+      (acaoBiblioteca) => {
+        console.log(`Acao Biblioteca: [${acaoBiblioteca}]`);
+        this.carregarCatalogo();
+      },
+    );
+
+    this.subs.add(subLivro);
+    this.subs.add(subBiblioteca);
   }
 
   private carregarDadosPerfil() {

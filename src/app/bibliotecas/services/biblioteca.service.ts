@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
+import { Chave } from 'src/app/shared/chave';
 import { Biblioteca } from '../biblioteca.model';
 import { Livro } from '../../livros/livro.model';
 import { CrudService } from '../../shared/services/crud.service';
-import { Chave } from 'src/app/shared/chave';
 
 interface IAluguelLivro {
   userId: string;
@@ -12,10 +13,19 @@ interface IAluguelLivro {
   libraryId: string;
 }
 
+enum AcaoBiblioteca {
+  Criado = 'Criado',
+  Atualizado = 'Atualizado',
+  Removido = 'Removido',
+  LivroAdicionadoAoCatalogo = 'LivroAdicionadoAoCatalogo',
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class BibliotecaService extends CrudService<Biblioteca> {
+  acaoBiblioteca: Subject<AcaoBiblioteca> = new Subject();
+
   constructor(protected http: HttpClient) {
     super(http, 'libraries');
   }
@@ -28,6 +38,10 @@ export class BibliotecaService extends CrudService<Biblioteca> {
     return this.http.get<Livro[]>(
       `${this.apiUrl}/${this.recurso}/stock/${idBiblioteca}`,
     );
+  }
+
+  emitirAcao(acao: AcaoBiblioteca) {
+    this.acaoBiblioteca.next(acao);
   }
 
   alugarLivro(infoAlugar: IAluguelLivro) {
