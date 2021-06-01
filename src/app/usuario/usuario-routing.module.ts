@@ -5,7 +5,7 @@ import { LivroDetalheComponent } from '../livros/livro-detalhe/livro-detalhe.com
 
 import { LoginComponent } from './login/login.component';
 import { PerfilDetalheComponent } from './perfil-detalhe/perfil-detalhe.component';
-import { PerfilComponent } from './perfil/perfil.component';
+import { PerfilPage } from './perfil/perfil.page';
 
 const routes: Routes = [
   {
@@ -14,7 +14,7 @@ const routes: Routes = [
   },
   {
     path: 'perfil',
-    component: PerfilComponent,
+    component: PerfilPage,
     children: [
       {
         path: '',

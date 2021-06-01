@@ -5,10 +5,10 @@ import { UsuarioService } from '../usuario.service';
 
 @Component({
   selector: 'app-perfil',
-  templateUrl: './perfil.component.html',
-  styleUrls: ['./perfil.component.scss'],
+  templateUrl: './perfil.page.html',
+  styleUrls: ['./perfil.page.scss'],
 })
-export class PerfilComponent implements OnInit {
+export class PerfilPage implements OnInit {
   livrosAlugados = [];
 
   constructor(
