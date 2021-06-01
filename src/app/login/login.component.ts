@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { LoginService } from './login.service';
+import { AcaoLogin, LoginService } from './login.service';
 
 @Component({
   selector: 'app-login',
@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit {
     this.loginService.fazerLogin(this.formulario.value).subscribe(
       (response) => {
         this.authService.salvarDadosSessao(response);
+        this.loginService.emitirAutenticacao(AcaoLogin.Login);
         this.redirecionarRota('/bibliotecas/perfil');
       },
       (error) => {},
