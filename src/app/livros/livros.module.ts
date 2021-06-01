@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { LivrosComponent } from './livros.component';
 import { CardItemLivroComponent } from './card-item-livro/card-item-livro.component';
@@ -17,7 +18,12 @@ import { SharedModule } from '../shared/shared.module';
     LivroDetalheComponent,
     LivroFormularioComponent,
   ],
-  imports: [CommonModule, LivrosRoutingModule, SharedModule],
+  imports: [
+    CommonModule,
+    LivrosRoutingModule,
+    ReactiveFormsModule,
+    SharedModule,
+  ],
   exports: [
     LivrosComponent,
     CardItemLivroComponent,

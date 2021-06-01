@@ -24,6 +24,29 @@ const routes: Routes = [
       livro: LivroResolver,
     },
   },
+  // {
+  //   path: '',
+  //   children: [
+  //     {
+  //       path: 'criar-livro',
+  //       component: LivroFormularioComponent,
+  //       resolve: {
+  //         livro: LivroResolver,
+  //       },
+  //     },
+  //     {
+  //       path: ':slug',
+  //       component: LivroDetalheComponent,
+  //     },
+  //     {
+  //       path: ':slug/editar',
+  //       component: LivroFormularioComponent,
+  //       resolve: {
+  //         livro: LivroResolver,
+  //       },
+  //     },
+  //   ],
+  // },
 ];
 
 @NgModule({
