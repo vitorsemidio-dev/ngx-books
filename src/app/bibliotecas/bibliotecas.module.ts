@@ -9,8 +9,6 @@ import { CardItemBibliotecaComponent } from './card-item-biblioteca/card-item-bi
 import { SharedModule } from '../shared/shared.module';
 import { PerfilComponent } from './perfil/perfil.component';
 import { PerfilDetalheComponent } from './perfil-detalhe/perfil-detalhe.component';
-import { LivroDetalheComponent } from './livro-detalhe/livro-detalhe.component';
-import { LivroFormularioComponent } from './livro-formulario/livro-formulario.component';
 
 @NgModule({
   declarations: [
@@ -19,8 +17,6 @@ import { LivroFormularioComponent } from './livro-formulario/livro-formulario.co
     CardItemBibliotecaComponent,
     PerfilComponent,
     PerfilDetalheComponent,
-    LivroDetalheComponent,
-    LivroFormularioComponent,
   ],
   imports: [
     CommonModule,

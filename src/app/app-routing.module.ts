@@ -30,6 +30,11 @@ const routes: Routes = [
         (m) => m.BibliotecasModule,
       ),
   },
+  {
+    path: '**',
+    redirectTo: '/login',
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({
