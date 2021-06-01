@@ -20,11 +20,7 @@
   <a *ngIf="!usuarioLogado" class="btn btn-info" [routerLink]="['login']"
     >Login/Cadastro</a
   >
-  <a
-    class="avatar-usuario"
-    [routerLink]="['/bibliotecas/perfil']"
-    *ngIf="usuarioLogado"
-  >
+  <a class="avatar-usuario" [routerLink]="[rotaPerfil]" *ngIf="usuarioLogado">
     <app-img-item
       [src]="usuarioLogado.imgUrl"
       alt="Avatar do usuario logado {{ usuarioLogado.name }}"
