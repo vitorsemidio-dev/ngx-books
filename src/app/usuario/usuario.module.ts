@@ -6,9 +6,10 @@ import { UsuarioRoutingModule } from './usuario-routing.module';
 import { LoginComponent } from './login/login.component';
 import { SharedModule } from '../shared/shared.module';
 import { PerfilComponent } from './perfil/perfil.component';
+import { PerfilDetalheComponent } from './perfil-detalhe/perfil-detalhe.component';
 
 @NgModule({
-  declarations: [LoginComponent, PerfilComponent],
+  declarations: [LoginComponent, PerfilComponent, PerfilDetalheComponent],
   imports: [
     CommonModule,
     UsuarioRoutingModule,
