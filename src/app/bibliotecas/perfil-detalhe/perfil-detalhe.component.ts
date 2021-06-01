@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Livro } from 'src/app/livros/livro.model';
+import { LoginService } from 'src/app/login/login.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { Biblioteca } from '../biblioteca.model';
 
 @Component({
@@ -12,7 +15,11 @@ export class PerfilDetalheComponent implements OnInit {
   biblioteca: Biblioteca;
   catalogo: Livro[];
 
-  constructor() {}
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private loginService: LoginService,
+  ) {}
 
   ngOnInit(): void {
     this.carregarTela();
@@ -23,12 +30,21 @@ export class PerfilDetalheComponent implements OnInit {
   }
 
   private carregarDadosPerfil() {
-    const dadosPerfil = JSON.parse(
-      localStorage.getItem('@ngx-books:biblioteca'),
-    ) as {
-      library: Biblioteca;
-    };
+    const dadosSessao = this.authService.buscarDadosSessao();
 
-    this.biblioteca = dadosPerfil.library;
+    if (!dadosSessao) {
+      return;
+    }
+
+    this.biblioteca = dadosSessao.library;
+  }
+
+  onSair() {
+    this.loginService.fazerLogout();
+    this.redirecionarRota('/login');
+  }
+
+  private redirecionarRota(rota: string) {
+    this.router.navigate([rota]);
   }
 }

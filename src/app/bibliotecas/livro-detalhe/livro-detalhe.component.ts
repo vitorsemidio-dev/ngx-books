@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { tap } from 'rxjs/operators';
+
 import { Livro } from 'src/app/livros/livro.model';
-import { LivrosService } from 'src/app/livros/livros.service';
+import { AcaoLivro, LivrosService } from 'src/app/livros/livros.service';
 
 @Component({
   selector: 'app-livro-detalhe',
@@ -15,7 +17,8 @@ export class LivroDetalheComponent implements OnInit {
 
   constructor(
     private livrosService: LivrosService,
-    private router: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -23,7 +26,7 @@ export class LivroDetalheComponent implements OnInit {
   }
 
   carregarTela() {
-    this.router.params.subscribe((params) => {
+    this.activatedRoute.params.subscribe((params) => {
       this.slug = params['slug'];
       this.carregarDadosLivro();
     });
@@ -37,10 +40,15 @@ export class LivroDetalheComponent implements OnInit {
 
   onExcluir() {
     this.confirmacao();
-    this.livrosService.remover(this.livro.id).subscribe(
-      (response) => {},
-      (error) => {},
-    );
+    this.livrosService
+      .remover(this.livro.id)
+      .pipe(tap(() => this.livrosService.emitirAcao(AcaoLivro.Removido)))
+      .subscribe(
+        (response) => {
+          this.router.navigate(['/bibliotecas', 'perfil']);
+        },
+        (error) => {},
+      );
   }
 
   private confirmacao() {

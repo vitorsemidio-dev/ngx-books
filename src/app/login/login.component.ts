@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
-import { LoginService } from './login.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { AcaoLogin, LoginService } from './login.service';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +16,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private loginService: LoginService,
+    private router: Router,
+    private authService: AuthService,
   ) {}
 
   ngOnInit(): void {
@@ -30,11 +34,15 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.loginService.fazerLogin(this.formulario.value).subscribe(
       (response) => {
-        const nomeChave = '@ngx-books:biblioteca';
-        const dadosLoginBiblioteca = JSON.stringify(response);
-        localStorage.setItem(nomeChave, dadosLoginBiblioteca);
+        this.authService.salvarDadosSessao(response);
+        this.loginService.emitirAutenticacao(AcaoLogin.Login);
+        this.redirecionarRota('/bibliotecas/perfil');
       },
       (error) => {},
     );
+  }
+
+  private redirecionarRota(rota: string) {
+    this.router.navigate([rota]);
   }
 }

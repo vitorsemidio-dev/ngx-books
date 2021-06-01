@@ -33,9 +33,13 @@ export class CadastroComponent implements OnInit {
   onSubmit() {
     this.bibliotecaService.criar(this.formulario.value).subscribe(
       (response) => {
-        this.router.navigate(['/login']);
+        this.redirecionarRota('/login');
       },
       (error) => {},
     );
+  }
+
+  private redirecionarRota(rota: string) {
+    this.router.navigate([rota]);
   }
 }

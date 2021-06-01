@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import { BibliotecaService } from 'src/app/bibliotecas/services/biblioteca.service';
+import {
+  BibliotecaService,
+  AcaoBiblioteca,
+} from 'src/app/bibliotecas/services/biblioteca.service';
 import { Livro } from 'src/app/livros/livro.model';
-import { LivrosService } from 'src/app/livros/livros.service';
+import { AcaoLivro, LivrosService } from 'src/app/livros/livros.service';
 
 @Component({
   selector: 'app-livro-formulario',
@@ -20,11 +23,12 @@ export class LivroFormularioComponent implements OnInit {
     private bibliotecaService: BibliotecaService,
     private livrosService: LivrosService,
     private fb: FormBuilder,
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
   ) {}
 
   ngOnInit() {
-    this.route.data.subscribe((resolve: { livro: Livro }) => {
+    this.activatedRoute.data.subscribe((resolve: { livro: Livro }) => {
       this.montarFormulario(resolve.livro);
       this.livro = resolve.livro;
       if (this.livro.imgUrl) {
@@ -66,11 +70,15 @@ export class LivroFormularioComponent implements OnInit {
   onSalvar() {
     if (this.formularioLivro.value['id']) {
       this.atualizarLivro();
-      console.log('Atualizar');
     } else {
-      console.log('Criar');
       this.adicionarLivroAoCatalogo();
     }
+  }
+
+  onCancelar() {
+    this.router.navigate(['..'], {
+      relativeTo: this.activatedRoute,
+    });
   }
 
   private adicionarLivroAoCatalogo() {
@@ -78,22 +86,21 @@ export class LivroFormularioComponent implements OnInit {
       .adicionarLivroAoCatalogo(this.formularioLivro.value)
       .subscribe(
         (response) => {
-          console.log('sucesso');
+          this.bibliotecaService.emitirAcao(AcaoBiblioteca.Criado);
+          this.router.navigate(['/bibliotecas', 'perfil']);
         },
-        (error) => {
-          console.log('error');
-        },
+        (error) => {},
       );
   }
 
   private atualizarLivro() {
     this.livrosService.atualizar(this.formularioLivro.value).subscribe(
       (response) => {
-        console.log(response);
+        const { slug } = response;
+        this.livrosService.emitirAcao(AcaoLivro.Atualizado);
+        this.router.navigate(['/bibliotecas', 'perfil', slug]);
       },
-      (error) => {
-        console.log('error');
-      },
+      (error) => {},
     );
   }
 
@@ -119,13 +126,8 @@ export class LivroFormularioComponent implements OnInit {
 
   private atualizarImagemLivro(imagem: File) {
     this.livrosService.atualizarImagem(imagem, this.livro.id).subscribe(
-      (response) => {
-        console.log('atualizado');
-        console.log(response);
-      },
-      (error) => {
-        console.log('error ao atualizar');
-      },
+      (response) => {},
+      (error) => {},
     );
   }
 }
