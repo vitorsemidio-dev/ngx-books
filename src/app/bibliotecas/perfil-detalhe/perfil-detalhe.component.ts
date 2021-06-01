@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Livro } from 'src/app/livros/livro.model';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { Biblioteca } from '../biblioteca.model';
 
 @Component({
@@ -13,7 +14,7 @@ export class PerfilDetalheComponent implements OnInit {
   biblioteca: Biblioteca;
   catalogo: Livro[];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.carregarTela();
@@ -24,13 +25,13 @@ export class PerfilDetalheComponent implements OnInit {
   }
 
   private carregarDadosPerfil() {
-    const dadosPerfil = JSON.parse(
-      localStorage.getItem('@ngx-books:biblioteca'),
-    ) as {
-      library: Biblioteca;
-    };
+    const dadosAutenticacao = this.authService.buscarInformacaoUsuarioLogado();
 
-    this.biblioteca = dadosPerfil.library;
+    if (!dadosAutenticacao) {
+      return;
+    }
+
+    this.biblioteca = dadosAutenticacao.library;
   }
 
   onSair() {

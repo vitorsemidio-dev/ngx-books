@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Biblioteca } from './../biblioteca.model';
 import { BibliotecaService } from '../services/biblioteca.service';
 import { Livro } from '../../livros/livro.model';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-biblioteca-detalhe',
@@ -26,6 +27,7 @@ export class BibliotecaDetalheComponent implements OnInit {
   constructor(
     private bibliotecaService: BibliotecaService,
     private route: ActivatedRoute,
+    private authService: AuthService,
   ) {}
 
   ngOnInit(): void {
@@ -59,11 +61,13 @@ export class BibliotecaDetalheComponent implements OnInit {
   }
 
   handleAlugar(evento: string) {
-    const localStorageData = JSON.parse(
-      localStorage.getItem('@ngx-books:biblioteca'),
-    ) as { library: Biblioteca };
+    const dadosAutenticacao = this.authService.buscarInformacaoUsuarioLogado();
 
-    const userData = localStorageData.library;
+    if (!dadosAutenticacao) {
+      return;
+    }
+
+    const userData = dadosAutenticacao.library;
 
     const bookId = evento;
     const userId = userData.id;

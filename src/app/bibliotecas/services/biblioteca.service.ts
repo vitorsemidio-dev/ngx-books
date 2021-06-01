@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { Biblioteca } from '../biblioteca.model';
 import { Livro } from '../../livros/livro.model';
 import { CrudService } from '../../shared/services/crud.service';
+import { Chave } from 'src/app/shared/chave';
 
 interface IAluguelLivro {
   userId: string;
@@ -57,10 +58,14 @@ export class BibliotecaService extends CrudService<Biblioteca> {
   // TODO: Refatorar para conseguir de maneira melhor e passar por HEADERS
   private getLibraryId() {
     const dadosLocalStorage = JSON.parse(
-      localStorage.getItem('@ngx-books:biblioteca'),
+      localStorage.getItem(Chave.chaveUsuarioLogado),
     ) as {
       library: Biblioteca;
     };
+
+    if (!dadosLocalStorage) {
+      return null;
+    }
 
     const library_id = dadosLocalStorage.library.id;
 

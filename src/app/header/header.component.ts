@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Chave } from 'src/app/shared/chave';
 import { Biblioteca } from '../bibliotecas/biblioteca.model';
+import { AuthService } from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -11,23 +11,20 @@ import { Biblioteca } from '../bibliotecas/biblioteca.model';
 export class HeaderComponent implements OnInit {
   usuarioLogado: Biblioteca;
 
-  constructor() {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
     this.carregarDadosUsuarioAutenticado();
   }
 
   carregarDadosUsuarioAutenticado() {
-    const dadosLocalStorage = localStorage.getItem(Chave.chaveUsuarioLogado);
+    const dadosAutenticacao = this.authService.buscarInformacaoUsuarioLogado();
 
-    if (!dadosLocalStorage) {
+    if (!dadosAutenticacao) {
       return;
     }
 
-    const { library } = JSON.parse(dadosLocalStorage) as {
-      library: Biblioteca;
-      token: string;
-    };
+    const { library } = dadosAutenticacao;
 
     this.usuarioLogado = library;
   }
