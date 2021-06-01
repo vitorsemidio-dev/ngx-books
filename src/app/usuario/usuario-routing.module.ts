@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { LivroDetalheComponent } from '../livros/livro-detalhe/livro-detalhe.component';
+
 import { LoginComponent } from './login/login.component';
 import { PerfilDetalheComponent } from './perfil-detalhe/perfil-detalhe.component';
 import { PerfilComponent } from './perfil/perfil.component';
@@ -18,10 +20,10 @@ const routes: Routes = [
         path: '',
         component: PerfilDetalheComponent,
       },
-      // {
-      //   path: ':slug',
-      //   component: LivroDetalheComponent,
-      // }
+      {
+        path: ':slug',
+        component: LivroDetalheComponent,
+      },
     ],
   },
 ];
