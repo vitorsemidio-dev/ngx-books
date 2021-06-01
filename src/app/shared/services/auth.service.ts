@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Biblioteca } from 'src/app/bibliotecas/biblioteca.model';
+import { Usuario } from 'src/app/usuario/usuario';
 import { Chave } from '../chave';
 
 @Injectable({
@@ -19,7 +20,7 @@ export class AuthService {
     const { library, token, user } = JSON.parse(dadosLocalStorage) as {
       library: Biblioteca;
       token: string;
-      user: any;
+      user: Usuario;
     };
 
     return {

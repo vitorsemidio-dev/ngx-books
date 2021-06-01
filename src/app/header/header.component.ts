@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { Biblioteca } from '../bibliotecas/biblioteca.model';
 import { LoginService } from '../login/login.service';
 import { AuthService } from '../shared/services/auth.service';
+import { Usuario } from '../usuario/usuario';
 
 @Component({
   selector: 'app-header',
@@ -12,7 +13,7 @@ import { AuthService } from '../shared/services/auth.service';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   private acaoLogin$: Subscription;
-  usuarioLogado: Biblioteca;
+  usuarioLogado: Biblioteca | Usuario;
   rotaPerfil: string;
 
   constructor(

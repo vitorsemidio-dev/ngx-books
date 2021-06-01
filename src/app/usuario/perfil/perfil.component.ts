@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Biblioteca } from 'src/app/bibliotecas/biblioteca.model';
 
-import { Livro } from 'src/app/livros/livro.model';
 import { LoginService } from 'src/app/login/login.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { Usuario } from '../usuario';
 
 @Component({
   selector: 'app-perfil',
@@ -12,7 +11,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   styleUrls: ['./perfil.component.scss'],
 })
 export class PerfilComponent implements OnInit {
-  usuario: any;
+  usuario: Usuario;
   livrosAlugados = [];
 
   constructor(
