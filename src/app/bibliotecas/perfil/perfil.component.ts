@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { BibliotecaService } from 'src/app/bibliotecas/services/biblioteca.service';
 import { Livro } from 'src/app/livros/livro.model';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { Biblioteca } from '../biblioteca.model';
 
 @Component({
@@ -13,7 +14,10 @@ export class PerfilComponent implements OnInit {
   biblioteca: Biblioteca;
   catalogo: Livro[];
 
-  constructor(private bibliotecaService: BibliotecaService) {}
+  constructor(
+    private bibliotecaService: BibliotecaService,
+    private authService: AuthService,
+  ) {}
 
   ngOnInit(): void {
     this.carregarTela();
@@ -25,13 +29,13 @@ export class PerfilComponent implements OnInit {
   }
 
   private carregarDadosPerfil() {
-    const dadosPerfil = JSON.parse(
-      localStorage.getItem('@ngx-books:biblioteca'),
-    ) as {
-      library: Biblioteca;
-    };
+    const dadosSessao = this.authService.buscarDadosSessao();
 
-    this.biblioteca = dadosPerfil.library;
+    if (!dadosSessao) {
+      return;
+    }
+
+    this.biblioteca = dadosSessao.library;
   }
 
   private carregarCatalogo() {
