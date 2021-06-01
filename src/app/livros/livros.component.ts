@@ -45,12 +45,11 @@ export class LivrosComponent implements OnInit {
     this.bibliotecaService
       .alugarLivro({
         bookId: evento.id,
-        libraryId: 'libraryId',
         userId: user.id,
       })
-      .subscribe((result) => {
-        console.log('[Response Alugar Livro]');
-        console.table(result);
-      });
+      .subscribe(
+        (response) => {},
+        (error) => {},
+      );
   }
 }

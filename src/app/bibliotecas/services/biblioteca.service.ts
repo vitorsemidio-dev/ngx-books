@@ -10,7 +10,6 @@ import { CrudService } from '../../shared/services/crud.service';
 interface IAluguelLivro {
   userId: string;
   bookId: string;
-  libraryId: string;
 }
 
 export enum AcaoBiblioteca {
@@ -45,15 +44,10 @@ export class BibliotecaService extends CrudService<Biblioteca> {
   }
 
   alugarLivro(infoAlugar: IAluguelLivro) {
-    const {
-      bookId: book_id,
-      libraryId: library_id,
-      userId: user_id,
-    } = infoAlugar;
+    const { bookId: book_id, userId: user_id } = infoAlugar;
 
     return this.http.post(`${this.apiUrl}/${this.recurso}/rent`, {
       book_id,
-      library_id,
       user_id,
     });
   }
