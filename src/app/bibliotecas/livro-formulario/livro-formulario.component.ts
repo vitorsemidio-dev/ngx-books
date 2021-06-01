@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { BibliotecaService } from 'src/app/bibliotecas/services/biblioteca.service';
 import { Livro } from 'src/app/livros/livro.model';
@@ -21,6 +21,7 @@ export class LivroFormularioComponent implements OnInit {
     private livrosService: LivrosService,
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
+    private router: Router,
   ) {}
 
   ngOnInit() {
@@ -79,6 +80,7 @@ export class LivroFormularioComponent implements OnInit {
       .subscribe(
         (response) => {
           console.log('sucesso');
+          this.router.navigate(['/bibliotecas', 'perfil']);
         },
         (error) => {
           console.log('error');
@@ -90,6 +92,8 @@ export class LivroFormularioComponent implements OnInit {
     this.livrosService.atualizar(this.formularioLivro.value).subscribe(
       (response) => {
         console.log(response);
+        const { slug } = response;
+        this.router.navigate(['/bibliotecas', 'perfil', slug]);
       },
       (error) => {
         console.log('error');
