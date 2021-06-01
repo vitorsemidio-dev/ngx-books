@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { LoginService } from 'src/app/login/login.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { Usuario } from '../usuario';
+import { UsuarioService } from '../usuario.service';
 
 @Component({
   selector: 'app-perfil',
@@ -18,6 +19,7 @@ export class PerfilComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     private loginService: LoginService,
+    private usuarioService: UsuarioService,
   ) {}
 
   ngOnInit(): void {
@@ -26,6 +28,7 @@ export class PerfilComponent implements OnInit {
 
   carregarTela() {
     this.carregarDadosPerfil();
+    this.carregarLivrosAlugados();
   }
 
   private carregarDadosPerfil() {
@@ -36,6 +39,25 @@ export class PerfilComponent implements OnInit {
     }
 
     this.usuario = dadosSessao.user;
+  }
+
+  private carregarLivrosAlugados() {
+    const dadosSessao = this.authService.buscarDadosSessao();
+
+    if (!dadosSessao) {
+      return;
+    }
+
+    const { user } = dadosSessao;
+    this.usuarioService.listarLivrosAlugados(user.id).subscribe(
+      (response) => {
+        console.log(response);
+        this.livrosAlugados = response;
+      },
+      (error) => {
+        console.log('Falha ao carregar listagem de livros alugados');
+      },
+    );
   }
 
   onSair() {
