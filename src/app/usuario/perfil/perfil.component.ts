@@ -51,12 +51,9 @@ export class PerfilComponent implements OnInit {
     const { user } = dadosSessao;
     this.usuarioService.listarLivrosAlugados(user.id).subscribe(
       (response) => {
-        console.log(response);
         this.livrosAlugados = response;
       },
-      (error) => {
-        console.log('Falha ao carregar listagem de livros alugados');
-      },
+      (error) => {},
     );
   }
 

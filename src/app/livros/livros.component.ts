@@ -48,9 +48,9 @@ export class LivrosComponent implements OnInit {
         libraryId: 'libraryId',
         userId: user.id,
       })
-      .subscribe((result) => {
-        console.log('[Response Alugar Livro]');
-        console.table(result);
-      });
+      .subscribe(
+        (response) => {},
+        (error) => {},
+      );
   }
 }
