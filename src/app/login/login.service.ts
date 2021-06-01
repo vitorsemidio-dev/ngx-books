@@ -42,7 +42,7 @@ export class LoginService {
   }
 
   fazerLoginUsuario({ email, password }: ICredencial) {
-    return this.http.post<ILoginResponse>(`${this.baseUrl}/users/sessions`, {
+    return this.http.post<ILoginResponse>(`${this.baseUrl}/sessions`, {
       email,
       password,
     });
