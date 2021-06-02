@@ -24,9 +24,9 @@ export class CadastroComponent implements OnInit {
 
   private montarFormulario() {
     this.formulario = this.formBuilder.group({
-      name: [null, [Validators.required]],
+      name: ['nome inicial', [Validators.required]],
       email: [null, [Validators.required, Validators.email]],
-      password: [, [Validators.required]],
+      password: [null, [Validators.required]],
     });
   }
 
@@ -37,6 +37,28 @@ export class CadastroComponent implements OnInit {
     //   },
     //   (error) => {},
     // );
+    // setTimeout(() => this.verificarValidacoesFormulario(), 2000);
+    this.verificarDisponibilidadeNome();
+  }
+
+  private verificarDisponibilidadeNome() {
+    console.log('Verificando disponibilidade');
+    this.bibliotecaService
+      .verificarNomeDisponivel(this.formulario.get('name').value)
+      .subscribe(
+        (response) => {
+          console.log('nome disponivel');
+        },
+        (error) => {
+          console.log('nome indisponivel');
+        },
+      );
+  }
+
+  private verificarValidacoesFormulario() {
+    Object.keys(this.formulario.controls).forEach((control) => {
+      this.formulario.get(control).markAsTouched();
+    });
   }
 
   private redirecionarRota(rota: string) {

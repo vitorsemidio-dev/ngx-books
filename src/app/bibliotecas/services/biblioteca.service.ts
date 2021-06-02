@@ -79,4 +79,13 @@ export class BibliotecaService extends CrudService<Biblioteca> {
 
     return library_id;
   }
+
+  verificarNomeDisponivel(name: string) {
+    return this.http.post(
+      `${this.apiUrl}/${this.recurso}/check-available/name`,
+      {
+        name,
+      },
+    );
+  }
 }
