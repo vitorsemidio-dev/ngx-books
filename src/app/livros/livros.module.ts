@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { LivrosComponent } from './livros.component';
 import { CardItemLivroComponent } from './card-item-livro/card-item-livro.component';
 
 import { LivroDetalheComponent } from './livro-detalhe/livro-detalhe.component';
@@ -14,7 +13,6 @@ import { ListagemLivrosPage } from './listagem-livros/listagem-livros.page';
 
 @NgModule({
   declarations: [
-    LivrosComponent,
     CardItemLivroComponent,
     LivroDetalheComponent,
     LivroFormularioComponent,
@@ -27,10 +25,10 @@ import { ListagemLivrosPage } from './listagem-livros/listagem-livros.page';
     SharedModule,
   ],
   exports: [
-    LivrosComponent,
     CardItemLivroComponent,
     LivroDetalheComponent,
     LivroFormularioComponent,
+    ListagemLivrosPage,
   ],
 })
 export class LivrosModule {}
