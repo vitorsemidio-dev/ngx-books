@@ -10,6 +10,7 @@ import { LivroFormularioComponent } from './livro-formulario/livro-formulario.co
 
 import { LivrosRoutingModule } from './livros-routing.module';
 import { SharedModule } from '../shared/shared.module';
+import { ListagemLivrosPage } from './listagem-livros/listagem-livros.page';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { SharedModule } from '../shared/shared.module';
     CardItemLivroComponent,
     LivroDetalheComponent,
     LivroFormularioComponent,
+    ListagemLivrosPage,
   ],
   imports: [
     CommonModule,
