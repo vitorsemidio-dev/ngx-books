@@ -26,7 +26,7 @@
               [imgUrl]="livro.imgUrl"
               [url]="livro.slug"
               [textoBotao]="'alugar'"
-              [tipoBotaoCta]="'Botao'"
+              [tipoBotaoCta]="esconderBotaoCta ? 'Desativado' : 'Botao'"
               (onClickCta)="handleAlugar($event)"
             >
             </app-card-item>

@@ -15,6 +15,7 @@ export class BibliotecaDetalheComponent implements OnInit {
   private slug: string;
   private _biblioteca: Biblioteca;
   catalogo: Livro[];
+  esconderBotaoCta = true;
 
   get biblioteca() {
     return this._biblioteca;
@@ -32,6 +33,7 @@ export class BibliotecaDetalheComponent implements OnInit {
 
   ngOnInit(): void {
     this.carregarTela();
+    this.verificarTipoUsuarioLogado();
   }
 
   carregarTela() {
@@ -79,5 +81,10 @@ export class BibliotecaDetalheComponent implements OnInit {
         (response) => console.log(response),
         (error) => {},
       );
+  }
+
+  private verificarTipoUsuarioLogado() {
+    const usuario = this.authService.buscarDadosUsuario();
+    this.esconderBotaoCta = usuario ? false : true;
   }
 }
