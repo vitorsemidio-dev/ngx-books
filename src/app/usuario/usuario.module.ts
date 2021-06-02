@@ -5,10 +5,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UsuarioRoutingModule } from './usuario-routing.module';
 import { LoginComponent } from './login/login.component';
 import { SharedModule } from '../shared/shared.module';
-import { PerfilComponent } from './perfil/perfil.component';
+import { PerfilDetalheComponent } from './perfil-detalhe/perfil-detalhe.component';
+import { PerfilPage } from './perfil/perfil.page';
 
 @NgModule({
-  declarations: [LoginComponent, PerfilComponent],
+  declarations: [LoginComponent, PerfilDetalheComponent, PerfilPage],
   imports: [
     CommonModule,
     UsuarioRoutingModule,

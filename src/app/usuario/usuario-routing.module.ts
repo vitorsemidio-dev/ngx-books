@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { LivroDetalheComponent } from '../livros/livro-detalhe/livro-detalhe.component';
+
 import { LoginComponent } from './login/login.component';
-import { PerfilComponent } from './perfil/perfil.component';
+import { PerfilDetalheComponent } from './perfil-detalhe/perfil-detalhe.component';
+import { PerfilPage } from './perfil/perfil.page';
 
 const routes: Routes = [
   {
@@ -11,7 +14,17 @@ const routes: Routes = [
   },
   {
     path: 'perfil',
-    component: PerfilComponent,
+    component: PerfilPage,
+    children: [
+      {
+        path: '',
+        component: PerfilDetalheComponent,
+      },
+      {
+        path: ':slug',
+        component: LivroDetalheComponent,
+      },
+    ],
   },
 ];
 

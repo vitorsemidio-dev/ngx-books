@@ -4,22 +4,19 @@ import { Router } from '@angular/router';
 import { LoginService } from 'src/app/login/login.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { Usuario } from '../usuario';
-import { UsuarioService } from '../usuario.service';
 
 @Component({
-  selector: 'app-perfil',
-  templateUrl: './perfil.component.html',
-  styleUrls: ['./perfil.component.scss'],
+  selector: 'app-perfil-detalhe',
+  templateUrl: './perfil-detalhe.component.html',
+  styleUrls: ['./perfil-detalhe.component.scss'],
 })
-export class PerfilComponent implements OnInit {
+export class PerfilDetalheComponent implements OnInit {
   usuario: Usuario;
-  livrosAlugados = [];
 
   constructor(
     private router: Router,
     private authService: AuthService,
     private loginService: LoginService,
-    private usuarioService: UsuarioService,
   ) {}
 
   ngOnInit(): void {
@@ -28,7 +25,6 @@ export class PerfilComponent implements OnInit {
 
   carregarTela() {
     this.carregarDadosPerfil();
-    this.carregarLivrosAlugados();
   }
 
   private carregarDadosPerfil() {
@@ -39,22 +35,6 @@ export class PerfilComponent implements OnInit {
     }
 
     this.usuario = dadosSessao.user;
-  }
-
-  private carregarLivrosAlugados() {
-    const dadosSessao = this.authService.buscarDadosSessao();
-
-    if (!dadosSessao) {
-      return;
-    }
-
-    const { user } = dadosSessao;
-    this.usuarioService.listarLivrosAlugados(user.id).subscribe(
-      (response) => {
-        this.livrosAlugados = response;
-      },
-      (error) => {},
-    );
   }
 
   onSair() {

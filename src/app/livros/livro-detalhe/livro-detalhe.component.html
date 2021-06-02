@@ -13,14 +13,18 @@
       </h3>
       <p>Autor: {{ livro.author }}</p>
       <p>Páginas: {{ livro.pages }}</p>
-      <p>Quantidade disponível: {{ livro.quantity }}</p>
+      <p *ngIf="isFooterBiblioteca">
+        Quantidade disponível: {{ livro.quantity }}
+      </p>
 
       <footer class="footer" *ngIf="isFooterBiblioteca">
         <a class="btn btn-warning" [routerLink]="['editar']">Editar</a>
         <button class="btn btn-danger" (click)="onExcluir()">Excluir</button>
       </footer>
       <footer class="footer" *ngIf="!isFooterBiblioteca">
-        <button class="btn btn-info">Devolver Livro</button>
+        <button class="btn btn-info" (click)="onDevolverLivro()">
+          Devolver Livro
+        </button>
       </footer>
     </div>
   </div>
