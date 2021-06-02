@@ -35,4 +35,14 @@ export class AuthService {
     const dadosLoginBiblioteca = JSON.stringify(sessao);
     localStorage.setItem(nomeChave, dadosLoginBiblioteca);
   }
+
+  buscarDadosBiblioteca() {
+    const dadosSessao = this.buscarDadosSessao();
+
+    if (!dadosSessao) {
+      return null;
+    }
+
+    return dadosSessao.library;
+  }
 }
