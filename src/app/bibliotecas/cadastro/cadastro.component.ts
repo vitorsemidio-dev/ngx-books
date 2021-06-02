@@ -33,7 +33,7 @@ export class CadastroComponent implements OnInit {
       name: [
         'nome inicial',
         [Validators.required],
-        [this.validacaoVerificarDisponibilidadeNome],
+        [this.validacaoVerificarDisponibilidadeNome.bind(this)],
       ],
       email: [null, [Validators.required, Validators.email]],
       password: [null, [Validators.required]],
@@ -73,27 +73,28 @@ export class CadastroComponent implements OnInit {
 
     // return null;
 
-    if (formControl.value === 'existe') {
-      return of({
-        nomeIndisponivel: true,
-      });
-    }
+    // if (formControl.value === 'existe') {
+    //   return of({
+    //     nomeIndisponivel: true,
+    //   });
+    // }
 
-    return of(null);
+    // return of(null);
 
-    // return this.bibliotecaService.verificarNomeDisponivel(formControl.value)
-    //   .subscribe(
-    //     (response) => {
-    //       console.log('Validacao assincrona. nome disponivel')
-    //       return null;
-    //     },
-    //     (error) => {
-    //       console.log('Validacao assincrona. nome nao disponivel')
-    //       return {
-    //         nomeIndisponivel: true
-    //       }
-    //     }
-    //   )
+    return this.bibliotecaService
+      .verificarNomeDisponivel(formControl.value)
+      .subscribe(
+        (response) => {
+          console.log('Validacao assincrona. nome disponivel');
+          return null;
+        },
+        (error) => {
+          console.log('Validacao assincrona. nome nao disponivel');
+          return {
+            nomeIndisponivel: true,
+          };
+        },
+      );
   }
 
   private verificarValidacoesFormulario() {
