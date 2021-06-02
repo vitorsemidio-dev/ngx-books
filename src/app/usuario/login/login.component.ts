@@ -2,10 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import {
-  AcaoLogin,
-  LoginService,
-} from 'src/app/bibliotecas/login/login.service';
+import { AcaoLogin, LoginService } from 'src/app/shared/services/login.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
