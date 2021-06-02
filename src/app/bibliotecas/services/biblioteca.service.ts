@@ -6,6 +6,7 @@ import { Chave } from 'src/app/shared/chave';
 import { Biblioteca } from '../biblioteca.model';
 import { Livro } from '../../livros/livro.model';
 import { CrudService } from '../../shared/services/crud.service';
+import { delay } from 'rxjs/operators';
 
 interface IAluguelLivro {
   userId: string;
@@ -81,11 +82,10 @@ export class BibliotecaService extends CrudService<Biblioteca> {
   }
 
   verificarNomeDisponivel(name: string) {
-    return this.http.post(
-      `${this.apiUrl}/${this.recurso}/check-available/name`,
-      {
+    return this.http
+      .post(`${this.apiUrl}/${this.recurso}/check-available/name`, {
         name,
-      },
-    );
+      })
+      .pipe(delay(2000));
   }
 }

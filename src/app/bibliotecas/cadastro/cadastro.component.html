@@ -18,19 +18,18 @@
         placeholder="Informe nome da biblioteca"
         formControlName="name"
       />
-      <app-msg-error class="invalid-feedback" [msgError]="'Nome é obrigatório'">
+      <app-msg-error
+        *ngIf="formulario.get('name').hasError('required')"
+        class="invalid-feedback"
+        [msgError]="'Nome é obrigatório'"
+      >
       </app-msg-error>
-      <!-- <app-msg-error *ngIf="formulario.get('email').status === 'PENDING'"  class="invalid-feedback" [msgError]="'Nome já utilizado'">
-      </app-msg-error> -->
-      <div *ngIf="formulario.get('name').hasError('nomeIndisponivel')">
-        Nome já cadastrado
-      </div>
-      <div *ngIf="formulario.get('name').status === 'PENDING'">
-        Validando nome
-      </div>
-      <div *ngIf="formulario.get('name').status === 'VALID'">
-        Nome disponível
-      </div>
+      <app-msg-error
+        *ngIf="formulario.get('name').hasError('nomeIndisponivel')"
+        class="invalid-feedback"
+        [msgError]="'Nome já cadastrado'"
+      >
+      </app-msg-error>
     </div>
     <div class="form-group">
       <label for="email">Email</label>

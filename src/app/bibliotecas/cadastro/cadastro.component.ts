@@ -74,7 +74,6 @@ export class CadastroComponent implements OnInit {
     return this.bibliotecaService
       .verificarNomeDisponivel(formControl.value)
       .pipe(
-        delay(2000),
         map((response) => {
           return null;
         }),
@@ -100,6 +99,10 @@ export class CadastroComponent implements OnInit {
     const campo = this.formulario.get(nomeCampo);
 
     if (!campo) {
+      return {};
+    }
+
+    if (campo.status === 'PENDING') {
       return {};
     }
 
