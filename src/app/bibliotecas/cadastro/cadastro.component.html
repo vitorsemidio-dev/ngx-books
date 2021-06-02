@@ -13,14 +13,7 @@
       <label for="nome">Nome</label>
       <input
         class="form-control"
-        [ngClass]="{
-          'is-valid':
-            (formulario.get('name').touched || formulario.get('name').dirty) &&
-            formulario.get('name').valid,
-          'is-invalid':
-            (formulario.get('name').touched || formulario.get('name').dirty) &&
-            !formulario.get('name').valid
-        }"
+        [ngClass]="aplicarClasseCssFeedback('name')"
         id="nome"
         placeholder="Informe nome da biblioteca"
         formControlName="name"
@@ -32,16 +25,7 @@
       <input
         type="email"
         class="form-control is-invalid"
-        [ngClass]="{
-          'is-valid':
-            (formulario.get('email').touched ||
-              formulario.get('email').dirty) &&
-            formulario.get('email').valid,
-          'is-invalid':
-            (formulario.get('email').touched ||
-              formulario.get('email').dirty) &&
-            !formulario.get('email').valid
-        }"
+        [ngClass]="aplicarClasseCssFeedback('email')"
         id="email"
         placeholder="Informe seu email"
         formControlName="email"
@@ -53,16 +37,7 @@
       <input
         type="password"
         class="form-control"
-        [ngClass]="{
-          'is-valid':
-            (formulario.get('password').touched ||
-              formulario.get('password').dirty) &&
-            formulario.get('password').valid,
-          'is-invalid':
-            (formulario.get('password').touched ||
-              formulario.get('password').dirty) &&
-            !formulario.get('password').valid
-        }"
+        [ngClass]="aplicarClasseCssFeedback('password')"
         id="senha"
         placeholder="Digite sua senha"
         formControlName="password"

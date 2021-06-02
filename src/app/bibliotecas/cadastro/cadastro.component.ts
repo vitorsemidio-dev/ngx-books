@@ -42,4 +42,17 @@ export class CadastroComponent implements OnInit {
   private redirecionarRota(rota: string) {
     this.router.navigate([rota]);
   }
+
+  aplicarClasseCssFeedback(nomeCampo: string) {
+    const campo = this.formulario.get(nomeCampo);
+
+    if (!campo) {
+      return {};
+    }
+
+    return {
+      'is-valid': (campo.touched || campo.dirty) && campo.valid,
+      'is-invalid': (campo.touched || campo.dirty) && !campo.valid,
+    };
+  }
 }
