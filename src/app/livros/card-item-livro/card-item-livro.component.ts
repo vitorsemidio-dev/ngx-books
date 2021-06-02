@@ -9,6 +9,7 @@ import { Livro } from '../livro.model';
 })
 export class CardItemLivroComponent implements OnInit {
   @Input() livro: Livro;
+  @Input() esconderBotaoCta = false;
   @Output() onClickCtaLivro = new EventEmitter<Livro>();
 
   constructor() {}

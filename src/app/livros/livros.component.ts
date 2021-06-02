@@ -13,6 +13,7 @@ import { LivrosService } from './livros.service';
 })
 export class LivrosComponent implements OnInit {
   listagemLivro: Livro[];
+  esconderBotaoCta = true;
 
   constructor(
     private livrosService: LivrosService,
@@ -22,6 +23,7 @@ export class LivrosComponent implements OnInit {
 
   ngOnInit(): void {
     this.carregarTela();
+    this.verificarTipoUsuarioLogado();
   }
 
   carregarTela() {
@@ -49,5 +51,10 @@ export class LivrosComponent implements OnInit {
         (response) => {},
         (error) => {},
       );
+  }
+
+  private verificarTipoUsuarioLogado() {
+    const usuario = this.authService.buscarDadosUsuario();
+    this.esconderBotaoCta = usuario ? false : true;
   }
 }
