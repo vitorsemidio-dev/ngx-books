@@ -14,7 +14,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 export class LivroDetalheComponent implements OnInit {
   slug: string;
   livro: Livro;
-  isFooterBiblioteca = false;
+  isBibliotecaLogada = false;
 
   constructor(
     private livrosService: LivrosService,
@@ -32,7 +32,7 @@ export class LivroDetalheComponent implements OnInit {
       this.slug = params['slug'];
       this.carregarDadosLivro();
       const lib = this.authService.buscarDadosBiblioteca();
-      this.isFooterBiblioteca = Boolean(lib);
+      this.isBibliotecaLogada = Boolean(lib);
     });
   }
 
