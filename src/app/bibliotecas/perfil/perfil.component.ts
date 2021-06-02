@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 
 import { BibliotecaService } from 'src/app/bibliotecas/services/biblioteca.service';
 import { Livro } from 'src/app/livros/livro.model';
-import { LivrosService } from 'src/app/livros/livros.service';
+import { LivrosService } from 'src/app/livros/services/livros.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { Biblioteca } from '../biblioteca.model';
 

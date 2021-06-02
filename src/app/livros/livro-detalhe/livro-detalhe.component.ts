@@ -3,7 +3,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { tap } from 'rxjs/operators';
 
 import { Livro } from 'src/app/livros/livro.model';
-import { AcaoLivro, LivrosService } from 'src/app/livros/livros.service';
+import {
+  AcaoLivro,
+  LivrosService,
+} from 'src/app/livros/services/livros.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({

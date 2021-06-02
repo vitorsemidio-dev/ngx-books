@@ -7,7 +7,10 @@ import {
   AcaoBiblioteca,
 } from 'src/app/bibliotecas/services/biblioteca.service';
 import { Livro } from 'src/app/livros/livro.model';
-import { AcaoLivro, LivrosService } from 'src/app/livros/livros.service';
+import {
+  AcaoLivro,
+  LivrosService,
+} from 'src/app/livros/services/livros.service';
 
 @Component({
   selector: 'app-livro-formulario',

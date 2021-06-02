@@ -4,7 +4,7 @@ import { BibliotecaService } from 'src/app/bibliotecas/services/biblioteca.servi
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 import { Livro } from '../livro.model';
-import { LivrosService } from '../livros.service';
+import { LivrosService } from '../services/livros.service';
 
 @Component({
   selector: 'app-listagem-livros',
