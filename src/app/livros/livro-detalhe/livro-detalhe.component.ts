@@ -45,7 +45,9 @@ export class LivroDetalheComponent implements OnInit {
       .pipe(tap(() => this.livrosService.emitirAcao(AcaoLivro.Removido)))
       .subscribe(
         (response) => {
-          this.router.navigate(['/bibliotecas', 'perfil']);
+          this.router.navigate(['..'], {
+            relativeTo: this.activatedRoute,
+          });
         },
         (error) => {},
       );
@@ -53,5 +55,12 @@ export class LivroDetalheComponent implements OnInit {
 
   private confirmacao() {
     console.log('Deseja realmente excluir?');
+  }
+
+  onDevolverLivro() {
+    console.log('Devolver livro');
+    this.router.navigate(['..'], {
+      relativeTo: this.activatedRoute,
+    });
   }
 }
