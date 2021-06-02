@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
+import { of } from 'rxjs';
 
 import { BibliotecaService } from '../services/biblioteca.service';
 
@@ -24,7 +30,11 @@ export class CadastroComponent implements OnInit {
 
   private montarFormulario() {
     this.formulario = this.formBuilder.group({
-      name: ['nome inicial', [Validators.required]],
+      name: [
+        'nome inicial',
+        [Validators.required],
+        [this.validacaoVerificarDisponibilidadeNome],
+      ],
       email: [null, [Validators.required, Validators.email]],
       password: [null, [Validators.required]],
     });
@@ -53,6 +63,37 @@ export class CadastroComponent implements OnInit {
           console.log('nome indisponivel');
         },
       );
+  }
+
+  validacaoVerificarDisponibilidadeNome(formControl: FormControl) {
+    if (!formControl) {
+      console.log('não existe form control');
+      return of(null);
+    }
+
+    // return null;
+
+    if (formControl.value === 'existe') {
+      return of({
+        nomeIndisponivel: true,
+      });
+    }
+
+    return of(null);
+
+    // return this.bibliotecaService.verificarNomeDisponivel(formControl.value)
+    //   .subscribe(
+    //     (response) => {
+    //       console.log('Validacao assincrona. nome disponivel')
+    //       return null;
+    //     },
+    //     (error) => {
+    //       console.log('Validacao assincrona. nome nao disponivel')
+    //       return {
+    //         nomeIndisponivel: true
+    //       }
+    //     }
+    //   )
   }
 
   private verificarValidacoesFormulario() {
