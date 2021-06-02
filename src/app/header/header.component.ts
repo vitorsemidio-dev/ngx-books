@@ -39,15 +39,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   carregarDadosUsuarioAutenticado() {
-    const dadosSessao = this.authService.buscarDadosSessao();
+    const sessao = this.authService.buscarDadosSessao();
 
-    if (!dadosSessao) {
+    if (!sessao) {
       this.rotaPerfil = '';
       this.usuarioLogado = null;
       return;
     }
 
-    const { library, user } = dadosSessao;
+    const { library, user } = sessao;
 
     this.usuarioLogado = library || user;
 

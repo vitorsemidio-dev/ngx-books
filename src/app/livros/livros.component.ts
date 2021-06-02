@@ -34,18 +34,16 @@ export class LivrosComponent implements OnInit {
   }
 
   handleAlugar(evento: Livro) {
-    const dadosSessao = this.authService.buscarDadosSessao();
+    const usuario = this.authService.buscarDadosUsuario();
 
-    if (!dadosSessao) {
+    if (!usuario) {
       return;
     }
-
-    const { user } = dadosSessao;
 
     this.bibliotecaService
       .alugarLivro({
         bookId: evento.id,
-        userId: user.id,
+        userId: usuario.id,
       })
       .subscribe(
         (response) => {},

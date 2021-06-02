@@ -28,13 +28,13 @@ export class PerfilDetalheComponent implements OnInit {
   }
 
   private carregarDadosPerfil() {
-    const dadosSessao = this.authService.buscarDadosSessao();
+    const usuario = this.authService.buscarDadosUsuario();
 
-    if (!dadosSessao) {
+    if (!usuario) {
       return;
     }
 
-    this.usuario = dadosSessao.user;
+    this.usuario = usuario;
   }
 
   onSair() {

@@ -30,13 +30,13 @@ export class PerfilDetalheComponent implements OnInit {
   }
 
   private carregarDadosPerfil() {
-    const dadosSessao = this.authService.buscarDadosSessao();
+    const biblioteca = this.authService.buscarDadosBiblioteca();
 
-    if (!dadosSessao) {
+    if (!biblioteca) {
       return;
     }
 
-    this.biblioteca = dadosSessao.library;
+    this.biblioteca = biblioteca;
   }
 
   onSair() {

@@ -45,4 +45,14 @@ export class AuthService {
 
     return dadosSessao.library;
   }
+
+  buscarDadosUsuario() {
+    const dadosSessao = this.buscarDadosSessao();
+
+    if (!dadosSessao) {
+      return null;
+    }
+
+    return dadosSessao.user;
+  }
 }
