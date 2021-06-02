@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
 import { BibliotecaService } from '../services/biblioteca.service';
 
@@ -67,33 +68,20 @@ export class CadastroComponent implements OnInit {
 
   validacaoVerificarDisponibilidadeNome(formControl: FormControl) {
     if (!formControl) {
-      console.log('não existe form control');
       return of(null);
     }
 
-    // return null;
-
-    // if (formControl.value === 'existe') {
-    //   return of({
-    //     nomeIndisponivel: true,
-    //   });
-    // }
-
-    // return of(null);
-
     return this.bibliotecaService
       .verificarNomeDisponivel(formControl.value)
-      .subscribe(
-        (response) => {
-          console.log('Validacao assincrona. nome disponivel');
+      .pipe(
+        map((response) => {
           return null;
-        },
-        (error) => {
-          console.log('Validacao assincrona. nome nao disponivel');
-          return {
+        }),
+        catchError((error) => {
+          return of({
             nomeIndisponivel: true,
-          };
-        },
+          });
+        }),
       );
   }
 
