@@ -2,12 +2,12 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { BibliotecaDetalheComponent } from './biblioteca-detalhe/biblioteca-detalhe.component';
-import { BibliotecasComponent } from './bibliotecas.component';
+import { ListagemBibliotecasPage } from './listagem-bibliotecas/listagem-bibliotecas.page';
 import { PerfilDetalheComponent } from './perfil-detalhe/perfil-detalhe.component';
 import { PerfilComponent } from './perfil/perfil.component';
 
 const routes: Routes = [
-  { path: '', component: BibliotecasComponent },
+  { path: '', component: ListagemBibliotecasPage },
   {
     path: 'perfil',
     component: PerfilComponent,

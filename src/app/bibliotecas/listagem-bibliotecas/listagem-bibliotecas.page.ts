@@ -1,14 +1,13 @@
+import { BibliotecaService } from 'src/app/bibliotecas/services/biblioteca.service';
 import { Component, OnInit } from '@angular/core';
-
-import { Biblioteca } from './biblioteca.model';
-import { BibliotecaService } from './services/biblioteca.service';
+import { Biblioteca } from '../biblioteca.model';
 
 @Component({
-  selector: 'app-bibliotecas',
-  templateUrl: './bibliotecas.component.html',
-  styleUrls: ['./bibliotecas.component.scss'],
+  selector: 'app-listagem-bibliotecas',
+  templateUrl: './listagem-bibliotecas.page.html',
+  styleUrls: ['./listagem-bibliotecas.page.scss'],
 })
-export class BibliotecasComponent implements OnInit {
+export class ListagemBibliotecasPage implements OnInit {
   listagemBibliotecas: Biblioteca[] = [];
 
   constructor(private bibliotecaService: BibliotecaService) {}

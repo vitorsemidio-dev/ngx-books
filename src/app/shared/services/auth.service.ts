@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Biblioteca } from 'src/app/bibliotecas/biblioteca.model';
-import { Usuario } from 'src/app/usuario/usuario';
+import { Usuario } from 'src/app/usuario/usuario.model';
 import { Chave } from '../chave';
 
 @Injectable({
@@ -34,5 +34,25 @@ export class AuthService {
     const nomeChave = Chave.chaveSessao;
     const dadosLoginBiblioteca = JSON.stringify(sessao);
     localStorage.setItem(nomeChave, dadosLoginBiblioteca);
+  }
+
+  buscarDadosBiblioteca() {
+    const dadosSessao = this.buscarDadosSessao();
+
+    if (!dadosSessao) {
+      return null;
+    }
+
+    return dadosSessao.library;
+  }
+
+  buscarDadosUsuario() {
+    const dadosSessao = this.buscarDadosSessao();
+
+    if (!dadosSessao) {
+      return null;
+    }
+
+    return dadosSessao.user;
   }
 }

@@ -12,6 +12,7 @@ h2 {
 .conteudo-container {
   display: grid;
   grid-template-columns: max(80px, 15%) auto;
+  margin-top: 1rem;
 
   gap: 0.5rem;
   .img-container {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { UsuarioService } from '../usuario.service';
+import { UsuarioService } from '../services/usuario.service';
 
 @Component({
   selector: 'app-perfil',
@@ -24,14 +24,13 @@ export class PerfilPage implements OnInit {
     this.carregarLivrosAlugados();
   }
   private carregarLivrosAlugados() {
-    const dadosSessao = this.authService.buscarDadosSessao();
+    const usuario = this.authService.buscarDadosUsuario();
 
-    if (!dadosSessao) {
+    if (!usuario) {
       return;
     }
 
-    const { user } = dadosSessao;
-    this.usuarioService.listarLivrosAlugados(user.id).subscribe(
+    this.usuarioService.listarLivrosAlugados(usuario.id).subscribe(
       (response) => {
         this.livrosAlugados = response;
       },

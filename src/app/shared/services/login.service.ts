@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
-import { Biblioteca } from '../bibliotecas/biblioteca.model';
-import { Chave } from '../shared/chave';
+import { Biblioteca } from '../../bibliotecas/biblioteca.model';
+import { Chave } from '../../shared/chave';
 
 interface ICredencial {
   email: string;

@@ -3,7 +3,7 @@ import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable, of } from 'rxjs';
 
 import { Livro } from 'src/app/livros/livro.model';
-import { LivrosService } from 'src/app/livros/livros.service';
+import { LivrosService } from 'src/app/livros/services/livros.service';
 
 @Injectable({ providedIn: 'root' })
 export class LivroResolver implements Resolve<Livro> {

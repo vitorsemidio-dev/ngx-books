@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Livro } from 'src/app/livros/livro.model';
-import { LoginService } from 'src/app/login/login.service';
+import { LoginService } from 'src/app/shared/services/login.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { Biblioteca } from '../biblioteca.model';
 
@@ -30,13 +30,13 @@ export class PerfilDetalheComponent implements OnInit {
   }
 
   private carregarDadosPerfil() {
-    const dadosSessao = this.authService.buscarDadosSessao();
+    const biblioteca = this.authService.buscarDadosBiblioteca();
 
-    if (!dadosSessao) {
+    if (!biblioteca) {
       return;
     }
 
-    this.biblioteca = dadosSessao.library;
+    this.biblioteca = biblioteca;
   }
 
   onSair() {

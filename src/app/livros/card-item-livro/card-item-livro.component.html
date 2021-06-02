@@ -3,6 +3,6 @@
   [titulo]="livro.name"
   [imgUrl]="livro.imgUrl"
   [textoBotao]="'Alugar'"
-  [tipoBotaoCta]="'Botao'"
+  [tipoBotaoCta]="esconderBotaoCta ? 'Desativado' : 'Botao'"
   (onClickCta)="emitirClickCtaLivro()"
 ></app-card-item>

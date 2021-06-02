@@ -2,9 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { Biblioteca } from '../bibliotecas/biblioteca.model';
-import { LoginService } from '../login/login.service';
+import { LoginService } from '../shared/services/login.service';
 import { AuthService } from '../shared/services/auth.service';
-import { Usuario } from '../usuario/usuario';
+import { Usuario } from '../usuario/usuario.model';
 
 @Component({
   selector: 'app-header',
@@ -39,15 +39,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   carregarDadosUsuarioAutenticado() {
-    const dadosSessao = this.authService.buscarDadosSessao();
+    const sessao = this.authService.buscarDadosSessao();
 
-    if (!dadosSessao) {
+    if (!sessao) {
       this.rotaPerfil = '';
       this.usuarioLogado = null;
       return;
     }
 
-    const { library, user } = dadosSessao;
+    const { library, user } = sessao;
 
     this.usuarioLogado = library || user;
 

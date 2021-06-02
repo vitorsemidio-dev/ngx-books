@@ -3,7 +3,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { tap } from 'rxjs/operators';
 
 import { Livro } from 'src/app/livros/livro.model';
-import { AcaoLivro, LivrosService } from 'src/app/livros/livros.service';
+import {
+  AcaoLivro,
+  LivrosService,
+} from 'src/app/livros/services/livros.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-livro-detalhe',
@@ -13,12 +17,13 @@ import { AcaoLivro, LivrosService } from 'src/app/livros/livros.service';
 export class LivroDetalheComponent implements OnInit {
   slug: string;
   livro: Livro;
-  isFooterBiblioteca = false;
+  isBibliotecaLogada = false;
 
   constructor(
     private livrosService: LivrosService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
+    private authService: AuthService,
   ) {}
 
   ngOnInit(): void {
@@ -29,6 +34,8 @@ export class LivroDetalheComponent implements OnInit {
     this.activatedRoute.params.subscribe((params) => {
       this.slug = params['slug'];
       this.carregarDadosLivro();
+      const lib = this.authService.buscarDadosBiblioteca();
+      this.isBibliotecaLogada = Boolean(lib);
     });
   }
 
