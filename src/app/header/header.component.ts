@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { Biblioteca } from '../bibliotecas/biblioteca.model';
-import { LoginService } from '../login/login.service';
+import { LoginService } from '../bibliotecas/login/login.service';
 import { AuthService } from '../shared/services/auth.service';
 import { Usuario } from '../usuario/usuario';
 
