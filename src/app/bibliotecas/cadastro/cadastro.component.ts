@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, delay, map } from 'rxjs/operators';
 
 import { BibliotecaService } from '../services/biblioteca.service';
 
@@ -74,6 +74,7 @@ export class CadastroComponent implements OnInit {
     return this.bibliotecaService
       .verificarNomeDisponivel(formControl.value)
       .pipe(
+        delay(2000),
         map((response) => {
           return null;
         }),
