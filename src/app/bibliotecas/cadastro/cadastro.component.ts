@@ -24,9 +24,9 @@ export class CadastroComponent implements OnInit {
 
   private montarFormulario() {
     this.formulario = this.formBuilder.group({
-      name: ['Angular Ngx Books', [Validators.required]],
-      email: ['angular@ngxbooks.com', [Validators.required, Validators.email]],
-      password: ['123456', [Validators.required]],
+      name: [null, [Validators.required]],
+      email: [null, [Validators.required, Validators.email]],
+      password: [, [Validators.required]],
     });
   }
 
