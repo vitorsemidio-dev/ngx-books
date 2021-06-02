@@ -6,6 +6,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./perfil-detalhe-item.component.scss'],
 })
 export class PerfilDetalheItemComponent implements OnInit {
+  @Input() titulo = 'Informações perfil';
   @Input() imgUrl: string;
   @Input() imgDescricao: string;
   @Input() name: string;
