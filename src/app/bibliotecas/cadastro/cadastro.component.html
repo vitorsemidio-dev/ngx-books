@@ -18,7 +18,8 @@
         placeholder="Informe nome da biblioteca"
         formControlName="name"
       />
-      <small class="invalid-feedback"> Nome é obrigatório </small>
+      <app-msg-error class="invalid-feedback" [msgError]="'Nome é obrigatório'">
+      </app-msg-error>
     </div>
     <div class="form-group">
       <label for="email">Email</label>
@@ -30,7 +31,9 @@
         placeholder="Informe seu email"
         formControlName="email"
       />
-      <small class="invalid-feedback"> Email é obrigatório </small>
+
+      <app-msg-error class="invalid-feedback" [msgError]="'E-mail inválido'">
+      </app-msg-error>
     </div>
     <div class="form-group">
       <label for="senha">Senha</label>
@@ -42,7 +45,11 @@
         placeholder="Digite sua senha"
         formControlName="password"
       />
-      <small class="invalid-feedback"> Senha é obrigatória </small>
+      <app-msg-error
+        class="invalid-feedback"
+        [msgError]="'Senha é obrigatório'"
+      >
+      </app-msg-error>
     </div>
     <button type="button" class="btn btn-primary" (click)="onSubmit()">
       Cadastrar

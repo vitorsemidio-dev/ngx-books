@@ -8,6 +8,7 @@ import { AsideItemComponent } from './aside-item/aside-item.component';
 import { ImgItemComponent } from './img-item/img-item.component';
 import { PerfilDetalheItemComponent } from './perfil-detalhe-item/perfil-detalhe-item.component';
 import { ListagemItensComponent } from './listagem-itens/listagem-itens.component';
+import { MsgErrorComponent } from './msg-error/msg-error.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { ListagemItensComponent } from './listagem-itens/listagem-itens.componen
     ImgItemComponent,
     PerfilDetalheItemComponent,
     ListagemItensComponent,
+    MsgErrorComponent,
   ],
   imports: [CommonModule, RouterModule, ReactiveFormsModule],
   exports: [
@@ -24,6 +26,7 @@ import { ListagemItensComponent } from './listagem-itens/listagem-itens.componen
     ImgItemComponent,
     PerfilDetalheItemComponent,
     ListagemItensComponent,
+    MsgErrorComponent,
   ],
 })
 export class SharedModule {}
