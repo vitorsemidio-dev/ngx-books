@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Biblioteca } from 'src/app/bibliotecas/biblioteca.model';
-import { Usuario } from 'src/app/usuario/usuario';
+import { Usuario } from 'src/app/usuario/usuario.model';
 import { Chave } from '../chave';
 
 @Injectable({

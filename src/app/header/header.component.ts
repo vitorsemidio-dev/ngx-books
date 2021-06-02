@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { Biblioteca } from '../bibliotecas/biblioteca.model';
 import { LoginService } from '../shared/services/login.service';
 import { AuthService } from '../shared/services/auth.service';
-import { Usuario } from '../usuario/usuario';
+import { Usuario } from '../usuario/usuario.model';
 
 @Component({
   selector: 'app-header',

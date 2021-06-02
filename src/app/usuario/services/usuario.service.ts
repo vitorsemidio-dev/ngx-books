@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Usuario } from '../usuario';
+import { Usuario } from '../usuario.model';
 
 import { CrudService } from 'src/app/shared/services/crud.service';
 import { HttpClient } from '@angular/common/http';

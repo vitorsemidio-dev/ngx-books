@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { LoginService } from 'src/app/shared/services/login.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { Usuario } from '../usuario';
+import { Usuario } from '../usuario.model';
 
 @Component({
   selector: 'app-perfil-detalhe',
