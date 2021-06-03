@@ -20,20 +20,9 @@
       />
       <app-msg-error [control]="formulario.get('name')" [label]="'Nome'">
       </app-msg-error>
-      <!-- <app-msg-error
-
-        class="invalid-feedback"
-      >
-      </app-msg-error> -->
-      <!-- <app-msg-error
-        *ngIf="formulario.get('name').hasError('nomeJaCadastrado')"
-        class="invalid-feedback"
-        [msgError]="'Nome já cadastrado'"
-      >
-      </app-msg-error> -->
     </div>
     <div class="form-group">
-      <label for="email">Email</label>
+      <label for="email">E-mail</label>
       <input
         type="email"
         class="form-control is-invalid"
@@ -43,24 +32,8 @@
         formControlName="email"
       />
 
-      <!-- <app-msg-error
-        *ngIf="formulario.get('email').hasError('required')"
-        class="invalid-feedback"
-        [msgError]="'E-mail é obrigatório'"
-      >
+      <app-msg-error [control]="formulario.get('email')" [label]="'E-mail'">
       </app-msg-error>
-      <app-msg-error
-        *ngIf="formulario.get('email').hasError('email')"
-        class="invalid-feedback"
-        [msgError]="'E-mail inválido'"
-      >
-      </app-msg-error>
-      <app-msg-error
-        *ngIf="formulario.get('email').hasError('emailJaCadastrado')"
-        class="invalid-feedback"
-        [msgError]="'E-mail já cadastrado'"
-      >
-      </app-msg-error> -->
     </div>
     <div class="form-group">
       <label for="senha">Senha</label>
@@ -72,12 +45,9 @@
         placeholder="Informe sua senha"
         formControlName="password"
       />
-      <!-- <app-msg-error
-        *ngIf="formulario.get('password').hasError('required')"
-        class="invalid-feedback"
-        [msgError]="'Senha é obrigatória'"
-      >
-      </app-msg-error> -->
+
+      <app-msg-error [control]="formulario.get('password')" [label]="'Senha'">
+      </app-msg-error>
     </div>
     <button type="button" class="btn btn-primary" (click)="onSubmit()">
       Cadastrar
