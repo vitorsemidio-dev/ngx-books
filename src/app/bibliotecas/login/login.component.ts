@@ -26,8 +26,8 @@ export class LoginComponent implements OnInit {
 
   private montarFormulario() {
     this.formulario = this.formBuilder.group({
-      email: ['bruen@nextlib.com', [Validators.required, Validators.email]],
-      password: ['123456', [Validators.required]],
+      email: [null, [Validators.required, Validators.email]],
+      password: [null, [Validators.required]],
     });
   }
 

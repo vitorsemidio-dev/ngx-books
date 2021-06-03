@@ -13,30 +13,70 @@
       <label for="nome">Nome</label>
       <input
         class="form-control"
+        [ngClass]="aplicarClasseCssFeedback('name')"
         id="nome"
         placeholder="Informe nome da biblioteca"
         formControlName="name"
       />
+      <app-msg-error
+        *ngIf="formulario.get('name').hasError('required')"
+        class="invalid-feedback"
+        [msgError]="'Nome é obrigatório'"
+      >
+      </app-msg-error>
+      <app-msg-error
+        *ngIf="formulario.get('name').hasError('nomeJaCadastrado')"
+        class="invalid-feedback"
+        [msgError]="'Nome já cadastrado'"
+      >
+      </app-msg-error>
     </div>
     <div class="form-group">
       <label for="email">Email</label>
       <input
         type="email"
-        class="form-control"
+        class="form-control is-invalid"
+        [ngClass]="aplicarClasseCssFeedback('email')"
         id="email"
         placeholder="Informe seu email"
         formControlName="email"
       />
+
+      <app-msg-error
+        *ngIf="formulario.get('email').hasError('required')"
+        class="invalid-feedback"
+        [msgError]="'E-mail é obrigatório'"
+      >
+      </app-msg-error>
+      <app-msg-error
+        *ngIf="formulario.get('email').hasError('email')"
+        class="invalid-feedback"
+        [msgError]="'E-mail inválido'"
+      >
+      </app-msg-error>
+      <app-msg-error
+        *ngIf="formulario.get('email').hasError('emailJaCadastrado')"
+        class="invalid-feedback"
+        [msgError]="'E-mail já cadastrado'"
+      >
+      </app-msg-error>
     </div>
     <div class="form-group">
       <label for="senha">Senha</label>
       <input
         type="password"
         class="form-control"
+        [ngClass]="aplicarClasseCssFeedback('password')"
         id="senha"
-        placeholder="Digite sua senha"
+        placeholder="Informe sua senha"
         formControlName="password"
       />
+      <app-msg-error
+        *ngIf="formulario.get('password').hasError('required')"
+        class="invalid-feedback"
+        [msgError]="'Senha é obrigatória'"
+      >
+      </app-msg-error>
     </div>
     <button type="button" class="btn btn-primary" (click)="onSubmit()">
       Cadastrar

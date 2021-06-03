@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
+import { of } from 'rxjs';
+import { catchError, delay, map } from 'rxjs/operators';
 
 import { BibliotecaService } from '../services/biblioteca.service';
 
@@ -24,13 +31,29 @@ export class CadastroComponent implements OnInit {
 
   private montarFormulario() {
     this.formulario = this.formBuilder.group({
-      name: ['Angular Ngx Books', [Validators.required]],
-      email: ['angular@ngxbooks.com', [Validators.required, Validators.email]],
-      password: ['123456', [Validators.required]],
+      name: [
+        null,
+        [Validators.required],
+        [this.validacaoVerificarDisponibilidadeNome.bind(this)],
+      ],
+      email: [
+        null,
+        [Validators.required, Validators.email],
+        [this.validacaoVerificarDisponibilidadeEmail.bind(this)],
+      ],
+      password: [null, [Validators.required]],
     });
   }
 
   onSubmit() {
+    if (this.formulario.valid) {
+      this.criarBiblioteca();
+    } else {
+      this.verificarValidacoesFormulario();
+    }
+  }
+
+  private criarBiblioteca() {
     this.bibliotecaService.criar(this.formulario.value).subscribe(
       (response) => {
         this.redirecionarRota('/login');
@@ -39,7 +62,68 @@ export class CadastroComponent implements OnInit {
     );
   }
 
+  validacaoVerificarDisponibilidadeNome(formControl: FormControl) {
+    if (!formControl) {
+      return null;
+    }
+
+    return this.bibliotecaService
+      .verificarNomeDisponivel(formControl.value)
+      .pipe(
+        map((response) => {
+          return null;
+        }),
+        catchError((error) => {
+          return of({
+            nomeJaCadastrado: true,
+          });
+        }),
+      );
+  }
+
+  validacaoVerificarDisponibilidadeEmail(formControl: FormControl) {
+    if (!formControl) {
+      return null;
+    }
+
+    return this.bibliotecaService
+      .verificarEmailDisponivel(formControl.value)
+      .pipe(
+        map((response) => {
+          return null;
+        }),
+        catchError((error) => {
+          return of({
+            emailJaCadastrado: true,
+          });
+        }),
+      );
+  }
+
+  private verificarValidacoesFormulario() {
+    Object.keys(this.formulario.controls).forEach((control) => {
+      this.formulario.get(control).markAsTouched();
+    });
+  }
+
   private redirecionarRota(rota: string) {
     this.router.navigate([rota]);
+  }
+
+  aplicarClasseCssFeedback(nomeCampo: string) {
+    const campo = this.formulario.get(nomeCampo);
+
+    if (!campo) {
+      return {};
+    }
+
+    if (campo.status === 'PENDING') {
+      return {};
+    }
+
+    return {
+      'is-valid': (campo.touched || campo.dirty) && campo.valid,
+      'is-invalid': (campo.touched || campo.dirty) && !campo.valid,
+    };
   }
 }

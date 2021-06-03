@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { delay, tap } from 'rxjs/operators';
 
 import { Chave } from 'src/app/shared/chave';
 import { Biblioteca } from '../biblioteca.model';
@@ -78,5 +79,21 @@ export class BibliotecaService extends CrudService<Biblioteca> {
     const library_id = dadosLocalStorage.library.id;
 
     return library_id;
+  }
+
+  verificarNomeDisponivel(name: string) {
+    return this.http
+      .post(`${this.apiUrl}/${this.recurso}/check-available/name`, {
+        name,
+      })
+      .pipe(delay(1000));
+  }
+
+  verificarEmailDisponivel(email: string) {
+    return this.http
+      .post(`${this.apiUrl}/${this.recurso}/check-available/email`, {
+        email,
+      })
+      .pipe(delay(1000));
   }
 }
