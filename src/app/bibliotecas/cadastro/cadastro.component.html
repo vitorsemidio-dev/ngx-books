@@ -12,13 +12,14 @@
     <app-input-field
       [classeCss]="aplicarClasseCssFeedback('name')"
       [control]="formulario.get('name')"
-      [id]="'nome-field'"
+      formControlName="name"
       [label]="'Nome'"
+      [id]="'nome'"
       [placeholder]="'Informe nome da biblioteca'"
     >
     </app-input-field>
 
-    <div class="form-group">
+    <!-- <div class="form-group">
       <label for="nome">Nome</label>
       <input
         class="form-control"
@@ -29,7 +30,7 @@
       />
       <app-msg-error [control]="formulario.get('name')" [label]="'Nome'">
       </app-msg-error>
-    </div>
+    </div> -->
     <div class="form-group">
       <label for="email">E-mail</label>
       <input
