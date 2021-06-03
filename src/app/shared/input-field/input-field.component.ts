@@ -18,13 +18,29 @@ export class InputFieldComponent implements ControlValueAccessor {
   @Input() placeholder: string;
   @Input() control: AbstractControl | FormControl;
 
-  constructor() {}
+  private innerValue: any;
+
+  get value() {
+    return this.innerValue;
+  }
+
+  set value(v: any) {
+    if (v !== this.innerValue) {
+      this.innerValue = v;
+      this.onChangeCb(v);
+    }
+  }
+
+  onChangeCb: (_: any) => void = () => {};
+  onTouchedCb: (_: any) => void = () => {};
+
+  writeValue(v: any) {
+    this.value = v;
+  }
 
   registerOnChange() {}
 
   registerOnTouched() {}
 
   setDisabledState() {}
-
-  writeValue() {}
 }
