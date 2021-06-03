@@ -1,4 +1,4 @@
-export class ValidacoesFormulario {
+export class FormValidations {
   static getErrorMsg(
     fieldName: string,
     validatorName: string,
