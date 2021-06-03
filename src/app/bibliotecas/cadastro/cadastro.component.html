@@ -9,6 +9,15 @@
   </app-aside-item>
 
   <form class="formulario-login" novalidate [formGroup]="formulario">
+    <app-input-field
+      [classeCss]="aplicarClasseCssFeedback('name')"
+      [control]="formulario.get('name')"
+      [id]="'nome-field'"
+      [label]="'Nome'"
+      [placeholder]="'Informe nome da biblioteca'"
+    >
+    </app-input-field>
+
     <div class="form-group">
       <label for="nome">Nome</label>
       <input
