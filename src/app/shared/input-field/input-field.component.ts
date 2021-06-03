@@ -17,6 +17,7 @@ export class InputFieldComponent implements ControlValueAccessor {
   @Input() type = 'text';
   @Input() placeholder: string;
   @Input() control: AbstractControl | FormControl;
+  @Input() isReadOnly = false;
 
   private innerValue: any;
 
@@ -38,9 +39,15 @@ export class InputFieldComponent implements ControlValueAccessor {
     this.value = v;
   }
 
-  registerOnChange() {}
+  registerOnChange(fn: any) {
+    this.onChangeCb = fn;
+  }
 
-  registerOnTouched() {}
+  registerOnTouched(fn: any) {
+    this.onTouchedCb = fn;
+  }
 
-  setDisabledState() {}
+  setDisabledState(isDisabled: boolean) {
+    this.isReadOnly = isDisabled;
+  }
 }
