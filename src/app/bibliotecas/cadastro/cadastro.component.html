@@ -25,7 +25,7 @@
       >
       </app-msg-error>
       <app-msg-error
-        *ngIf="formulario.get('name').hasError('nomeIndisponivel')"
+        *ngIf="formulario.get('name').hasError('nomeJaCadastrado')"
         class="invalid-feedback"
         [msgError]="'Nome já cadastrado'"
       >

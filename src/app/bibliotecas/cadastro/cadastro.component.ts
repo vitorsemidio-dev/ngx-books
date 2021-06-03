@@ -53,26 +53,17 @@ export class CadastroComponent implements OnInit {
     //   (error) => {},
     // );
     // setTimeout(() => this.verificarValidacoesFormulario(), 2000);
-    this.verificarDisponibilidadeNome();
-  }
 
-  private verificarDisponibilidadeNome() {
-    console.log('Verificando disponibilidade');
-    this.bibliotecaService
-      .verificarNomeDisponivel(this.formulario.get('name').value)
-      .subscribe(
-        (response) => {
-          console.log('nome disponivel');
-        },
-        (error) => {
-          console.log('nome indisponivel');
-        },
-      );
+    if (this.formulario.valid) {
+      console.log('Cadastro realizado com sucesso');
+    } else {
+      console.log('Falha ao realizar cadastro');
+    }
   }
 
   validacaoVerificarDisponibilidadeNome(formControl: FormControl) {
     if (!formControl) {
-      return of(null);
+      return null;
     }
 
     return this.bibliotecaService
@@ -83,7 +74,7 @@ export class CadastroComponent implements OnInit {
         }),
         catchError((error) => {
           return of({
-            nomeIndisponivel: true,
+            nomeJaCadastrado: true,
           });
         }),
       );
@@ -91,7 +82,7 @@ export class CadastroComponent implements OnInit {
 
   validacaoVerificarDisponibilidadeEmail(formControl: FormControl) {
     if (!formControl) {
-      return of(null);
+      return null;
     }
 
     return this.bibliotecaService
