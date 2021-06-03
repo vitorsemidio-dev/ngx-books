@@ -73,14 +73,12 @@ export class CadastroComponent implements OnInit {
         return this.bibliotecaService
           .verificarNomeDisponivel(formControl.value)
           .pipe(
-            map((response) => {
-              return null;
-            }),
-            catchError((error) => {
-              return of({
+            map(null),
+            catchError((error) =>
+              of({
                 nomeJaCadastrado: true,
-              });
-            }),
+              }),
+            ),
           );
       }),
     );
@@ -96,14 +94,12 @@ export class CadastroComponent implements OnInit {
         return this.bibliotecaService
           .verificarEmailDisponivel(formControl.value)
           .pipe(
-            map((response) => {
-              return null;
-            }),
-            catchError((error) => {
-              return of({
+            map(null),
+            catchError((error) =>
+              of({
                 emailJaCadastrado: true,
-              });
-            }),
+              }),
+            ),
           );
       }),
     );
