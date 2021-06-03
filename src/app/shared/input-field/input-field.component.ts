@@ -1,12 +1,16 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { AbstractControl, FormControl } from '@angular/forms';
+import { Component, Input } from '@angular/core';
+import {
+  AbstractControl,
+  ControlValueAccessor,
+  FormControl,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-input-field',
   templateUrl: './input-field.component.html',
   styleUrls: ['./input-field.component.scss'],
 })
-export class InputFieldComponent implements OnInit {
+export class InputFieldComponent implements ControlValueAccessor {
   @Input() classeCss: any;
   @Input() id: string;
   @Input() label: string;
@@ -16,5 +20,11 @@ export class InputFieldComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  registerOnChange() {}
+
+  registerOnTouched() {}
+
+  setDisabledState() {}
+
+  writeValue() {}
 }
