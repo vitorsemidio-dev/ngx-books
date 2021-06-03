@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { CardItemComponent } from './card-item/card-item.component';
@@ -21,7 +21,7 @@ import { InputFieldComponent } from './input-field/input-field.component';
     MsgErrorComponent,
     InputFieldComponent,
   ],
-  imports: [CommonModule, RouterModule, ReactiveFormsModule],
+  imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
   exports: [
     CardItemComponent,
     AsideItemComponent,
