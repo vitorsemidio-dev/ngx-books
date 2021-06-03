@@ -82,18 +82,20 @@ export class BibliotecaService extends CrudService<Biblioteca> {
   }
 
   verificarNomeDisponivel(name: string) {
-    return this.http
-      .post(`${this.apiUrl}/${this.recurso}/check-available/name`, {
+    return this.http.post(
+      `${this.apiUrl}/${this.recurso}/check-available/name`,
+      {
         name,
-      })
-      .pipe(delay(1000));
+      },
+    );
   }
 
   verificarEmailDisponivel(email: string) {
-    return this.http
-      .post(`${this.apiUrl}/${this.recurso}/check-available/email`, {
+    return this.http.post(
+      `${this.apiUrl}/${this.recurso}/check-available/email`,
+      {
         email,
-      })
-      .pipe(delay(1000));
+      },
+    );
   }
 }

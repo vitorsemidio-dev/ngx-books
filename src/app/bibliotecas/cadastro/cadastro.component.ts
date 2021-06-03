@@ -6,8 +6,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { of } from 'rxjs';
-import { catchError, delay, map } from 'rxjs/operators';
+import { of, timer } from 'rxjs';
+import { catchError, map, switchMap } from 'rxjs/operators';
 
 import { BibliotecaService } from '../services/biblioteca.service';
 
@@ -18,6 +18,7 @@ import { BibliotecaService } from '../services/biblioteca.service';
 })
 export class CadastroComponent implements OnInit {
   formulario: FormGroup;
+  debounceTime = 500;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -67,18 +68,22 @@ export class CadastroComponent implements OnInit {
       return null;
     }
 
-    return this.bibliotecaService
-      .verificarNomeDisponivel(formControl.value)
-      .pipe(
-        map((response) => {
-          return null;
-        }),
-        catchError((error) => {
-          return of({
-            nomeJaCadastrado: true,
-          });
-        }),
-      );
+    return timer(this.debounceTime).pipe(
+      switchMap(() => {
+        return this.bibliotecaService
+          .verificarNomeDisponivel(formControl.value)
+          .pipe(
+            map((response) => {
+              return null;
+            }),
+            catchError((error) => {
+              return of({
+                nomeJaCadastrado: true,
+              });
+            }),
+          );
+      }),
+    );
   }
 
   validacaoVerificarDisponibilidadeEmail(formControl: FormControl) {
@@ -86,18 +91,22 @@ export class CadastroComponent implements OnInit {
       return null;
     }
 
-    return this.bibliotecaService
-      .verificarEmailDisponivel(formControl.value)
-      .pipe(
-        map((response) => {
-          return null;
-        }),
-        catchError((error) => {
-          return of({
-            emailJaCadastrado: true,
-          });
-        }),
-      );
+    return timer(this.debounceTime).pipe(
+      switchMap(() => {
+        return this.bibliotecaService
+          .verificarEmailDisponivel(formControl.value)
+          .pipe(
+            map((response) => {
+              return null;
+            }),
+            catchError((error) => {
+              return of({
+                emailJaCadastrado: true,
+              });
+            }),
+          );
+      }),
+    );
   }
 
   private verificarValidacoesFormulario() {
