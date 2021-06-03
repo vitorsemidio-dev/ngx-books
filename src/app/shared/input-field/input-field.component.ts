@@ -1,14 +1,22 @@
-import { Component, Input } from '@angular/core';
+import { Component, forwardRef, Input } from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor,
   FormControl,
+  NG_VALUE_ACCESSOR,
 } from '@angular/forms';
+
+const INPUT_FIELD_VALUE_ACCESSOR = {
+  provide: NG_VALUE_ACCESSOR,
+  useExisting: forwardRef(() => InputFieldComponent),
+  multi: true,
+};
 
 @Component({
   selector: 'app-input-field',
   templateUrl: './input-field.component.html',
   styleUrls: ['./input-field.component.scss'],
+  providers: [INPUT_FIELD_VALUE_ACCESSOR],
 })
 export class InputFieldComponent implements ControlValueAccessor {
   @Input() classeCss: any;
