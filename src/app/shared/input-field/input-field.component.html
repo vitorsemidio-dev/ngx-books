@@ -8,6 +8,8 @@
     [id]="id"
     [type]="type"
     [placeholder]="placeholder"
+    [readonly]="!!isReadOnly"
+    [(ngModel)]="value"
   />
   <app-msg-error [control]="control" [label]="label"> </app-msg-error>
 </div>
