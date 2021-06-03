@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { delay, tap } from 'rxjs/operators';
 
 import { Chave } from 'src/app/shared/chave';
 import { Biblioteca } from '../biblioteca.model';
 import { Livro } from '../../livros/livro.model';
 import { CrudService } from '../../shared/services/crud.service';
-import { delay } from 'rxjs/operators';
 
 interface IAluguelLivro {
   userId: string;
@@ -86,6 +86,14 @@ export class BibliotecaService extends CrudService<Biblioteca> {
       .post(`${this.apiUrl}/${this.recurso}/check-available/name`, {
         name,
       })
-      .pipe(delay(2000));
+      .pipe(delay(1000));
+  }
+
+  verificarEmailDisponivel(email: string) {
+    return this.http
+      .post(`${this.apiUrl}/${this.recurso}/check-available/email`, {
+        email,
+      })
+      .pipe(delay(1000));
   }
 }

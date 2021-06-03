@@ -36,7 +36,11 @@ export class CadastroComponent implements OnInit {
         [Validators.required],
         [this.validacaoVerificarDisponibilidadeNome.bind(this)],
       ],
-      email: [null, [Validators.required, Validators.email]],
+      email: [
+        null,
+        [Validators.required, Validators.email],
+        [this.validacaoVerificarDisponibilidadeEmail.bind(this)],
+      ],
       password: [null, [Validators.required]],
     });
   }
@@ -80,6 +84,25 @@ export class CadastroComponent implements OnInit {
         catchError((error) => {
           return of({
             nomeIndisponivel: true,
+          });
+        }),
+      );
+  }
+
+  validacaoVerificarDisponibilidadeEmail(formControl: FormControl) {
+    if (!formControl) {
+      return of(null);
+    }
+
+    return this.bibliotecaService
+      .verificarEmailDisponivel(formControl.value)
+      .pipe(
+        map((response) => {
+          return null;
+        }),
+        catchError((error) => {
+          return of({
+            emailJaCadastrado: true,
           });
         }),
       );
