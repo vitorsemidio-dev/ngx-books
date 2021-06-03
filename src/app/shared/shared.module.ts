@@ -9,6 +9,7 @@ import { ImgItemComponent } from './img-item/img-item.component';
 import { PerfilDetalheItemComponent } from './perfil-detalhe-item/perfil-detalhe-item.component';
 import { ListagemItensComponent } from './listagem-itens/listagem-itens.component';
 import { MsgErrorComponent } from './msg-error/msg-error.component';
+import { InputFieldComponent } from './input-field/input-field.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { MsgErrorComponent } from './msg-error/msg-error.component';
     PerfilDetalheItemComponent,
     ListagemItensComponent,
     MsgErrorComponent,
+    InputFieldComponent,
   ],
   imports: [CommonModule, RouterModule, ReactiveFormsModule],
   exports: [
@@ -27,6 +29,7 @@ import { MsgErrorComponent } from './msg-error/msg-error.component';
     PerfilDetalheItemComponent,
     ListagemItensComponent,
     MsgErrorComponent,
+    InputFieldComponent,
   ],
 })
 export class SharedModule {}
