@@ -42,7 +42,23 @@
         formControlName="email"
       />
 
-      <app-msg-error class="invalid-feedback" [msgError]="'E-mail inválido'">
+      <app-msg-error
+        *ngIf="formulario.get('email').hasError('required')"
+        class="invalid-feedback"
+        [msgError]="'E-mail é obrigatório'"
+      >
+      </app-msg-error>
+      <app-msg-error
+        *ngIf="formulario.get('email').hasError('email')"
+        class="invalid-feedback"
+        [msgError]="'E-mail inválido'"
+      >
+      </app-msg-error>
+      <app-msg-error
+        *ngIf="formulario.get('email').hasError('emailJaCadastrado')"
+        class="invalid-feedback"
+        [msgError]="'E-mail já cadastrado'"
+      >
       </app-msg-error>
     </div>
     <div class="form-group">
@@ -56,6 +72,7 @@
         formControlName="password"
       />
       <app-msg-error
+        *ngIf="formulario.get('password').hasError('required')"
         class="invalid-feedback"
         [msgError]="'Senha é obrigatório'"
       >

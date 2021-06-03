@@ -32,7 +32,7 @@ export class CadastroComponent implements OnInit {
   private montarFormulario() {
     this.formulario = this.formBuilder.group({
       name: [
-        'nome inicial',
+        null,
         [Validators.required],
         [this.validacaoVerificarDisponibilidadeNome.bind(this)],
       ],
