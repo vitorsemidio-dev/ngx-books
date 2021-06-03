@@ -68,13 +68,13 @@
         class="form-control"
         [ngClass]="aplicarClasseCssFeedback('password')"
         id="senha"
-        placeholder="Digite sua senha"
+        placeholder="Informe sua senha"
         formControlName="password"
       />
       <app-msg-error
         *ngIf="formulario.get('password').hasError('required')"
         class="invalid-feedback"
-        [msgError]="'Senha é obrigatório'"
+        [msgError]="'Senha é obrigatória'"
       >
       </app-msg-error>
     </div>

@@ -46,19 +46,20 @@ export class CadastroComponent implements OnInit {
   }
 
   onSubmit() {
-    // this.bibliotecaService.criar(this.formulario.value).subscribe(
-    //   (response) => {
-    //     this.redirecionarRota('/login');
-    //   },
-    //   (error) => {},
-    // );
-    // setTimeout(() => this.verificarValidacoesFormulario(), 2000);
-
     if (this.formulario.valid) {
-      console.log('Cadastro realizado com sucesso');
+      this.criarBiblioteca();
     } else {
-      console.log('Falha ao realizar cadastro');
+      this.verificarValidacoesFormulario();
     }
+  }
+
+  private criarBiblioteca() {
+    this.bibliotecaService.criar(this.formulario.value).subscribe(
+      (response) => {
+        this.redirecionarRota('/login');
+      },
+      (error) => {},
+    );
   }
 
   validacaoVerificarDisponibilidadeNome(formControl: FormControl) {
