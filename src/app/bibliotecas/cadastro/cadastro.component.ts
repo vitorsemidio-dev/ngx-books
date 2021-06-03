@@ -1,14 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { of, timer } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, mapTo, switchMap } from 'rxjs/operators';
 
+import { BaseFormComponent } from 'src/app/shared/base-form/base-form.component';
 import { BibliotecaService } from '../services/biblioteca.service';
 
 @Component({
@@ -16,15 +12,16 @@ import { BibliotecaService } from '../services/biblioteca.service';
   templateUrl: './cadastro.component.html',
   styleUrls: ['./cadastro.component.scss'],
 })
-export class CadastroComponent implements OnInit {
-  formulario: FormGroup;
+export class CadastroComponent extends BaseFormComponent implements OnInit {
   debounceTime = 500;
 
   constructor(
     private formBuilder: FormBuilder,
     private bibliotecaService: BibliotecaService,
     private router: Router,
-  ) {}
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
     this.montarFormulario();
@@ -46,15 +43,7 @@ export class CadastroComponent implements OnInit {
     });
   }
 
-  onSubmit() {
-    if (this.formulario.valid) {
-      this.criarBiblioteca();
-    } else {
-      this.verificarValidacoesFormulario();
-    }
-  }
-
-  private criarBiblioteca() {
+  submit() {
     this.bibliotecaService.criar(this.formulario.value).subscribe(
       (response) => {
         this.redirecionarRota('/login');
@@ -73,7 +62,7 @@ export class CadastroComponent implements OnInit {
         return this.bibliotecaService
           .verificarNomeDisponivel(formControl.value)
           .pipe(
-            map(null),
+            mapTo(null),
             catchError((error) =>
               of({
                 nomeJaCadastrado: true,
@@ -94,7 +83,7 @@ export class CadastroComponent implements OnInit {
         return this.bibliotecaService
           .verificarEmailDisponivel(formControl.value)
           .pipe(
-            map(null),
+            mapTo(null),
             catchError((error) =>
               of({
                 emailJaCadastrado: true,
@@ -105,30 +94,7 @@ export class CadastroComponent implements OnInit {
     );
   }
 
-  private verificarValidacoesFormulario() {
-    Object.keys(this.formulario.controls).forEach((control) => {
-      this.formulario.get(control).markAsTouched();
-    });
-  }
-
   private redirecionarRota(rota: string) {
     this.router.navigate([rota]);
-  }
-
-  aplicarClasseCssFeedback(nomeCampo: string) {
-    const campo = this.formulario.get(nomeCampo);
-
-    if (!campo) {
-      return {};
-    }
-
-    if (campo.status === 'PENDING') {
-      return {};
-    }
-
-    return {
-      'is-valid': (campo.touched || campo.dirty) && campo.valid,
-      'is-invalid': (campo.touched || campo.dirty) && !campo.valid,
-    };
   }
 }
