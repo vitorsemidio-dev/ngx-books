@@ -1,5 +1,14 @@
 # Ngx-books
 
+<div align="center">
+  <img src="https://aleen42.github.io/badges/src/angular.svg" alt="Angular" />
+  <img src="https://aleen42.github.io/badges/src/npm.svg" alt="npm" />
+  <img src="https://aleen42.github.io/badges/src/visual_studio_code.svg" alt="Visual Studio Code" />
+  <img src="https://aleen42.github.io/badges/src/eslint.svg" alt="eslint" />
+  <img src="https://aleen42.github.io/badges/src/typescript.svg" alt="TypeScript" />
+  <img src="https://aleen42.github.io/badges/src/github.svg" alt="Github" />
+</div>
+
 ![](.github/login-page.png)
 
 ## Sobre o projeto
