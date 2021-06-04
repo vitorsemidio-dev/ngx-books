@@ -54,11 +54,35 @@
     </div>
     <div class="form-group">
       <label for="paginas">Páginas</label>
-      <input type="number" id="paginas" formControlName="pages" />
+      <input
+        type="number"
+        class="form-control"
+        [ngClass]="aplicarClasseCssFeedback('pages')"
+        [id]="'paginas'"
+        [placeholder]="'Informe a quantidade de páginas'"
+        formControlName="pages"
+      />
+      <app-msg-error
+        [control]="formularioLivro.get('pages')"
+        [label]="'Páginas'"
+      ></app-msg-error>
     </div>
     <div class="form-group">
-      <label for="quantidade">Quantidade disponível</label>
-      <input type="number" id="quantidade" formControlName="quantity" />
+      <label for="quantidade">Quantidade</label>
+      <input
+        type="number"
+        class="form-control"
+        [ngClass]="aplicarClasseCssFeedback('quantity')"
+        [id]="'quantidade'"
+        [placeholder]="'Informe a quantidade disponível'"
+        formControlName="quantity"
+      />
+
+      <app-msg-error
+        [control]="formularioLivro.get('quantity')"
+        [label]="'Quantidade'"
+      >
+      </app-msg-error>
     </div>
     <footer class="formulario-footer">
       <button
