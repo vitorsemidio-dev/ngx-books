@@ -65,7 +65,7 @@ export class LivroFormularioComponent implements OnInit {
       ],
       quantity: [
         dadosIniciais.quantity,
-        [Validators.required, Validators.min(0)],
+        [Validators.required, Validators.min(0), Validators.max(100)],
       ],
     });
   }
