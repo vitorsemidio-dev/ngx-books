@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { of, timer } from 'rxjs';
-import { catchError, mapTo, switchMap } from 'rxjs/operators';
+import { catchError, map, mapTo, switchMap } from 'rxjs/operators';
 
 import { BaseFormComponent } from 'src/app/shared/base-form/base-form.component';
 import { BibliotecaService } from '../services/biblioteca.service';
@@ -32,7 +32,7 @@ export class CadastroComponent extends BaseFormComponent implements OnInit {
       name: [
         null,
         [Validators.required],
-        [this.validacaoVerificarDisponibilidadeNome.bind(this)],
+        [this.verificarDisponibilidadeCampo('name').bind(this)],
       ],
       email: [
         null,
@@ -92,6 +92,23 @@ export class CadastroComponent extends BaseFormComponent implements OnInit {
           );
       }),
     );
+  }
+
+  verificarDisponibilidadeCampo(nomeCampo: string) {
+    const validator = () => {
+      return this.bibliotecaService
+        .verificarDisponibilidadeCampo(nomeCampo, 'tmp')
+        .pipe(
+          mapTo(() => null),
+          catchError((error) =>
+            of({
+              nomeJaCadastrado: true,
+            }),
+          ),
+        );
+    };
+
+    return validator;
   }
 
   private redirecionarRota(rota: string) {

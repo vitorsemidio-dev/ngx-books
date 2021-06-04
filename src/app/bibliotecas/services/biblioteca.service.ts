@@ -97,4 +97,13 @@ export class BibliotecaService extends CrudService<Biblioteca> {
       },
     );
   }
+
+  verificarDisponibilidadeCampo(nomeCampo: string, valor: string) {
+    return this.http.post(
+      `${this.apiUrl}/${this.recurso}/check-availability/${nomeCampo}`,
+      {
+        [nomeCampo]: valor,
+      },
+    );
+  }
 }
