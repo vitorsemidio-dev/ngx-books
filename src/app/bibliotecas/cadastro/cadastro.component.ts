@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormControl,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { of, timer } from 'rxjs';
 import { catchError, map, mapTo, switchMap } from 'rxjs/operators';
@@ -95,9 +100,9 @@ export class CadastroComponent extends BaseFormComponent implements OnInit {
   }
 
   verificarDisponibilidadeCampo(nomeCampo: string) {
-    const validator = () => {
+    const validator = (controle: AbstractControl) => {
       return this.bibliotecaService
-        .verificarDisponibilidadeCampo(nomeCampo, 'tmp')
+        .verificarDisponibilidadeCampo(nomeCampo, controle.value)
         .pipe(
           mapTo(() => null),
           catchError((error) =>
