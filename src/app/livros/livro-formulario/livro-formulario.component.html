@@ -20,27 +20,37 @@
   </fieldset>
 
   <fieldset>
-    <!-- <div class="form-group">
-      <label for="nome">Nome</label>
-      <input type="text" id="nome" formControlName="name" />
-    </div> -->
-
     <div class="form-group">
       <label for="nome">Nome</label>
       <input
         class="form-control"
         [ngClass]="aplicarClasseCssFeedback('name')"
-        id="nome"
-        placeholder="Informe nome da biblioteca"
+        [id]="'nome'"
+        placeholder="Informe nome do livro"
         formControlName="name"
         [autocomplete]="'off'"
       />
-      <app-msg-error [control]="formularioLivro.get('name')" [label]="'Nome'">
+      <app-msg-error
+        [control]="formularioLivro.get('name')"
+        [label]="'Nome do livro'"
+      >
       </app-msg-error>
     </div>
     <div class="form-group">
       <label for="autor">Autor</label>
-      <input type="text" id="autor" formControlName="author" />
+      <input
+        class="form-control"
+        [ngClass]="aplicarClasseCssFeedback('autor')"
+        [id]="'autor'"
+        [placeholder]="'Informe nome do autor do livro'"
+        [autocomplete]="'off'"
+        formControlName="author"
+      />
+      <app-msg-error
+        [control]="formularioLivro.get('author')"
+        [label]="'Nome do autor'"
+      >
+      </app-msg-error>
     </div>
     <div class="form-group">
       <label for="paginas">Páginas</label>
