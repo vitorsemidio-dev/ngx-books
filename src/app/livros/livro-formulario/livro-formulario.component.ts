@@ -1,5 +1,13 @@
+import { switchMap, mapTo, catchError } from 'rxjs/operators';
+import { timer, of } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import {
@@ -18,6 +26,7 @@ import {
   styleUrls: ['./livro-formulario.component.scss'],
 })
 export class LivroFormularioComponent implements OnInit {
+  debounceTime = 500;
   formularioLivro: FormGroup;
   livro: Livro;
   previewImg: any = 'https://via.placeholder.com/150';
@@ -50,6 +59,7 @@ export class LivroFormularioComponent implements OnInit {
           Validators.minLength(3),
           Validators.maxLength(50),
         ],
+        [this.verificarDisponibilidadeCampo('name').bind(this)],
       ],
       author: [
         dadosIniciais.author,
@@ -153,5 +163,30 @@ export class LivroFormularioComponent implements OnInit {
       'is-valid': (controle.touched || controle.dirty) && controle.valid,
       'is-invalid': (controle.touched || controle.dirty) && !controle.valid,
     };
+  }
+
+  verificarDisponibilidadeCampo(nomeCampo: string) {
+    const validator = (controle: AbstractControl | FormControl) => {
+      if (!controle) {
+        return null;
+      }
+
+      return timer(this.debounceTime).pipe(
+        switchMap(() => {
+          return this.livrosService
+            .verificarDisponibilidadeCampo(nomeCampo, controle.value)
+            .pipe(
+              mapTo(() => null),
+              catchError((error) =>
+                of({
+                  nomeJaCadastrado: true,
+                }),
+              ),
+            );
+        }),
+      );
+    };
+
+    return validator;
   }
 }
