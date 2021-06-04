@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { of, timer } from 'rxjs';
-import { catchError, map, mapTo, switchMap } from 'rxjs/operators';
+import { catchError, mapTo, switchMap } from 'rxjs/operators';
 
 import { BaseFormComponent } from 'src/app/shared/base-form/base-form.component';
 import { BibliotecaService } from '../services/biblioteca.service';
@@ -57,50 +57,8 @@ export class CadastroComponent extends BaseFormComponent implements OnInit {
     );
   }
 
-  // validacaoVerificarDisponibilidadeNome(formControl: FormControl) {
-  //   if (!formControl) {
-  //     return null;
-  //   }
-
-  //   return timer(this.debounceTime).pipe(
-  //     switchMap(() => {
-  //       return this.bibliotecaService
-  //         .verificarNomeDisponivel(formControl.value)
-  //         .pipe(
-  //           mapTo(null),
-  //           catchError((error) =>
-  //             of({
-  //               nomeJaCadastrado: true,
-  //             }),
-  //           ),
-  //         );
-  //     }),
-  //   );
-  // }
-
-  // validacaoVerificarDisponibilidadeEmail(formControl: FormControl) {
-  //   if (!formControl) {
-  //     return null;
-  //   }
-
-  //   return timer(this.debounceTime).pipe(
-  //     switchMap(() => {
-  //       return this.bibliotecaService
-  //         .verificarEmailDisponivel(formControl.value)
-  //         .pipe(
-  //           mapTo(null),
-  //           catchError((error) =>
-  //             of({
-  //               emailJaCadastrado: true,
-  //             }),
-  //           ),
-  //         );
-  //     }),
-  //   );
-  // }
-
   verificarDisponibilidadeCampo(nomeCampo: string) {
-    const validator = (controle: AbstractControl) => {
+    const validator = (controle: AbstractControl | FormControl) => {
       return timer(this.debounceTime).pipe(
         switchMap(() => {
           return this.bibliotecaService
