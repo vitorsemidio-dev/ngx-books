@@ -23,11 +23,11 @@
 </a>
 </div>
 
-## 🔮 Sobre o projeto
+## 🔮 Sobre o Projeto
 
 Aplicação criada para fornecer a possibilidade de biblioteca cadastrarem os livros de seu estoque na plataforma. E os usuários interessados possam navegar pelo sistema a procura de livros e aluguem os que mais gostarem.
 
-### 🌐 Backend
+### 🔥 Backend
 
 Para ter uma experiência completa de uso da aplicação, acesse o repositório do front-end [clicando aqui](https://github.com/vitorsemidio-dev/next-lib-server) para cloná-lo e faça com que o cliente e servidor se comuniquem.
 
@@ -37,7 +37,7 @@ Para ter uma experiência completa de uso da aplicação, acesse o repositório 
 git clone https://github.com/vitorsemidio-dev/next-lib-server
 ```
 
-## 🎲 Como rodar o backend?
+## 🎲 Como Rodar a Aplicação?
 
 ```sh
 # Instalando as dependências da aplicação
@@ -49,17 +49,12 @@ $ npm run start
 
 > Veja a parte de **scripts {}** do arquivo <kbd>[package.json](https://github.com/vitorsemidio-dev/next-lib-server/blob/master/package.json)</kbd> para saber quais scripts estão disponíveis.
 
-## 🚀 Tecnologias usadas
+## 🚀 Tecnologias Usadas
 
-- [Bcrypt.js](https://github.com/dcodeIO/bcrypt.js)
-- [Docker](https://www.docker.com/)
-- [Express](https://expressjs.com/pt-br/)
-- [Multer](https://github.com/expressjs/multer)
-- [Node.js](https://nodejs.org/pt-br/)
-- [PostgreSQL](https://www.postgresql.org/)
-- [Tsyringe](https://github.com/microsoft/tsyringe)
+- [Angular](https://angular.io/)
+- [Bootstrap](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
+- [RxJs](https://rxjs.dev/guide/overview)
 - [TypeScript](https://www.typescriptlang.org/)
-- [TypeORM](https://typeorm.io/)
 
 <a name="-autor"></a>
 
