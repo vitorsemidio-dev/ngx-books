@@ -27,6 +27,7 @@
         id="nome"
         placeholder="Informe nome da biblioteca"
         formControlName="name"
+        [autocomplete]="'off'"
       />
       <app-msg-error [control]="formulario.get('name')" [label]="'Nome'">
       </app-msg-error>
@@ -40,6 +41,7 @@
         id="email"
         placeholder="Informe seu email"
         formControlName="email"
+        [autocomplete]="'off'"
       />
 
       <app-msg-error [control]="formulario.get('email')" [label]="'E-mail'">
@@ -54,6 +56,7 @@
         id="senha"
         placeholder="Informe sua senha"
         formControlName="password"
+        [autocomplete]="'off'"
       />
 
       <app-msg-error [control]="formulario.get('password')" [label]="'Senha'">
