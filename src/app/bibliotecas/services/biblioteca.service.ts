@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { delay, tap } from 'rxjs/operators';
 
 import { Chave } from 'src/app/shared/chave';
 import { Biblioteca } from '../biblioteca.model';
