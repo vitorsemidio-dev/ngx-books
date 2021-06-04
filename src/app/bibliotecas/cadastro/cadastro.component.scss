@@ -23,11 +23,11 @@ $light-blue: #6aaddd;
     color: #fff;
   }
 
-  .form-group + .form-group {
+  :where(app-input-field, .form-group) + :where(app-input-field, .form-group) {
     margin-top: 1rem;
   }
 
-  .form-group + .btn {
+  :where(app-input-field, .form-group) + .btn {
     margin-top: 2rem;
   }
 

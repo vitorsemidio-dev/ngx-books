@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { delay, tap } from 'rxjs/operators';
 
 import { Chave } from 'src/app/shared/chave';
 import { Biblioteca } from '../biblioteca.model';
@@ -82,18 +81,20 @@ export class BibliotecaService extends CrudService<Biblioteca> {
   }
 
   verificarNomeDisponivel(name: string) {
-    return this.http
-      .post(`${this.apiUrl}/${this.recurso}/check-available/name`, {
+    return this.http.post(
+      `${this.apiUrl}/${this.recurso}/check-availability/name`,
+      {
         name,
-      })
-      .pipe(delay(1000));
+      },
+    );
   }
 
   verificarEmailDisponivel(email: string) {
-    return this.http
-      .post(`${this.apiUrl}/${this.recurso}/check-available/email`, {
+    return this.http.post(
+      `${this.apiUrl}/${this.recurso}/check-availability/email`,
+      {
         email,
-      })
-      .pipe(delay(1000));
+      },
+    );
   }
 }

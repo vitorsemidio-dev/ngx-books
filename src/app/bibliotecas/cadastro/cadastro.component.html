@@ -9,6 +9,16 @@
   </app-aside-item>
 
   <form class="formulario-login" novalidate [formGroup]="formulario">
+    <!-- <app-input-field
+      [classeCss]="aplicarClasseCssFeedback('name')"
+      [control]="formulario.get('name')"
+      formControlName="name"
+      [label]="'Nome'"
+      [id]="'nome'"
+      [placeholder]="'Informe nome da biblioteca'"
+    >
+    </app-input-field> -->
+
     <div class="form-group">
       <label for="nome">Nome</label>
       <input
@@ -17,22 +27,13 @@
         id="nome"
         placeholder="Informe nome da biblioteca"
         formControlName="name"
+        [autocomplete]="'off'"
       />
-      <app-msg-error
-        *ngIf="formulario.get('name').hasError('required')"
-        class="invalid-feedback"
-        [msgError]="'Nome é obrigatório'"
-      >
-      </app-msg-error>
-      <app-msg-error
-        *ngIf="formulario.get('name').hasError('nomeJaCadastrado')"
-        class="invalid-feedback"
-        [msgError]="'Nome já cadastrado'"
-      >
+      <app-msg-error [control]="formulario.get('name')" [label]="'Nome'">
       </app-msg-error>
     </div>
     <div class="form-group">
-      <label for="email">Email</label>
+      <label for="email">E-mail</label>
       <input
         type="email"
         class="form-control is-invalid"
@@ -40,25 +41,10 @@
         id="email"
         placeholder="Informe seu email"
         formControlName="email"
+        [autocomplete]="'off'"
       />
 
-      <app-msg-error
-        *ngIf="formulario.get('email').hasError('required')"
-        class="invalid-feedback"
-        [msgError]="'E-mail é obrigatório'"
-      >
-      </app-msg-error>
-      <app-msg-error
-        *ngIf="formulario.get('email').hasError('email')"
-        class="invalid-feedback"
-        [msgError]="'E-mail inválido'"
-      >
-      </app-msg-error>
-      <app-msg-error
-        *ngIf="formulario.get('email').hasError('emailJaCadastrado')"
-        class="invalid-feedback"
-        [msgError]="'E-mail já cadastrado'"
-      >
+      <app-msg-error [control]="formulario.get('email')" [label]="'E-mail'">
       </app-msg-error>
     </div>
     <div class="form-group">
@@ -70,12 +56,10 @@
         id="senha"
         placeholder="Informe sua senha"
         formControlName="password"
+        [autocomplete]="'off'"
       />
-      <app-msg-error
-        *ngIf="formulario.get('password').hasError('required')"
-        class="invalid-feedback"
-        [msgError]="'Senha é obrigatória'"
-      >
+
+      <app-msg-error [control]="formulario.get('password')" [label]="'Senha'">
       </app-msg-error>
     </div>
     <button type="button" class="btn btn-primary" (click)="onSubmit()">
