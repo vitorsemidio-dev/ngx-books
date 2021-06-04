@@ -83,7 +83,7 @@ export class BibliotecaService extends CrudService<Biblioteca> {
 
   verificarNomeDisponivel(name: string) {
     return this.http.post(
-      `${this.apiUrl}/${this.recurso}/check-available/name`,
+      `${this.apiUrl}/${this.recurso}/check-availability/name`,
       {
         name,
       },
@@ -92,7 +92,7 @@ export class BibliotecaService extends CrudService<Biblioteca> {
 
   verificarEmailDisponivel(email: string) {
     return this.http.post(
-      `${this.apiUrl}/${this.recurso}/check-available/email`,
+      `${this.apiUrl}/${this.recurso}/check-availability/email`,
       {
         email,
       },
