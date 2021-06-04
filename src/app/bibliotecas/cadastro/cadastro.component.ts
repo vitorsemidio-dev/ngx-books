@@ -42,7 +42,7 @@ export class CadastroComponent extends BaseFormComponent implements OnInit {
       email: [
         null,
         [Validators.required, Validators.email],
-        [this.validacaoVerificarDisponibilidadeEmail.bind(this)],
+        [this.verificarDisponibilidadeCampo('email').bind(this)],
       ],
       password: [null, [Validators.required]],
     });
@@ -57,60 +57,64 @@ export class CadastroComponent extends BaseFormComponent implements OnInit {
     );
   }
 
-  validacaoVerificarDisponibilidadeNome(formControl: FormControl) {
-    if (!formControl) {
-      return null;
-    }
+  // validacaoVerificarDisponibilidadeNome(formControl: FormControl) {
+  //   if (!formControl) {
+  //     return null;
+  //   }
 
-    return timer(this.debounceTime).pipe(
-      switchMap(() => {
-        return this.bibliotecaService
-          .verificarNomeDisponivel(formControl.value)
-          .pipe(
-            mapTo(null),
-            catchError((error) =>
-              of({
-                nomeJaCadastrado: true,
-              }),
-            ),
-          );
-      }),
-    );
-  }
+  //   return timer(this.debounceTime).pipe(
+  //     switchMap(() => {
+  //       return this.bibliotecaService
+  //         .verificarNomeDisponivel(formControl.value)
+  //         .pipe(
+  //           mapTo(null),
+  //           catchError((error) =>
+  //             of({
+  //               nomeJaCadastrado: true,
+  //             }),
+  //           ),
+  //         );
+  //     }),
+  //   );
+  // }
 
-  validacaoVerificarDisponibilidadeEmail(formControl: FormControl) {
-    if (!formControl) {
-      return null;
-    }
+  // validacaoVerificarDisponibilidadeEmail(formControl: FormControl) {
+  //   if (!formControl) {
+  //     return null;
+  //   }
 
-    return timer(this.debounceTime).pipe(
-      switchMap(() => {
-        return this.bibliotecaService
-          .verificarEmailDisponivel(formControl.value)
-          .pipe(
-            mapTo(null),
-            catchError((error) =>
-              of({
-                emailJaCadastrado: true,
-              }),
-            ),
-          );
-      }),
-    );
-  }
+  //   return timer(this.debounceTime).pipe(
+  //     switchMap(() => {
+  //       return this.bibliotecaService
+  //         .verificarEmailDisponivel(formControl.value)
+  //         .pipe(
+  //           mapTo(null),
+  //           catchError((error) =>
+  //             of({
+  //               emailJaCadastrado: true,
+  //             }),
+  //           ),
+  //         );
+  //     }),
+  //   );
+  // }
 
   verificarDisponibilidadeCampo(nomeCampo: string) {
     const validator = (controle: AbstractControl) => {
-      return this.bibliotecaService
-        .verificarDisponibilidadeCampo(nomeCampo, controle.value)
-        .pipe(
-          mapTo(() => null),
-          catchError((error) =>
-            of({
-              nomeJaCadastrado: true,
-            }),
-          ),
-        );
+      return timer(this.debounceTime).pipe(
+        switchMap(() => {
+          return this.bibliotecaService
+            .verificarDisponibilidadeCampo(nomeCampo, controle.value)
+            .pipe(
+              mapTo(() => null),
+              catchError((error) =>
+                of({
+                  nomeJaCadastrado: true,
+                }),
+              ),
+            );
+        }),
+      );
     };
 
     return validator;
