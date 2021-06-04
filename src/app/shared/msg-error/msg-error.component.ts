@@ -25,7 +25,7 @@ export class MsgErrorComponent implements OnInit {
     for (const propertyName in this.control.errors) {
       if (
         this.control.errors.hasOwnProperty(propertyName) &&
-        this.control.touched
+        (this.control.touched || this.control.dirty)
       ) {
         return FormValidations.getErrorMsg(
           this.label,
