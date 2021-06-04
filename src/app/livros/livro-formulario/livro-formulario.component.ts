@@ -70,6 +70,14 @@ export class LivroFormularioComponent implements OnInit {
     });
   }
 
+  onSubmit() {
+    if (this.formularioLivro.valid) {
+      console.log('submit');
+    } else {
+      console.log('formulario invalido');
+    }
+  }
+
   onSalvar() {
     if (this.formularioLivro.value['id']) {
       this.atualizarLivro();
