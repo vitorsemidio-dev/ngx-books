@@ -1,48 +1,26 @@
 # Ngx-books
 
 <div align="center">
-  <img src="https://aleen42.github.io/badges/src/angular.svg" alt="Angular" />
-  <img src="https://aleen42.github.io/badges/src/npm.svg" alt="npm" />
-  <img src="https://aleen42.github.io/badges/src/visual_studio_code.svg" alt="Visual Studio Code" />
-  <img src="https://aleen42.github.io/badges/src/eslint.svg" alt="eslint" />
-  <img src="https://aleen42.github.io/badges/src/typescript.svg" alt="TypeScript" />
-  <img src="https://aleen42.github.io/badges/src/github.svg" alt="Github" />
-</div>
-
-![](.github/login-page.png)
-
-## Sobre o projeto
-
-Aplicação desenvolvida utilizando Angular para fornecer a possibilidade de biblioteca cadastrarem seus livros de seu estoque para que usuários possam alugá-los.
-
-## Backend
-
-Antes de rodar a aplicação, garante que o backend esteja rodando. [Clique aqui](https://github.com/vitorsemidio-dev/next-lib-server) para acessar o repositório.
-
-# Ngx-books
-
-<div align="center">
 
 ![]()
-<img src="https://aleen42.github.io/badges/src/node.svg" alt="Node.js" />
+<img src="https://aleen42.github.io/badges/src/angular.svg" alt="Angular" />
 <img src="https://aleen42.github.io/badges/src/npm.svg" alt="npm" />
 <img src="https://aleen42.github.io/badges/src/visual_studio_code.svg" alt="Visual Studio Code" />
 <img src="https://aleen42.github.io/badges/src/eslint.svg" alt="eslint" />
 <img src="https://aleen42.github.io/badges/src/typescript.svg" alt="TypeScript" />
-<img src="https://aleen42.github.io/badges/src/docker.svg" alt="Docker" />
 <img src="https://aleen42.github.io/badges/src/github.svg" alt="Github" />
 
 ![]()
-<img alt="GitHub language count" src="https://img.shields.io/github/languages/count/vitorsemidio-dev/next-lib-server?color=%2304D361">
-<img alt="Repository size" src="https://img.shields.io/github/repo-size/vitorsemidio-dev/next-lib-server?">
-<a href="https://github.com/vitorsemidio-dev/next-lib-server/commits/master">
-<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/vitorsemidio-dev/next-lib-server?">
+<img alt="GitHub language count" src="https://img.shields.io/github/languages/count/vitorsemidio-dev/ngx-books?color=%2304D361">
+<img alt="Repository size" src="https://img.shields.io/github/repo-size/vitorsemidio-dev/ngx-books?">
+<a href="https://github.com/vitorsemidio-dev/ngx-books/commits/master">
+<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/vitorsemidio-dev/ngx-books?">
 </a>
 <img alt="License" src="https://img.shields.io/badge/license-MIT-brightgreen?">
 
-  <a href="https://www.linkedin.com/in/vitorsemidio" target="_blank">
-    <img alt="Made by Vitor Emidio" src="https://img.shields.io/badge/Made%20by-Vitor Emidio-%20?style=flat&logo=Linkedin&logoColor=white">
-  </a>
+<a href="https://www.linkedin.com/in/vitorsemidio" target="_blank">
+  <img alt="Made by Vitor Emidio" src="https://img.shields.io/badge/Made%20by-Vitor Emidio-%20?style=flat&logo=Linkedin&logoColor=white">
+</a>
 </div>
 
 ## 🔮 Sobre o projeto
