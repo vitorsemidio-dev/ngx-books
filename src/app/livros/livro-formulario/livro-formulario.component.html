@@ -29,6 +29,7 @@
       <label for="nome">Nome</label>
       <input
         class="form-control"
+        [ngClass]="aplicarClasseCssFeedback('name')"
         id="nome"
         placeholder="Informe nome da biblioteca"
         formControlName="name"

@@ -48,7 +48,7 @@ export class LivroFormularioComponent implements OnInit {
         [
           Validators.required,
           Validators.minLength(3),
-          Validators.maxLength(100),
+          Validators.maxLength(50),
         ],
       ],
       author: [
@@ -56,7 +56,7 @@ export class LivroFormularioComponent implements OnInit {
         [
           Validators.required,
           Validators.minLength(3),
-          Validators.maxLength(100),
+          Validators.maxLength(50),
         ],
       ],
       pages: [
@@ -140,5 +140,18 @@ export class LivroFormularioComponent implements OnInit {
       (response) => {},
       (error) => {},
     );
+  }
+
+  aplicarClasseCssFeedback(nomeCampo: string) {
+    const controle = this.formularioLivro.get(nomeCampo);
+
+    if (!controle || controle.status === 'PENDING') {
+      return {};
+    }
+
+    return {
+      'is-valid': (controle.touched || controle.dirty) && controle.valid,
+      'is-invalid': (controle.touched || controle.dirty) && !controle.valid,
+    };
   }
 }
