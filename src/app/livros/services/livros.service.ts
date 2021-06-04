@@ -39,4 +39,13 @@ export class LivrosService extends CrudService<Livro> {
   emitirAcao(acao: AcaoLivro) {
     this.acaoLivro.next(acao);
   }
+
+  verificarDisponibilidadeCampo(nomeCampo: string, valor: string) {
+    return this.http.post(
+      `${this.apiUrl}/${this.recurso}/check-availability/${nomeCampo}`,
+      {
+        [nomeCampo]: valor,
+      },
+    );
+  }
 }
