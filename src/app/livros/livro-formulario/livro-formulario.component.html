@@ -20,9 +20,22 @@
   </fieldset>
 
   <fieldset>
-    <div class="form-group">
+    <!-- <div class="form-group">
       <label for="nome">Nome</label>
       <input type="text" id="nome" formControlName="name" />
+    </div> -->
+
+    <div class="form-group">
+      <label for="nome">Nome</label>
+      <input
+        class="form-control"
+        id="nome"
+        placeholder="Informe nome da biblioteca"
+        formControlName="name"
+        [autocomplete]="'off'"
+      />
+      <app-msg-error [control]="formularioLivro.get('name')" [label]="'Nome'">
+      </app-msg-error>
     </div>
     <div class="form-group">
       <label for="autor">Autor</label>
