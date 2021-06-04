@@ -59,6 +59,10 @@ export class CadastroComponent extends BaseFormComponent implements OnInit {
 
   verificarDisponibilidadeCampo(nomeCampo: string) {
     const validator = (controle: AbstractControl | FormControl) => {
+      if (!controle) {
+        return null;
+      }
+
       return timer(this.debounceTime).pipe(
         switchMap(() => {
           return this.bibliotecaService
