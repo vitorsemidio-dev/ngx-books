@@ -11,7 +11,10 @@
     <li *ngFor="let item of lista">
       <a class="item-container" [routerLink]="[item.slug]">
         <div class="img-container">
-          <img [src]="item.imgUrl" alt="Capa do livro {{ item.name }}" />
+          <img
+            [src]="item.imgUrl || imgUrlDefault"
+            alt="Capa do livro {{ item.name }}"
+          />
           <!-- <app-img-item
             [src]="item.imgUrl"
             alt="Capa do livro {{ item.name }}"
@@ -25,5 +28,5 @@
       </a>
     </li>
   </ul>
-  <ng-template #listaVazia> Nenhum livro alugado por enquanto. </ng-template>
+  <ng-template #listaVazia> Nenhum livro encontrado </ng-template>
 </aside>
