@@ -3,6 +3,7 @@ import { timer, of } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
+  FormArray,
   FormBuilder,
   FormControl,
   FormGroup,
@@ -82,13 +83,13 @@ export class LivroFormularioComponent implements OnInit {
 
   onSubmit() {
     if (this.formularioLivro.valid) {
-      console.log('submit');
+      this.submit();
     } else {
-      console.log('formulario invalido');
+      this.verificarValidacoesFormulario(this.formularioLivro);
     }
   }
 
-  onSalvar() {
+  submit() {
     if (this.formularioLivro.value['id']) {
       this.atualizarLivro();
     } else {
@@ -188,5 +189,16 @@ export class LivroFormularioComponent implements OnInit {
     };
 
     return validator;
+  }
+
+  verificarValidacoesFormulario(formGroup: FormGroup | FormArray) {
+    Object.keys(formGroup.controls).forEach((campo) => {
+      const control = formGroup.get(campo);
+
+      this.formularioLivro.get(campo).markAsTouched();
+      if (control instanceof FormGroup || control instanceof FormArray) {
+        this.verificarValidacoesFormulario(control);
+      }
+    });
   }
 }
