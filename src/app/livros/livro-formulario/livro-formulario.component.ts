@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormControl,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { timer, of } from 'rxjs';
+import { switchMap, mapTo, catchError } from 'rxjs/operators';
 
 import {
   BibliotecaService,
@@ -11,14 +18,17 @@ import {
   AcaoLivro,
   LivrosService,
 } from 'src/app/livros/services/livros.service';
-
+import { BaseFormComponent } from 'src/app/shared/base-form/base-form.component';
 @Component({
   selector: 'app-livro-formulario',
   templateUrl: './livro-formulario.component.html',
   styleUrls: ['./livro-formulario.component.scss'],
 })
-export class LivroFormularioComponent implements OnInit {
-  formularioLivro: FormGroup;
+export class LivroFormularioComponent
+  extends BaseFormComponent
+  implements OnInit
+{
+  debounceTime = 500;
   livro: Livro;
   previewImg: any = 'https://via.placeholder.com/150';
 
@@ -28,27 +38,34 @@ export class LivroFormularioComponent implements OnInit {
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-  ) {}
+  ) {
+    super();
+  }
 
   ngOnInit() {
     this.activatedRoute.data.subscribe((resolve: { livro: Livro }) => {
-      this.montarFormulario(resolve.livro);
       this.livro = resolve.livro;
+      this.montarFormulario(resolve.livro);
       if (this.livro.imgUrl) {
         this.previewImg = this.livro.imgUrl;
       }
     });
   }
 
-  montarFormulario(dadosIniciais?: Livro) {
-    this.formularioLivro = this.fb.group({
+  montarFormulario(dadosIniciais: Livro) {
+    this.formulario = this.fb.group({
       id: [dadosIniciais.id],
       name: [
         dadosIniciais.name,
         [
           Validators.required,
           Validators.minLength(3),
-          Validators.maxLength(100),
+          Validators.maxLength(50),
+        ],
+        [
+          this.verificarDisponibilidadeCampo('name', dadosIniciais.name).bind(
+            this,
+          ),
         ],
       ],
       author: [
@@ -56,7 +73,7 @@ export class LivroFormularioComponent implements OnInit {
         [
           Validators.required,
           Validators.minLength(3),
-          Validators.maxLength(100),
+          Validators.maxLength(50),
         ],
       ],
       pages: [
@@ -65,13 +82,21 @@ export class LivroFormularioComponent implements OnInit {
       ],
       quantity: [
         dadosIniciais.quantity,
-        [Validators.required, Validators.min(0)],
+        [Validators.required, Validators.min(0), Validators.max(100)],
       ],
     });
   }
 
-  onSalvar() {
-    if (this.formularioLivro.value['id']) {
+  onSubmit() {
+    if (this.formulario.valid) {
+      this.submit();
+    } else {
+      this.verificarValidacoesFormulario(this.formulario);
+    }
+  }
+
+  submit() {
+    if (this.formulario.value['id']) {
       this.atualizarLivro();
     } else {
       this.adicionarLivroAoCatalogo();
@@ -86,7 +111,7 @@ export class LivroFormularioComponent implements OnInit {
 
   private adicionarLivroAoCatalogo() {
     this.bibliotecaService
-      .adicionarLivroAoCatalogo(this.formularioLivro.value)
+      .adicionarLivroAoCatalogo(this.formulario.value)
       .subscribe(
         (response) => {
           this.bibliotecaService.emitirAcao(AcaoBiblioteca.Criado);
@@ -97,7 +122,7 @@ export class LivroFormularioComponent implements OnInit {
   }
 
   private atualizarLivro() {
-    this.livrosService.atualizar(this.formularioLivro.value).subscribe(
+    this.livrosService.atualizar(this.formulario.value).subscribe(
       (response) => {
         const { slug } = response;
         this.livrosService.emitirAcao(AcaoLivro.Atualizado);
@@ -132,5 +157,34 @@ export class LivroFormularioComponent implements OnInit {
       (response) => {},
       (error) => {},
     );
+  }
+
+  verificarDisponibilidadeCampo(nomeCampo: string, valorAtualCampo?: string) {
+    const validator = (controle: AbstractControl | FormControl) => {
+      if (!controle) {
+        return of(null);
+      }
+
+      if (controle.value === valorAtualCampo) {
+        return of(null);
+      }
+
+      return timer(this.debounceTime).pipe(
+        switchMap(() => {
+          return this.livrosService
+            .verificarDisponibilidadeCampo(nomeCampo, controle.value)
+            .pipe(
+              mapTo(() => null),
+              catchError((error) =>
+                of({
+                  nomeJaCadastrado: true,
+                }),
+              ),
+            );
+        }),
+      );
+    };
+
+    return validator;
   }
 }

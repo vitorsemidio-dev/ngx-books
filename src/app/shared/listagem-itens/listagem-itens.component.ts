@@ -8,6 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ListagemItensComponent implements OnInit {
   @Input() lista: any[];
   @Input() titulo: string;
+  imgUrlDefault = 'https://via.placeholder.com/150';
 
   constructor() {}
 
