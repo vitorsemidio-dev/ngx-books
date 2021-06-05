@@ -110,7 +110,7 @@ export class BibliotecaFormularioComponent
     this.criarPreviewImagem(imagem);
 
     if (this.biblioteca.id) {
-      this.atualizarImagemLivro(imagem);
+      this.atualizarImagemPerfil(imagem);
     }
   }
 
@@ -123,7 +123,7 @@ export class BibliotecaFormularioComponent
     };
   }
 
-  private atualizarImagemLivro(imagem: File) {
+  private atualizarImagemPerfil(imagem: File) {
     this.bibliotecaService
       .atualizarImagem(imagem, this.biblioteca.id)
       .subscribe(
