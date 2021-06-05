@@ -1,1 +1,60 @@
-<p>biblioteca-formulario works!</p>
+<form class="formulario-login" novalidate [formGroup]="formulario">
+  <!-- <app-input-field
+    [classeCss]="aplicarClasseCssFeedback('name')"
+    [control]="formulario.get('name')"
+    formControlName="name"
+    [label]="'Nome'"
+    [id]="'nome'"
+    [placeholder]="'Informe nome da biblioteca'"
+  >
+  </app-input-field> -->
+
+  <div class="form-group">
+    <label for="nome">Nome</label>
+    <input
+      class="form-control"
+      [ngClass]="aplicarClasseCssFeedback('name')"
+      id="nome"
+      placeholder="Informe nome da biblioteca"
+      formControlName="name"
+      [autocomplete]="'off'"
+    />
+    <app-msg-error [control]="formulario.get('name')" [label]="'Nome'">
+    </app-msg-error>
+  </div>
+  <div class="form-group">
+    <label for="email">E-mail</label>
+    <input
+      type="email"
+      class="form-control is-invalid"
+      [ngClass]="aplicarClasseCssFeedback('email')"
+      id="email"
+      placeholder="Informe seu email"
+      formControlName="email"
+      [autocomplete]="'off'"
+    />
+
+    <app-msg-error [control]="formulario.get('email')" [label]="'E-mail'">
+    </app-msg-error>
+  </div>
+  <div class="form-group">
+    <label for="senha">Senha</label>
+    <input
+      type="password"
+      class="form-control"
+      [ngClass]="aplicarClasseCssFeedback('password')"
+      id="senha"
+      placeholder="Informe sua senha"
+      formControlName="password"
+      [autocomplete]="'off'"
+    />
+
+    <app-msg-error [control]="formulario.get('password')" [label]="'Senha'">
+    </app-msg-error>
+  </div>
+  <button type="button" class="btn btn-primary" (click)="onSubmit()">
+    Cadastrar
+  </button>
+
+  <a [routerLink]="['/usuarios/login']"> Entrar como usuário </a>
+</form>
