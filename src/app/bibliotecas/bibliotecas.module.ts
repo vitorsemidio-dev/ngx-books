@@ -9,6 +9,7 @@ import { SharedModule } from '../shared/shared.module';
 import { PerfilComponent } from './perfil/perfil.component';
 import { PerfilDetalheComponent } from './perfil-detalhe/perfil-detalhe.component';
 import { ListagemBibliotecasPage } from './listagem-bibliotecas/listagem-bibliotecas.page';
+import { BibliotecaFormularioComponent } from './biblioteca-formulario/biblioteca-formulario.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { ListagemBibliotecasPage } from './listagem-bibliotecas/listagem-bibliot
     PerfilComponent,
     PerfilDetalheComponent,
     ListagemBibliotecasPage,
+    BibliotecaFormularioComponent,
   ],
   imports: [
     CommonModule,
