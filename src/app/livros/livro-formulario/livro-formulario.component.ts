@@ -42,15 +42,15 @@ export class LivroFormularioComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.data.subscribe((resolve: { livro: Livro }) => {
-      this.montarFormulario(resolve.livro);
       this.livro = resolve.livro;
+      this.montarFormulario(resolve.livro);
       if (this.livro.imgUrl) {
         this.previewImg = this.livro.imgUrl;
       }
     });
   }
 
-  montarFormulario(dadosIniciais?: Livro) {
+  montarFormulario(dadosIniciais: Livro) {
     this.formularioLivro = this.fb.group({
       id: [dadosIniciais.id],
       name: [
@@ -60,7 +60,11 @@ export class LivroFormularioComponent implements OnInit {
           Validators.minLength(3),
           Validators.maxLength(50),
         ],
-        [this.verificarDisponibilidadeCampo('name').bind(this)],
+        [
+          this.verificarDisponibilidadeCampo('name', dadosIniciais.name).bind(
+            this,
+          ),
+        ],
       ],
       author: [
         dadosIniciais.author,
@@ -166,10 +170,14 @@ export class LivroFormularioComponent implements OnInit {
     };
   }
 
-  verificarDisponibilidadeCampo(nomeCampo: string) {
+  verificarDisponibilidadeCampo(nomeCampo: string, valorAtualCampo?: string) {
     const validator = (controle: AbstractControl | FormControl) => {
       if (!controle) {
-        return null;
+        return of(null);
+      }
+
+      if (controle.value === valorAtualCampo) {
+        return of(null);
       }
 
       return timer(this.debounceTime).pipe(
