@@ -1,5 +1,3 @@
-import { switchMap, mapTo, catchError } from 'rxjs/operators';
-import { timer, of } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
@@ -10,6 +8,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { timer, of } from 'rxjs';
+import { switchMap, mapTo, catchError } from 'rxjs/operators';
 
 import {
   BibliotecaService,
