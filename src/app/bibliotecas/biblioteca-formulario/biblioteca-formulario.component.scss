@@ -1,0 +1,37 @@
+$blue-purple: #1c2056;
+$light-blue: #6aaddd;
+
+.formulario-container {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  label {
+    color: #fff;
+  }
+
+  :where(app-input-field, .form-group) + :where(app-input-field, .form-group) {
+    margin-top: 1rem;
+  }
+
+  :where(app-input-field, .form-group) + .btn {
+    margin-top: 2rem;
+  }
+
+  * + a {
+    color: $light-blue;
+    align-self: center;
+    margin-top: 2rem;
+
+    &:hover {
+      filter: brightness(1.2);
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+  }
+}

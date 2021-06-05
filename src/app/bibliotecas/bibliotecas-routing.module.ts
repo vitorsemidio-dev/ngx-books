@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { BibliotecaDetalheComponent } from './biblioteca-detalhe/biblioteca-detalhe.component';
+import { BibliotecaFormularioComponent } from './biblioteca-formulario/biblioteca-formulario.component';
 import { ListagemBibliotecasPage } from './listagem-bibliotecas/listagem-bibliotecas.page';
 import { PerfilDetalheComponent } from './perfil-detalhe/perfil-detalhe.component';
 import { PerfilComponent } from './perfil/perfil.component';
@@ -15,6 +16,10 @@ const routes: Routes = [
       {
         path: '',
         component: PerfilDetalheComponent,
+      },
+      {
+        path: 'editar',
+        component: BibliotecaFormularioComponent,
       },
       {
         path: '',

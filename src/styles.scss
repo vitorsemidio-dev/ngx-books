@@ -3,11 +3,13 @@
 @use 'node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 $dark-blue: #12142f;
+$text-color: #fff;
 
 body {
   width: 100%;
   min-height: 100vh;
   background-color: $dark-blue;
+  color: $text-color;
 }
 
 ul,
