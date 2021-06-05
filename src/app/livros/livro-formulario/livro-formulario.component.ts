@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
-  FormArray,
   FormBuilder,
   FormControl,
-  FormGroup,
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -20,15 +18,17 @@ import {
   AcaoLivro,
   LivrosService,
 } from 'src/app/livros/services/livros.service';
-
+import { BaseFormComponent } from 'src/app/shared/base-form/base-form.component';
 @Component({
   selector: 'app-livro-formulario',
   templateUrl: './livro-formulario.component.html',
   styleUrls: ['./livro-formulario.component.scss'],
 })
-export class LivroFormularioComponent implements OnInit {
+export class LivroFormularioComponent
+  extends BaseFormComponent
+  implements OnInit
+{
   debounceTime = 500;
-  formularioLivro: FormGroup;
   livro: Livro;
   previewImg: any = 'https://via.placeholder.com/150';
 
@@ -38,7 +38,9 @@ export class LivroFormularioComponent implements OnInit {
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-  ) {}
+  ) {
+    super();
+  }
 
   ngOnInit() {
     this.activatedRoute.data.subscribe((resolve: { livro: Livro }) => {
@@ -51,7 +53,7 @@ export class LivroFormularioComponent implements OnInit {
   }
 
   montarFormulario(dadosIniciais: Livro) {
-    this.formularioLivro = this.fb.group({
+    this.formulario = this.fb.group({
       id: [dadosIniciais.id],
       name: [
         dadosIniciais.name,
@@ -86,15 +88,15 @@ export class LivroFormularioComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.formularioLivro.valid) {
+    if (this.formulario.valid) {
       this.submit();
     } else {
-      this.verificarValidacoesFormulario(this.formularioLivro);
+      this.verificarValidacoesFormulario(this.formulario);
     }
   }
 
   submit() {
-    if (this.formularioLivro.value['id']) {
+    if (this.formulario.value['id']) {
       this.atualizarLivro();
     } else {
       this.adicionarLivroAoCatalogo();
@@ -109,7 +111,7 @@ export class LivroFormularioComponent implements OnInit {
 
   private adicionarLivroAoCatalogo() {
     this.bibliotecaService
-      .adicionarLivroAoCatalogo(this.formularioLivro.value)
+      .adicionarLivroAoCatalogo(this.formulario.value)
       .subscribe(
         (response) => {
           this.bibliotecaService.emitirAcao(AcaoBiblioteca.Criado);
@@ -120,7 +122,7 @@ export class LivroFormularioComponent implements OnInit {
   }
 
   private atualizarLivro() {
-    this.livrosService.atualizar(this.formularioLivro.value).subscribe(
+    this.livrosService.atualizar(this.formulario.value).subscribe(
       (response) => {
         const { slug } = response;
         this.livrosService.emitirAcao(AcaoLivro.Atualizado);
@@ -157,19 +159,6 @@ export class LivroFormularioComponent implements OnInit {
     );
   }
 
-  aplicarClasseCssFeedback(nomeCampo: string) {
-    const controle = this.formularioLivro.get(nomeCampo);
-
-    if (!controle || controle.status === 'PENDING') {
-      return {};
-    }
-
-    return {
-      'is-valid': (controle.touched || controle.dirty) && controle.valid,
-      'is-invalid': (controle.touched || controle.dirty) && !controle.valid,
-    };
-  }
-
   verificarDisponibilidadeCampo(nomeCampo: string, valorAtualCampo?: string) {
     const validator = (controle: AbstractControl | FormControl) => {
       if (!controle) {
@@ -197,16 +186,5 @@ export class LivroFormularioComponent implements OnInit {
     };
 
     return validator;
-  }
-
-  verificarValidacoesFormulario(formGroup: FormGroup | FormArray) {
-    Object.keys(formGroup.controls).forEach((campo) => {
-      const control = formGroup.get(campo);
-
-      this.formularioLivro.get(campo).markAsTouched();
-      if (control instanceof FormGroup || control instanceof FormArray) {
-        this.verificarValidacoesFormulario(control);
-      }
-    });
   }
 }
