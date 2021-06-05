@@ -88,4 +88,8 @@ export class BibliotecaService extends CrudService<Biblioteca> {
       },
     );
   }
+
+  atualizarImagem(file: File, libraryId: string) {
+    return this.http.post('', {});
+  }
 }

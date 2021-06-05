@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { of, timer } from 'rxjs';
 import { catchError, mapTo, switchMap } from 'rxjs/operators';
 
+import { Biblioteca } from 'src/app/bibliotecas/biblioteca.model';
 import { BaseFormComponent } from 'src/app/shared/base-form/base-form.component';
 import { BibliotecaService } from '../services/biblioteca.service';
 
@@ -22,6 +23,8 @@ export class BibliotecaFormularioComponent
   implements OnInit
 {
   debounceTime = 500;
+  previewImg: any = 'https://via.placeholder.com/150';
+  biblioteca: Biblioteca;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -87,5 +90,45 @@ export class BibliotecaFormularioComponent
 
   private redirecionarRota(rota: string) {
     this.router.navigate([rota]);
+  }
+
+  private atualizarLivro() {
+    this.bibliotecaService.atualizar(this.formulario.value).subscribe(
+      (response) => {
+        const { slug } = response;
+        // this.bibliotecaService.emitirAcao(AcaoLivro.Atualizado);
+        this.router.navigate(['/bibliotecas', 'perfil', slug]);
+      },
+      (error) => {},
+    );
+  }
+
+  onImagemSelecionada(evento: any) {
+    const listaArquivos = <FileList>evento.srcElement.files;
+    const imagem = listaArquivos[0];
+
+    this.criarPreviewImagem(imagem);
+
+    if (this.biblioteca.id) {
+      this.atualizarImagemLivro(imagem);
+    }
+  }
+
+  private criarPreviewImagem(imagem: File) {
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(imagem);
+
+    fileReader.onload = (e) => {
+      this.previewImg = e.target.result;
+    };
+  }
+
+  private atualizarImagemLivro(imagem: File) {
+    this.bibliotecaService
+      .atualizarImagem(imagem, this.biblioteca.id)
+      .subscribe(
+        (response) => {},
+        (error) => {},
+      );
   }
 }
