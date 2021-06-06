@@ -39,6 +39,7 @@ export class BibliotecaFormularioComponent
   ngOnInit(): void {
     const biblioteca =
       this.authService.buscarDadosBiblioteca() || ({} as Biblioteca);
+    this.biblioteca = biblioteca;
     this.montarFormulario(biblioteca);
   }
 
@@ -77,9 +78,9 @@ export class BibliotecaFormularioComponent
     );
   }
 
-  private salvarDadosAtualizados(dados: Biblioteca) {
+  private salvarDadosAtualizados(bibliotecaAtualizada: Biblioteca) {
     const { token } = this.authService.buscarDadosSessao();
-    const library = dados;
+    const library = bibliotecaAtualizada;
 
     this.authService.salvarDadosSessao({
       token,
@@ -127,17 +128,6 @@ export class BibliotecaFormularioComponent
     this.router.navigate([rota]);
   }
 
-  private atualizarLivro() {
-    this.bibliotecaService.atualizar(this.formulario.value).subscribe(
-      (response) => {
-        const { slug } = response;
-        // this.bibliotecaService.emitirAcao(AcaoLivro.Atualizado);
-        this.router.navigate(['/bibliotecas', 'perfil', slug]);
-      },
-      (error) => {},
-    );
-  }
-
   onImagemSelecionada(evento: any) {
     const listaArquivos = <FileList>evento.srcElement.files;
     const imagem = listaArquivos[0];
@@ -162,7 +152,9 @@ export class BibliotecaFormularioComponent
     this.bibliotecaService
       .atualizarImagem(imagem, this.biblioteca.id)
       .subscribe(
-        (response) => {},
+        (response) => {
+          this.salvarDadosAtualizados(response);
+        },
         (error) => {},
       );
   }
