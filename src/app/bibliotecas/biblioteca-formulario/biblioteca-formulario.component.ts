@@ -47,12 +47,20 @@ export class BibliotecaFormularioComponent
       name: [
         dadosIniciais.name,
         [Validators.required],
-        [this.verificarDisponibilidadeCampo('name').bind(this)],
+        [
+          this.verificarDisponibilidadeCampo('name', dadosIniciais.name).bind(
+            this,
+          ),
+        ],
       ],
       email: [
         dadosIniciais.email,
         [Validators.required, Validators.email],
-        [this.verificarDisponibilidadeCampo('email').bind(this)],
+        [
+          this.verificarDisponibilidadeCampo('email', dadosIniciais.email).bind(
+            this,
+          ),
+        ],
       ],
       password: [null, []],
     });
@@ -74,10 +82,14 @@ export class BibliotecaFormularioComponent
     // });
   }
 
-  verificarDisponibilidadeCampo(nomeCampo: string) {
+  verificarDisponibilidadeCampo(nomeCampo: string, valorAtual: string) {
     const validator = (controle: AbstractControl | FormControl) => {
       if (!controle) {
-        return null;
+        return of(null);
+      }
+
+      if (controle.value === valorAtual) {
+        return of(null);
       }
 
       return timer(this.debounceTime).pipe(
