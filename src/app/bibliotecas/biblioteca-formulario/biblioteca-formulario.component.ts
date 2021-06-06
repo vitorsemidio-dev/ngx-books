@@ -70,10 +70,21 @@ export class BibliotecaFormularioComponent
   submit() {
     this.bibliotecaService.atualizar(this.formulario.value).subscribe(
       (response) => {
-        this.redirecionarRota('/login');
+        this.salvarDadosAtualizados(response);
+        this.redirecionarRota('/bibliotecas/perfil');
       },
       (error) => {},
     );
+  }
+
+  private salvarDadosAtualizados(dados: Biblioteca) {
+    const { token } = this.authService.buscarDadosSessao();
+    const library = dados;
+
+    this.authService.salvarDadosSessao({
+      token,
+      library,
+    });
   }
 
   onCancelar() {
