@@ -63,6 +63,13 @@ export class BibliotecaFormularioComponent
     );
   }
 
+  onCancelar() {
+    this.router.navigate(['/bibliotecas', 'perfil']);
+    // this.router.navigate(['..'], {
+    //   relativeTo: this.activatedRoute,
+    // });
+  }
+
   verificarDisponibilidadeCampo(nomeCampo: string) {
     const validator = (controle: AbstractControl | FormControl) => {
       if (!controle) {

@@ -1,7 +1,7 @@
 <h2>Tmp</h2>
 
 <form class="formulario-container" novalidate [formGroup]="formulario">
-  <fieldset>
+  <fieldset class="formulario-imagem-container">
     <div class="preview-image-container">
       <img [src]="previewImg" />
     </div>
@@ -61,9 +61,16 @@
       <app-msg-error [control]="formulario.get('password')" [label]="'Senha'">
       </app-msg-error>
     </div>
-    <button type="button" class="btn btn-primary" (click)="onSubmit()">
-      Cadastrar
-    </button>
+    <footer class="formulario-footer">
+      <button
+        class="btn btn-outline-secondary"
+        type="button"
+        (click)="onCancelar()"
+      >
+        Cancelar
+      </button>
+      <button class="btn btn-primary" (click)="onSubmit()">Salvar</button>
+    </footer>
   </fieldset>
 
   <!-- <a [routerLink]="['/usuarios/login']"> Entrar como usuário </a> -->
