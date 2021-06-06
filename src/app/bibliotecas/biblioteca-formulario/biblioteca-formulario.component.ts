@@ -40,6 +40,9 @@ export class BibliotecaFormularioComponent
     const biblioteca =
       this.authService.buscarDadosBiblioteca() || ({} as Biblioteca);
     this.biblioteca = biblioteca;
+    if (this.biblioteca.imgUrl) {
+      this.previewImg = this.biblioteca.imgUrl;
+    }
     this.montarFormulario(biblioteca);
   }
 
