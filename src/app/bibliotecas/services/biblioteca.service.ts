@@ -89,7 +89,13 @@ export class BibliotecaService extends CrudService<Biblioteca> {
     );
   }
 
-  atualizarImagem(file: File, libraryId: string) {
-    return this.http.post('', {});
+  atualizarImagem(imagem: File, library_id: string) {
+    const formData = new FormData();
+
+    formData.append('image', imagem);
+    return this.http.patch<Biblioteca>(
+      `${this.apiUrl}/${this.recurso}/${library_id}`,
+      formData,
+    );
   }
 }
