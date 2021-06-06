@@ -44,6 +44,7 @@ export class BibliotecaFormularioComponent
 
   private montarFormulario(dadosIniciais: Biblioteca) {
     this.formulario = this.formBuilder.group({
+      id: [dadosIniciais.id],
       name: [
         dadosIniciais.name,
         [Validators.required],
