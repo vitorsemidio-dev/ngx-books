@@ -11,6 +11,7 @@ import { catchError, mapTo, switchMap } from 'rxjs/operators';
 
 import { Biblioteca } from 'src/app/bibliotecas/biblioteca.model';
 import { BaseFormComponent } from 'src/app/shared/base-form/base-form.component';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { BibliotecaService } from '../services/biblioteca.service';
 
 @Component({
@@ -30,32 +31,35 @@ export class BibliotecaFormularioComponent
     private formBuilder: FormBuilder,
     private bibliotecaService: BibliotecaService,
     private router: Router,
+    private authService: AuthService,
   ) {
     super();
   }
 
   ngOnInit(): void {
-    this.montarFormulario();
+    const biblioteca =
+      this.authService.buscarDadosBiblioteca() || ({} as Biblioteca);
+    this.montarFormulario(biblioteca);
   }
 
-  private montarFormulario() {
+  private montarFormulario(dadosIniciais: Biblioteca) {
     this.formulario = this.formBuilder.group({
       name: [
-        null,
+        dadosIniciais.name,
         [Validators.required],
         [this.verificarDisponibilidadeCampo('name').bind(this)],
       ],
       email: [
-        null,
+        dadosIniciais.email,
         [Validators.required, Validators.email],
         [this.verificarDisponibilidadeCampo('email').bind(this)],
       ],
-      password: [null, [Validators.required]],
+      password: [null, []],
     });
   }
 
   submit() {
-    this.bibliotecaService.criar(this.formulario.value).subscribe(
+    this.bibliotecaService.atualizar(this.formulario.value).subscribe(
       (response) => {
         this.redirecionarRota('/login');
       },
