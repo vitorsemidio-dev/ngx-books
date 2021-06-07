@@ -36,6 +36,12 @@ export class AuthService {
     localStorage.setItem(nomeChave, dadosLoginBiblioteca);
   }
 
+  salvarDadosUsuario(sessao: { token: string; user: Usuario }) {
+    const nomeChave = Chave.chaveSessao;
+    const dadosLoginUsuario = JSON.stringify(sessao);
+    localStorage.setItem(nomeChave, dadosLoginUsuario);
+  }
+
   buscarDadosBiblioteca() {
     const dadosSessao = this.buscarDadosSessao();
 
