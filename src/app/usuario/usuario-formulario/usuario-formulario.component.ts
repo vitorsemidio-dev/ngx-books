@@ -48,15 +48,7 @@ export class UsuarioFormularioComponent
   private montarFormulario(dadosIniciais: Usuario) {
     this.formulario = this.formBuilder.group({
       id: [dadosIniciais.id],
-      name: [
-        dadosIniciais.name,
-        [Validators.required],
-        [
-          this.verificarDisponibilidadeCampo('name', dadosIniciais.name).bind(
-            this,
-          ),
-        ],
-      ],
+      name: [dadosIniciais.name, [Validators.required]],
       email: [
         dadosIniciais.email,
         [Validators.required, Validators.email],
@@ -74,7 +66,7 @@ export class UsuarioFormularioComponent
     this.usuarioService.atualizar(this.formulario.value).subscribe(
       (response) => {
         this.salvarDadosAtualizados(response);
-        this.redirecionarRota('/bibliotecas/perfil');
+        this.redirecionarRota('/usuarios/perfil');
       },
       (error) => {},
     );
