@@ -1,0 +1,77 @@
+<h2>Tmp</h2>
+
+<form class="formulario-container" novalidate [formGroup]="formulario">
+  <fieldset class="formulario-imagem-container">
+    <div class="preview-image-container">
+      <img [src]="previewImg" />
+    </div>
+
+    <label class="label-imagem-container" for="imagem">
+      <img [src]="'assets/ant-design_camera-outlined.svg'" />
+      <input
+        type="file"
+        name="image"
+        id="imagem"
+        (change)="onImagemSelecionada($event)"
+      />
+    </label>
+  </fieldset>
+
+  <fieldset>
+    <div class="form-group">
+      <label for="nome">Nome</label>
+      <input
+        class="form-control"
+        [ngClass]="aplicarClasseCssFeedback('name')"
+        id="nome"
+        placeholder="Informe nome da biblioteca"
+        formControlName="name"
+        [autocomplete]="'off'"
+      />
+      <app-msg-error [control]="formulario.get('name')" [label]="'Nome'">
+      </app-msg-error>
+    </div>
+    <div class="form-group">
+      <label for="email">E-mail</label>
+      <input
+        type="email"
+        class="form-control is-invalid"
+        [ngClass]="aplicarClasseCssFeedback('email')"
+        id="email"
+        placeholder="Informe seu email"
+        formControlName="email"
+        [autocomplete]="'off'"
+      />
+
+      <app-msg-error [control]="formulario.get('email')" [label]="'E-mail'">
+      </app-msg-error>
+    </div>
+    <div class="form-group">
+      <label for="senha">Senha</label>
+      <input
+        type="password"
+        class="form-control"
+        [ngClass]="aplicarClasseCssFeedback('password')"
+        id="senha"
+        placeholder="Informe sua senha"
+        formControlName="password"
+        [autocomplete]="'off'"
+      />
+
+      <app-msg-error [control]="formulario.get('password')" [label]="'Senha'">
+      </app-msg-error>
+    </div>
+    <footer class="formulario-footer">
+      <button
+        class="btn btn-outline-secondary"
+        type="button"
+        (click)="onCancelar()"
+      >
+        Cancelar
+      </button>
+      <button class="btn btn-primary" (click)="onSubmit()">Salvar</button>
+    </footer>
+  </fieldset>
+
+  <!-- <a [routerLink]="['/usuarios/login']"> Entrar como usuário </a> -->
+</form>
