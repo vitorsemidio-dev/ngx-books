@@ -6,6 +6,7 @@ import { LivroDetalheComponent } from '../livros/livro-detalhe/livro-detalhe.com
 import { LoginComponent } from './login/login.component';
 import { PerfilDetalheComponent } from './perfil-detalhe/perfil-detalhe.component';
 import { PerfilPage } from './perfil/perfil.page';
+import { UsuarioFormularioComponent } from './usuario-formulario/usuario-formulario.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,10 @@ const routes: Routes = [
       {
         path: '',
         component: PerfilDetalheComponent,
+      },
+      {
+        path: 'editar',
+        component: UsuarioFormularioComponent,
       },
       {
         path: ':slug',

@@ -9,27 +9,27 @@ import { Router } from '@angular/router';
 import { of, timer } from 'rxjs';
 import { catchError, mapTo, switchMap } from 'rxjs/operators';
 
-import { Biblioteca } from 'src/app/bibliotecas/biblioteca.model';
 import { BaseFormComponent } from 'src/app/shared/base-form/base-form.component';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { BibliotecaService } from '../services/biblioteca.service';
+import { UsuarioService } from '../services/usuario.service';
+import { Usuario } from '../usuario.model';
 
 @Component({
-  selector: 'app-biblioteca-formulario',
-  templateUrl: './biblioteca-formulario.component.html',
-  styleUrls: ['./biblioteca-formulario.component.scss'],
+  selector: 'app-usuario-formulario',
+  templateUrl: './usuario-formulario.component.html',
+  styleUrls: ['./usuario-formulario.component.scss'],
 })
-export class BibliotecaFormularioComponent
+export class UsuarioFormularioComponent
   extends BaseFormComponent
   implements OnInit
 {
   debounceTime = 500;
   previewImg: any = 'https://via.placeholder.com/150';
-  biblioteca: Biblioteca;
+  usuario: Usuario;
 
   constructor(
     private formBuilder: FormBuilder,
-    private bibliotecaService: BibliotecaService,
+    private usuarioService: UsuarioService,
     private router: Router,
     private authService: AuthService,
   ) {
@@ -37,27 +37,18 @@ export class BibliotecaFormularioComponent
   }
 
   ngOnInit(): void {
-    const biblioteca =
-      this.authService.buscarDadosBiblioteca() || ({} as Biblioteca);
-    this.biblioteca = biblioteca;
-    if (this.biblioteca.imgUrl) {
-      this.previewImg = this.biblioteca.imgUrl;
+    const biblioteca = this.authService.buscarDadosUsuario() || ({} as Usuario);
+    this.usuario = biblioteca;
+    if (this.usuario.imgUrl) {
+      this.previewImg = this.usuario.imgUrl;
     }
     this.montarFormulario(biblioteca);
   }
 
-  private montarFormulario(dadosIniciais: Biblioteca) {
+  private montarFormulario(dadosIniciais: Usuario) {
     this.formulario = this.formBuilder.group({
       id: [dadosIniciais.id],
-      name: [
-        dadosIniciais.name,
-        [Validators.required],
-        [
-          this.verificarDisponibilidadeCampo('name', dadosIniciais.name).bind(
-            this,
-          ),
-        ],
-      ],
+      name: [dadosIniciais.name, [Validators.required]],
       email: [
         dadosIniciais.email,
         [Validators.required, Validators.email],
@@ -72,27 +63,27 @@ export class BibliotecaFormularioComponent
   }
 
   submit() {
-    this.bibliotecaService.atualizar(this.formulario.value).subscribe(
+    this.usuarioService.atualizar(this.formulario.value).subscribe(
       (response) => {
         this.salvarDadosAtualizados(response);
-        this.redirecionarRota('/bibliotecas/perfil');
+        this.redirecionarRota('/usuarios/perfil');
       },
       (error) => {},
     );
   }
 
-  private salvarDadosAtualizados(bibliotecaAtualizada: Biblioteca) {
+  private salvarDadosAtualizados(usuarioAtualizado: Usuario) {
     const { token } = this.authService.buscarDadosSessao();
-    const library = bibliotecaAtualizada;
+    const user = usuarioAtualizado;
 
-    this.authService.salvarDadosSessao({
+    this.authService.salvarDadosUsuario({
       token,
-      library,
+      user,
     });
   }
 
   onCancelar() {
-    this.router.navigate(['/bibliotecas', 'perfil']);
+    this.router.navigate(['/usuarios', 'perfil']);
   }
 
   verificarDisponibilidadeCampo(nomeCampo: string, valorAtual: string) {
@@ -107,13 +98,13 @@ export class BibliotecaFormularioComponent
 
       return timer(this.debounceTime).pipe(
         switchMap(() => {
-          return this.bibliotecaService
+          return this.usuarioService
             .verificarDisponibilidadeCampo(nomeCampo, controle.value)
             .pipe(
               mapTo(() => null),
               catchError((error) =>
                 of({
-                  nomeJaCadastrado: true,
+                  emailJaCadastrado: true,
                 }),
               ),
             );
@@ -134,7 +125,7 @@ export class BibliotecaFormularioComponent
 
     this.criarPreviewImagem(imagem);
 
-    if (this.biblioteca.id) {
+    if (this.usuario.id) {
       this.atualizarImagemPerfil(imagem);
     }
   }
@@ -149,13 +140,11 @@ export class BibliotecaFormularioComponent
   }
 
   private atualizarImagemPerfil(imagem: File) {
-    this.bibliotecaService
-      .atualizarImagem(imagem, this.biblioteca.id)
-      .subscribe(
-        (response) => {
-          this.salvarDadosAtualizados(response);
-        },
-        (error) => {},
-      );
+    this.usuarioService.atualizarImagem(imagem, this.usuario.id).subscribe(
+      (response) => {
+        this.salvarDadosAtualizados(response);
+      },
+      (error) => {},
+    );
   }
 }
