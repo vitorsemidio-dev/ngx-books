@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 import { CrudService } from 'src/app/shared/services/crud.service';
 
@@ -10,6 +11,8 @@ export enum AcaoLivro {
   Criado = 'Criado',
   Atualizado = 'Atualizado',
   Removido = 'Removido',
+  Devolvido = 'Devolvido',
+  Alugado = 'Alugado',
 }
 
 @Injectable({
@@ -50,10 +53,12 @@ export class LivrosService extends CrudService<Livro> {
   }
 
   devolverLivro(userId: string, bookId: string) {
-    return this.http.delete(`${this.apiUrl}/users/${userId}/books-rented`, {
-      params: {
-        book_id: bookId,
-      },
-    });
+    return this.http
+      .delete(`${this.apiUrl}/users/${userId}/books-rented`, {
+        params: {
+          book_id: bookId,
+        },
+      })
+      .pipe(tap(() => this.emitirAcao(AcaoLivro.Devolvido)));
   }
 }
