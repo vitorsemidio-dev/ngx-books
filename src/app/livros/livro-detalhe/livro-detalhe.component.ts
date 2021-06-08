@@ -80,11 +80,9 @@ export class LivroDetalheComponent implements OnInit {
       .devolverLivro(this.autenticado.id, this.livro.id)
       .subscribe(
         (response) => {
-          console.log(response);
-
-          // this.router.navigate(['..'], {
-          //   relativeTo: this.activatedRoute,
-          // });
+          this.router.navigate(['..'], {
+            relativeTo: this.activatedRoute,
+          });
         },
         (error) => {},
       );
