@@ -8,6 +8,8 @@ import {
   LivrosService,
 } from 'src/app/livros/services/livros.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { Biblioteca } from 'src/app/bibliotecas/biblioteca.model';
+import { Usuario } from 'src/app/usuario/usuario.model';
 
 @Component({
   selector: 'app-livro-detalhe',
@@ -18,6 +20,7 @@ export class LivroDetalheComponent implements OnInit {
   slug: string;
   livro: Livro;
   isBibliotecaLogada = false;
+  autenticado: Biblioteca | Usuario;
 
   constructor(
     private livrosService: LivrosService,
@@ -36,6 +39,10 @@ export class LivroDetalheComponent implements OnInit {
       this.carregarDadosLivro();
       const lib = this.authService.buscarDadosBiblioteca();
       this.isBibliotecaLogada = Boolean(lib);
+
+      const { library, user } = this.authService.buscarDadosSessao();
+
+      this.autenticado = library || user;
     });
   }
 
@@ -65,9 +72,21 @@ export class LivroDetalheComponent implements OnInit {
   }
 
   onDevolverLivro() {
-    console.log('Devolver livro');
-    this.router.navigate(['..'], {
-      relativeTo: this.activatedRoute,
-    });
+    this.devolverLivro();
+  }
+
+  devolverLivro() {
+    this.livrosService
+      .devolverLivro(this.autenticado.id, this.livro.id)
+      .subscribe(
+        (response) => {
+          console.log(response);
+
+          // this.router.navigate(['..'], {
+          //   relativeTo: this.activatedRoute,
+          // });
+        },
+        (error) => {},
+      );
   }
 }
