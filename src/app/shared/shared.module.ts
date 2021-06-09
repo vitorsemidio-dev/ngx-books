@@ -11,6 +11,7 @@ import { ListagemItensComponent } from './listagem-itens/listagem-itens.componen
 import { MsgErrorComponent } from './msg-error/msg-error.component';
 import { InputFieldComponent } from './input-field/input-field.component';
 import { ConfirmacaoModalComponent } from './confirmacao-modal/confirmacao-modal.component';
+import { AlertaModalComponent } from './alerta-modal/alerta-modal.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { ConfirmacaoModalComponent } from './confirmacao-modal/confirmacao-modal
     MsgErrorComponent,
     InputFieldComponent,
     ConfirmacaoModalComponent,
+    AlertaModalComponent,
   ],
   imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
   exports: [
@@ -33,6 +35,7 @@ import { ConfirmacaoModalComponent } from './confirmacao-modal/confirmacao-modal
     MsgErrorComponent,
     InputFieldComponent,
     ConfirmacaoModalComponent,
+    AlertaModalComponent,
   ],
 })
 export class SharedModule {}
