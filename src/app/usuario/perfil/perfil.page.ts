@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { LivrosService } from 'src/app/livros/services/livros.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { UsuarioService } from '../services/usuario.service';
 
@@ -17,7 +16,6 @@ export class PerfilPage implements OnInit {
   constructor(
     private authService: AuthService,
     private usuarioService: UsuarioService,
-    private livroService: LivrosService,
   ) {}
 
   ngOnInit(): void {
@@ -51,10 +49,12 @@ export class PerfilPage implements OnInit {
   }
 
   private verificarAcoes() {
-    const subLivro = this.livroService.acaoLivro.subscribe((acaoLivro) => {
-      console.log(`Acao Livro: [${acaoLivro}]`);
-      this.carregarLivrosAlugados();
-    });
+    const subLivro = this.usuarioService.acaoUsuario.subscribe(
+      (acaoUsuario) => {
+        console.log(`Acao Usuario: [${acaoUsuario}]`);
+        this.carregarLivrosAlugados();
+      },
+    );
 
     this.subs.add(subLivro);
   }

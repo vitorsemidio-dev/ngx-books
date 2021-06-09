@@ -51,14 +51,4 @@ export class LivrosService extends CrudService<Livro> {
       },
     );
   }
-
-  devolverLivro(userId: string, bookId: string) {
-    return this.http
-      .delete(`${this.apiUrl}/users/${userId}/books-rented`, {
-        params: {
-          book_id: bookId,
-        },
-      })
-      .pipe(tap(() => this.emitirAcao(AcaoLivro.Devolvido)));
-  }
 }

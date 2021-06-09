@@ -10,6 +10,7 @@ import {
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { Biblioteca } from 'src/app/bibliotecas/biblioteca.model';
 import { Usuario } from 'src/app/usuario/usuario.model';
+import { UsuarioService } from 'src/app/usuario/services/usuario.service';
 
 @Component({
   selector: 'app-livro-detalhe',
@@ -27,6 +28,7 @@ export class LivroDetalheComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
+    private usuarioService: UsuarioService,
   ) {}
 
   ngOnInit(): void {
@@ -78,7 +80,7 @@ export class LivroDetalheComponent implements OnInit {
   }
 
   private devolverLivro() {
-    this.livrosService
+    this.usuarioService
       .devolverLivro(this.autenticado.id, this.livro.id)
       .subscribe(
         (response) => {
