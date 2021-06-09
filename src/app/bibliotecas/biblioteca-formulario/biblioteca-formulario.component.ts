@@ -17,7 +17,6 @@ export class BibliotecaFormularioComponent
   extends BaseFormComponent
   implements OnInit
 {
-  debounceTime = 500;
   biblioteca: Biblioteca;
 
   constructor(

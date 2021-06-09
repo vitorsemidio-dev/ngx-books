@@ -1,18 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  AbstractControl,
-  FormBuilder,
-  FormControl,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { timer, of } from 'rxjs';
-import { switchMap, mapTo, catchError } from 'rxjs/operators';
 
 import { BibliotecaService } from 'src/app/bibliotecas/services/biblioteca.service';
 import { Livro } from 'src/app/livros/livro.model';
 import { LivrosService } from 'src/app/livros/services/livros.service';
 import { BaseFormComponent } from 'src/app/shared/base-form/base-form.component';
+import { FormValidations } from 'src/app/shared/form-validations';
 @Component({
   selector: 'app-livro-formulario',
   templateUrl: './livro-formulario.component.html',
@@ -22,7 +16,6 @@ export class LivroFormularioComponent
   extends BaseFormComponent
   implements OnInit
 {
-  debounceTime = 500;
   livro: Livro;
 
   constructor(
@@ -56,8 +49,10 @@ export class LivroFormularioComponent
           Validators.maxLength(50),
         ],
         [
-          this.verificarDisponibilidadeCampo('name', dadosIniciais.name).bind(
-            this,
+          FormValidations.verificarDisponibilidadeCampo(
+            'name',
+            dadosIniciais.name,
+            this.livrosService,
           ),
         ],
       ],
@@ -148,34 +143,5 @@ export class LivroFormularioComponent
       (response) => {},
       (error) => {},
     );
-  }
-
-  verificarDisponibilidadeCampo(nomeCampo: string, valorAtualCampo?: string) {
-    const validator = (controle: AbstractControl | FormControl) => {
-      if (!controle) {
-        return of(null);
-      }
-
-      if (controle.value === valorAtualCampo) {
-        return of(null);
-      }
-
-      return timer(this.debounceTime).pipe(
-        switchMap(() => {
-          return this.livrosService
-            .verificarDisponibilidadeCampo(nomeCampo, controle.value)
-            .pipe(
-              mapTo(() => null),
-              catchError((error) =>
-                of({
-                  nomeJaCadastrado: true,
-                }),
-              ),
-            );
-        }),
-      );
-    };
-
-    return validator;
   }
 }
