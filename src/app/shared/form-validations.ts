@@ -16,8 +16,9 @@ export class FormValidations {
       min: `${fieldName} precisa ter o valor mínimo de ${validatorValue.min}`,
       max: `${fieldName} precisa ter o valor máximo de ${validatorValue.max}`,
       email: `${fieldName} inválido`,
-      nomeJaCadastrado: `${fieldName} já cadastrado.`,
-      emailJaCadastrado: `${fieldName} já cadastrado.`,
+      // nomeJaCadastrado: `${fieldName} já cadastrado.`,
+      // emailJaCadastrado: `${fieldName} já cadastrado.`,
+      availability: `${fieldName} já cadastrado.`,
     };
 
     return config[validatorName];
@@ -46,7 +47,7 @@ export class FormValidations {
               mapTo(() => null),
               catchError((error) =>
                 of({
-                  emailJaCadastrado: true,
+                  availability: true,
                 }),
               ),
             );
