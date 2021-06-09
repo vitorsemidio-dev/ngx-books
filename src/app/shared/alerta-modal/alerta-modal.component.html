@@ -1,8 +1,10 @@
 <div class="alert alert-{{ type }}" role="alert">
-  {{ mensagem }}
+  <p>
+    {{ mensagem }}
+  </p>
   <button
     type="button"
-    class="close"
+    class="btn close"
     data-dismiss="alert"
     aria-label="Close"
     (click)="onClose()"

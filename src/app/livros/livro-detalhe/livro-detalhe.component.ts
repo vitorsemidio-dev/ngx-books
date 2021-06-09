@@ -91,6 +91,9 @@ export class LivroDetalheComponent implements OnInit {
       console.log(confirmacao);
       if (confirmacao) {
         console.log('devolverLivro');
+        this.alertaModalService.mostrarAlertaSucesso(
+          'Livro devolvido com sucesso',
+        );
       }
     });
   }

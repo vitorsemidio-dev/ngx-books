@@ -36,7 +36,7 @@ export class AlertaModalService {
   }
 
   mostrarAlertaSucesso(mensagem: string) {
-    this.mostrarAlerta(mensagem, AlertaTipos.SUCCESS, 3000);
+    this.mostrarAlerta(mensagem, AlertaTipos.SUCCESS);
   }
 
   mostrarAlertaConfirmacao(
