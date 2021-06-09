@@ -52,14 +52,4 @@ export class UsuarioService extends CrudService<Usuario> {
       },
     );
   }
-
-  atualizarImagem(imagem: File, library_id: string) {
-    const formData = new FormData();
-
-    formData.append('image', imagem);
-    return this.http.patch<Usuario>(
-      `${this.apiUrl}/${this.recurso}/${library_id}`,
-      formData,
-    );
-  }
 }

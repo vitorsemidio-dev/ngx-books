@@ -41,4 +41,11 @@ export class CrudService<T> {
       },
     );
   }
+
+  atualizarImagem(imagem: File, id: string) {
+    const formData = new FormData();
+
+    formData.append('image', imagem);
+    return this.http.patch<T>(`${this.apiUrl}/${this.recurso}/${id}`, formData);
+  }
 }
