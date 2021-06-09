@@ -40,12 +40,12 @@ export class PerfilComponent implements OnInit, OnDestroy {
   }
 
   private verificarAcoes() {
-    const subLivro = this.livroService.acaoLivro.subscribe((acaoLivro) => {
+    const subLivro = this.livroService.emissorLivro$.subscribe((acaoLivro) => {
       console.log(`Acao Livro: [${acaoLivro}]`);
       this.carregarCatalogo();
     });
 
-    const subBiblioteca = this.bibliotecaService.acaoBiblioteca.subscribe(
+    const subBiblioteca = this.bibliotecaService.emissorBiblioteca$.subscribe(
       (acaoBiblioteca) => {
         console.log(`Acao Biblioteca: [${acaoBiblioteca}]`);
         this.carregarCatalogo();

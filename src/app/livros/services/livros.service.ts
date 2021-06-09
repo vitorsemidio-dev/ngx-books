@@ -17,7 +17,11 @@ export enum AcaoLivro {
   providedIn: 'root',
 })
 export class LivrosService extends CrudService<Livro> {
-  acaoLivro: Subject<AcaoLivro> = new Subject();
+  emissorLivro$: Subject<AcaoLivro> = new Subject();
+
+  get emissor() {
+    return this.emissorLivro$.asObservable();
+  }
 
   constructor(protected http: HttpClient) {
     super(http, 'books');
@@ -26,13 +30,13 @@ export class LivrosService extends CrudService<Livro> {
   remover(livroId: string) {
     return super
       .remover(livroId)
-      .pipe(tap(() => this.acaoLivro.next(AcaoLivro.Removido)));
+      .pipe(tap(() => this.emissorLivro$.next(AcaoLivro.Removido)));
   }
 
   atualizar(livro: Livro) {
     return super
       .atualizar(livro)
-      .pipe(tap(() => this.acaoLivro.next(AcaoLivro.Atualizado)));
+      .pipe(tap(() => this.emissorLivro$.next(AcaoLivro.Atualizado)));
   }
 
   buscarPorSlug(slug: string) {
@@ -40,6 +44,6 @@ export class LivrosService extends CrudService<Livro> {
   }
 
   private emitirAcao(acao: AcaoLivro) {
-    this.acaoLivro.next(acao);
+    this.emissorLivro$.next(acao);
   }
 }

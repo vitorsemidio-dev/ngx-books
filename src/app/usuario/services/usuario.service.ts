@@ -20,7 +20,12 @@ interface IAluguelLivro {
   providedIn: 'root',
 })
 export class UsuarioService extends CrudService<Usuario> {
-  acaoUsuario: Subject<AcaoUsuario> = new Subject();
+  emissorUsuario$: Subject<AcaoUsuario> = new Subject();
+
+  get emissor() {
+    return this.emissorUsuario$.asObservable();
+  }
+
   constructor(protected http: HttpClient) {
     super(http, 'users');
   }
@@ -39,7 +44,7 @@ export class UsuarioService extends CrudService<Usuario> {
           book_id,
         },
       })
-      .pipe(tap(() => this.acaoUsuario.next(AcaoUsuario.LivroDevolvido)));
+      .pipe(tap(() => this.emissorUsuario$.next(AcaoUsuario.LivroDevolvido)));
   }
 
   alugarLivro(infoAluguelLivro: IAluguelLivro) {
@@ -49,6 +54,6 @@ export class UsuarioService extends CrudService<Usuario> {
       .post(`${this.apiUrl}/${this.recurso}/${user_id}/books-rented`, {
         book_id,
       })
-      .pipe(tap(() => this.acaoUsuario.next(AcaoUsuario.LivroAlugado)));
+      .pipe(tap(() => this.emissorUsuario$.next(AcaoUsuario.LivroAlugado)));
   }
 }

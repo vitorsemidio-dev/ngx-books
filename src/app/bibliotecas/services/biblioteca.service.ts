@@ -19,7 +19,11 @@ export enum AcaoBiblioteca {
   providedIn: 'root',
 })
 export class BibliotecaService extends CrudService<Biblioteca> {
-  acaoBiblioteca: Subject<AcaoBiblioteca> = new Subject();
+  emissorBiblioteca$: Subject<AcaoBiblioteca> = new Subject();
+
+  get emissor() {
+    return this.emissorBiblioteca$.asObservable();
+  }
 
   constructor(protected http: HttpClient) {
     super(http, 'libraries');
@@ -35,10 +39,6 @@ export class BibliotecaService extends CrudService<Biblioteca> {
     );
   }
 
-  private emitirAcao(acao: AcaoBiblioteca) {
-    this.acaoBiblioteca.next(acao);
-  }
-
   adicionarLivroAoCatalogo({ name, pages, quantity, author }: Livro) {
     const book = { name, pages, author };
     const library_id = this.getLibraryId();
@@ -49,7 +49,11 @@ export class BibliotecaService extends CrudService<Biblioteca> {
         quantity,
       })
       .pipe(
-        tap(() => this.emitirAcao(AcaoBiblioteca.LivroAdicionadoAoCatalogo)),
+        tap(() =>
+          this.emissorBiblioteca$.next(
+            AcaoBiblioteca.LivroAdicionadoAoCatalogo,
+          ),
+        ),
       );
   }
 
