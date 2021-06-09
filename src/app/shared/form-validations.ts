@@ -1,3 +1,8 @@
+import { AbstractControl, FormControl } from '@angular/forms';
+import { of, timer } from 'rxjs';
+import { catchError, mapTo, switchMap } from 'rxjs/operators';
+import { CrudService } from './services/crud.service';
+
 export class FormValidations {
   static getErrorMsg(
     fieldName: string,
@@ -16,5 +21,39 @@ export class FormValidations {
     };
 
     return config[validatorName];
+  }
+
+  verificarDisponibilidadeCampo(
+    nomeCampo: string,
+    valorAtual: string,
+    service: CrudService<any>,
+    debounceTime = 500,
+  ) {
+    const validator = (controle: AbstractControl | FormControl) => {
+      if (!controle) {
+        return of(null);
+      }
+
+      if (controle.value === valorAtual) {
+        return of(null);
+      }
+
+      return timer(debounceTime).pipe(
+        switchMap(() => {
+          return service
+            .verificarDisponibilidadeCampo(nomeCampo, controle.value)
+            .pipe(
+              mapTo(() => null),
+              catchError((error) =>
+                of({
+                  emailJaCadastrado: true,
+                }),
+              ),
+            );
+        }),
+      );
+    };
+
+    return validator;
   }
 }
