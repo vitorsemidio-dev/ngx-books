@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { BaseFormComponent } from 'src/app/shared/base-form/base-form.component';
 import { FormValidations } from 'src/app/shared/form-validations';
+import { RotasUrlApp } from 'src/app/shared/rotas-url-app';
 import { AlertaModalService } from 'src/app/shared/services/alerta-modal.service';
 import { UsuarioService } from 'src/app/usuario/services/usuario.service';
 
@@ -16,6 +17,7 @@ export class UsuarioCadastroComponent
   extends BaseFormComponent
   implements OnInit
 {
+  rotasUrlApp = RotasUrlApp;
   constructor(
     private formBuilder: FormBuilder,
     private usuarioService: UsuarioService,

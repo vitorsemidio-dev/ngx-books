@@ -6,6 +6,7 @@ import { BibliotecaService } from 'src/app/bibliotecas/services/biblioteca.servi
 import { BaseFormComponent } from 'src/app/shared/base-form/base-form.component';
 import { FormValidations } from 'src/app/shared/form-validations';
 import { AlertaModalService } from 'src/app/shared/services/alerta-modal.service';
+import { RotasUrlApp } from 'src/app/shared/rotas-url-app';
 
 @Component({
   selector: 'app-cadastro',
@@ -13,6 +14,8 @@ import { AlertaModalService } from 'src/app/shared/services/alerta-modal.service
   styleUrls: ['./cadastro.component.scss'],
 })
 export class CadastroComponent extends BaseFormComponent implements OnInit {
+  rotasUrlApp = RotasUrlApp;
+
   constructor(
     private formBuilder: FormBuilder,
     private bibliotecaService: BibliotecaService,

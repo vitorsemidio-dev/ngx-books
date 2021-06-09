@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { AcaoLogin, LoginService } from 'src/app/shared/services/login.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { RotasUrlApp } from 'src/app/shared/rotas-url-app';
 
 @Component({
   selector: 'app-login',
@@ -12,6 +13,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 })
 export class LoginComponent implements OnInit {
   formulario: FormGroup;
+  rotasUrlApp = RotasUrlApp;
 
   constructor(
     private formBuilder: FormBuilder,

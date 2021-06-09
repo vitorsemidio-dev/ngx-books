@@ -3,7 +3,7 @@
     [imgUrl]="'assets/img-cadastro-biblioteca.svg'"
     [imgAltTexto]="'Cadastro Biblioteca'"
     [texto]="'Já criou sua conta?'"
-    [url]="'/login'"
+    [url]="rotasUrlApp.loginBiblioteca"
     [linkTexto]="'Entrar agora'"
   >
   </app-aside-item>
@@ -56,6 +56,6 @@
       Cadastrar
     </button>
 
-    <a [routerLink]="['/usuarios/login']"> Entrar como usuário </a>
+    <a [routerLink]="[rotasUrlApp.loginUsuario]"> Entrar como usuário </a>
   </form>
 </div>
