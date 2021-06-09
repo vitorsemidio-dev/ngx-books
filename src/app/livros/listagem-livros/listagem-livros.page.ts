@@ -49,10 +49,8 @@ export class ListagemLivrosPage implements OnInit {
       return;
     }
 
-    // TODO
     const bookId = evento.id;
     const userId = usuario.id;
-    console.log(evento);
 
     const confirmacaoAluguel = this.confirmarAluguel();
 
