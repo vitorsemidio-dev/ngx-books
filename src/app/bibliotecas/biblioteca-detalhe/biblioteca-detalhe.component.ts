@@ -82,9 +82,9 @@ export class BibliotecaDetalheComponent implements OnInit {
     const bookId = evento;
     const userId = usuario.id;
 
-    const confirmacaoExclusao = this.confirmarAluguel();
+    const confirmacaoAluguel = this.confirmarAluguel();
 
-    confirmacaoExclusao.pipe(take(1)).subscribe((confirmacao) => {
+    confirmacaoAluguel.pipe(take(1)).subscribe((confirmacao) => {
       if (confirmacao) {
         this.alugarLivro(userId, bookId);
       }

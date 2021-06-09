@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { take } from 'rxjs/operators';
 
-import { BibliotecaService } from 'src/app/bibliotecas/services/biblioteca.service';
+import { Livro } from 'src/app/livros/livro.model';
+import { LivrosService } from 'src/app/livros/services/livros.service';
+import { AlertaModalService } from 'src/app/shared/services/alerta-modal.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { UsuarioService } from 'src/app/usuario/services/usuario.service';
-
-import { Livro } from '../livro.model';
-import { LivrosService } from '../services/livros.service';
 
 @Component({
   selector: 'app-listagem-livros',
@@ -20,6 +20,7 @@ export class ListagemLivrosPage implements OnInit {
     private livrosService: LivrosService,
     private authService: AuthService,
     private usuarioService: UsuarioService,
+    private alertaModalService: AlertaModalService,
   ) {}
 
   ngOnInit(): void {
@@ -36,26 +37,54 @@ export class ListagemLivrosPage implements OnInit {
     );
   }
 
-  handleAlugar(evento: Livro) {
+  private verificarTipoUsuarioLogado() {
+    const usuario = this.authService.buscarDadosUsuario();
+    this.esconderBotaoCta = usuario ? false : true;
+  }
+
+  onAlugar(evento: Livro) {
     const usuario = this.authService.buscarDadosUsuario();
 
     if (!usuario) {
       return;
     }
 
-    this.usuarioService
-      .alugarLivro({
-        bookId: evento.id,
-        userId: usuario.id,
-      })
-      .subscribe(
-        (response) => {},
-        (error) => {},
-      );
+    // TODO
+    const bookId = evento.id;
+    const userId = usuario.id;
+    console.log(evento);
+
+    const confirmacaoAluguel = this.confirmarAluguel();
+
+    confirmacaoAluguel.pipe(take(1)).subscribe((confirmacao) => {
+      if (confirmacao) {
+        this.alugarLivro(userId, bookId);
+      }
+    });
   }
 
-  private verificarTipoUsuarioLogado() {
-    const usuario = this.authService.buscarDadosUsuario();
-    this.esconderBotaoCta = usuario ? false : true;
+  private confirmarAluguel() {
+    return this.alertaModalService.mostrarAlertaConfirmacao(
+      'Aluguel livro',
+      'Deseja realmente lugar o livro?',
+      'Sim, quero alugar',
+      'Não',
+    );
+  }
+
+  private alugarLivro(userId: string, bookId: string) {
+    this.usuarioService
+      .alugarLivro({
+        bookId,
+        userId,
+      })
+      .subscribe(
+        (response) => {
+          this.alertaModalService.mostrarAlertaSucesso(
+            'Livro alugado com sucesso',
+          );
+        },
+        (error) => {},
+      );
   }
 }
