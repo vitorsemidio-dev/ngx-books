@@ -20,7 +20,7 @@ interface IAluguelLivro {
   providedIn: 'root',
 })
 export class UsuarioService extends CrudService<Usuario> {
-  emissorUsuario$: Subject<AcaoUsuario> = new Subject();
+  private readonly emissorUsuario$: Subject<AcaoUsuario> = new Subject();
 
   get emissor() {
     return this.emissorUsuario$.asObservable();

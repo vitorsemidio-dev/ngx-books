@@ -28,7 +28,7 @@ export enum AcaoLogin {
   providedIn: 'root',
 })
 export class LoginService {
-  emissorLogin$: Subject<AcaoLogin> = new Subject();
+  private readonly emissorLogin$: Subject<AcaoLogin> = new Subject();
 
   get emissor() {
     return this.emissorLogin$.asObservable();

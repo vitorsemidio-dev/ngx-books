@@ -19,7 +19,7 @@ export enum AcaoBiblioteca {
   providedIn: 'root',
 })
 export class BibliotecaService extends CrudService<Biblioteca> {
-  emissorBiblioteca$: Subject<AcaoBiblioteca> = new Subject();
+  private readonly emissorBiblioteca$: Subject<AcaoBiblioteca> = new Subject();
 
   get emissor() {
     return this.emissorBiblioteca$.asObservable();
