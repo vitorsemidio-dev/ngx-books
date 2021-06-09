@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { BaseFormComponent } from 'src/app/shared/base-form/base-form.component';
 import { FormValidations } from 'src/app/shared/form-validations';
+import { AlertaModalService } from 'src/app/shared/services/alerta-modal.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { UsuarioService } from 'src/app/usuario/services/usuario.service';
 import { Usuario } from 'src/app/usuario/usuario.model';
@@ -24,6 +25,7 @@ export class UsuarioFormularioComponent
     private usuarioService: UsuarioService,
     private router: Router,
     private authService: AuthService,
+    private alertaModalService: AlertaModalService,
   ) {
     super();
   }
@@ -59,6 +61,9 @@ export class UsuarioFormularioComponent
   submit() {
     this.usuarioService.atualizar(this.formulario.value).subscribe(
       (response) => {
+        this.alertaModalService.mostrarAlertaSucesso(
+          'Perfil atualizado com sucesso',
+        );
         this.salvarDadosAtualizados(response);
         this.redirecionarRota('/usuarios/perfil');
       },
@@ -107,6 +112,9 @@ export class UsuarioFormularioComponent
   private atualizarImagemPerfil(imagem: File) {
     this.usuarioService.atualizarImagem(imagem, this.usuario.id).subscribe(
       (response) => {
+        this.alertaModalService.mostrarAlertaSucesso(
+          'Imagem do perfil atualizado com sucesso',
+        );
         this.salvarDadosAtualizados(response);
       },
       (error) => {},

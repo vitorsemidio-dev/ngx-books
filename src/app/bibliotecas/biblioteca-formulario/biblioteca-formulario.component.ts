@@ -125,6 +125,9 @@ export class BibliotecaFormularioComponent
       .atualizarImagem(imagem, this.biblioteca.id)
       .subscribe(
         (response) => {
+          this.alertaModalService.mostrarAlertaSucesso(
+            'Imagem do perfil atualizado com sucesso',
+          );
           this.salvarDadosAtualizados(response);
         },
         (error) => {},
