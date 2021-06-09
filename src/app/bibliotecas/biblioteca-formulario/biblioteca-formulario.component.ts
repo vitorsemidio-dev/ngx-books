@@ -1,17 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  AbstractControl,
-  FormBuilder,
-  FormControl,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { of, timer } from 'rxjs';
-import { catchError, mapTo, switchMap } from 'rxjs/operators';
 
 import { Biblioteca } from 'src/app/bibliotecas/biblioteca.model';
 import { BibliotecaService } from 'src/app/bibliotecas/services/biblioteca.service';
 import { BaseFormComponent } from 'src/app/shared/base-form/base-form.component';
+import { FormValidations } from 'src/app/shared/form-validations';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
@@ -52,8 +46,10 @@ export class BibliotecaFormularioComponent
         dadosIniciais.name,
         [Validators.required],
         [
-          this.verificarDisponibilidadeCampo('name', dadosIniciais.name).bind(
-            this,
+          FormValidations.verificarDisponibilidadeCampo(
+            'name',
+            dadosIniciais.name,
+            this.bibliotecaService,
           ),
         ],
       ],
@@ -61,8 +57,10 @@ export class BibliotecaFormularioComponent
         dadosIniciais.email,
         [Validators.required, Validators.email],
         [
-          this.verificarDisponibilidadeCampo('email', dadosIniciais.email).bind(
-            this,
+          FormValidations.verificarDisponibilidadeCampo(
+            'email',
+            dadosIniciais.email,
+            this.bibliotecaService,
           ),
         ],
       ],
@@ -92,35 +90,6 @@ export class BibliotecaFormularioComponent
 
   onCancelar() {
     this.router.navigate(['/bibliotecas', 'perfil']);
-  }
-
-  verificarDisponibilidadeCampo(nomeCampo: string, valorAtual: string) {
-    const validator = (controle: AbstractControl | FormControl) => {
-      if (!controle) {
-        return of(null);
-      }
-
-      if (controle.value === valorAtual) {
-        return of(null);
-      }
-
-      return timer(this.debounceTime).pipe(
-        switchMap(() => {
-          return this.bibliotecaService
-            .verificarDisponibilidadeCampo(nomeCampo, controle.value)
-            .pipe(
-              mapTo(() => null),
-              catchError((error) =>
-                of({
-                  nomeJaCadastrado: true,
-                }),
-              ),
-            );
-        }),
-      );
-    };
-
-    return validator;
   }
 
   private redirecionarRota(rota: string) {
