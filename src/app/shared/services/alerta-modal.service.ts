@@ -39,6 +39,14 @@ export class AlertaModalService {
     this.mostrarAlerta(mensagem, AlertaTipos.SUCCESS, dismissTimeout);
   }
 
+  mostrarAlertaAviso(mensagem: string, dismissTimeout?: number) {
+    this.mostrarAlerta(mensagem, AlertaTipos.WARNING, dismissTimeout);
+  }
+
+  mostrarAlertaError(mensagem: string, dismissTimeout?: number) {
+    this.mostrarAlerta(mensagem, AlertaTipos.DANGER, dismissTimeout);
+  }
+
   mostrarAlertaConfirmacao(
     titulo: string,
     msg: string,

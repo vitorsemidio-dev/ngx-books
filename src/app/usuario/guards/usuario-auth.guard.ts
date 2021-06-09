@@ -28,7 +28,7 @@ export class UsuarioAuthGuard implements CanActivate {
 
     if (!usuarioLogado) {
       this.router.navigate([RotasUrlApp.loginUsuario]);
-      this.alertaModalservice.mostrarAlertaSucesso(
+      this.alertaModalservice.mostrarAlertaAviso(
         'Para acessar o seu perfil, faça o login primeiro',
       );
       return false;
