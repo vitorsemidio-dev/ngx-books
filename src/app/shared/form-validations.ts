@@ -23,7 +23,7 @@ export class FormValidations {
     return config[validatorName];
   }
 
-  verificarDisponibilidadeCampo(
+  static verificarDisponibilidadeCampo(
     nomeCampo: string,
     valorAtual: string,
     service: CrudService<any>,
