@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { tap } from 'rxjs/operators';
+import { take, tap } from 'rxjs/operators';
 
 import { Livro } from 'src/app/livros/livro.model';
 import {
@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 import { Biblioteca } from 'src/app/bibliotecas/biblioteca.model';
 import { Usuario } from 'src/app/usuario/usuario.model';
 import { UsuarioService } from 'src/app/usuario/services/usuario.service';
+import { AlertaModalService } from 'src/app/shared/services/alerta-modal.service';
 
 @Component({
   selector: 'app-livro-detalhe',
@@ -29,6 +30,7 @@ export class LivroDetalheComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     private usuarioService: UsuarioService,
+    private alertaModalService: AlertaModalService,
   ) {}
 
   ngOnInit(): void {
@@ -76,8 +78,21 @@ export class LivroDetalheComponent implements OnInit {
   }
 
   onDevolverLivro() {
-    this.confirmacao();
+    // this.confirmacao();
     // this.devolverLivro();
+    const confirmacaoAlerta = this.alertaModalService.mostrarAlertaConfirmacao(
+      'Devolução livro',
+      'Deseja realmente devolver o livro?',
+      'Sim, quero devolver',
+      'Não',
+    );
+
+    confirmacaoAlerta.pipe(take(1)).subscribe((confirmacao) => {
+      console.log(confirmacao);
+      if (confirmacao) {
+        console.log('devolverLivro');
+      }
+    });
   }
 
   private devolverLivro() {
