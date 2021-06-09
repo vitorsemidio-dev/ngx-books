@@ -77,23 +77,21 @@ export class LivroDetalheComponent implements OnInit {
     console.log('Deseja realmente excluir?');
   }
 
-  onDevolverLivro() {
-    // this.confirmacao();
-    // this.devolverLivro();
-    const confirmacaoAlerta = this.alertaModalService.mostrarAlertaConfirmacao(
+  private confirmarDevolucao() {
+    return this.alertaModalService.mostrarAlertaConfirmacao(
       'Devolução livro',
       'Deseja realmente devolver o livro?',
       'Sim, quero devolver',
       'Não',
     );
+  }
 
-    confirmacaoAlerta.pipe(take(1)).subscribe((confirmacao) => {
-      console.log(confirmacao);
+  onDevolverLivro() {
+    const confirmacaoDevolucao = this.confirmarDevolucao();
+
+    confirmacaoDevolucao.pipe(take(1)).subscribe((confirmacao) => {
       if (confirmacao) {
-        console.log('devolverLivro');
-        this.alertaModalService.mostrarAlertaSucesso(
-          'Livro devolvido com sucesso',
-        );
+        this.devolverLivro();
       }
     });
   }
@@ -103,6 +101,9 @@ export class LivroDetalheComponent implements OnInit {
       .devolverLivro(this.autenticado.id, this.livro.id)
       .subscribe(
         (response) => {
+          this.alertaModalService.mostrarAlertaSucesso(
+            'Livro devolvido com sucesso',
+          );
           this.router.navigate(['..'], {
             relativeTo: this.activatedRoute,
           });
