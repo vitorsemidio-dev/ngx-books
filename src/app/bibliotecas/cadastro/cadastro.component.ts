@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { BibliotecaService } from 'src/app/bibliotecas/services/biblioteca.service';
 import { BaseFormComponent } from 'src/app/shared/base-form/base-form.component';
 import { FormValidations } from 'src/app/shared/form-validations';
+import { AlertaModalService } from 'src/app/shared/services/alerta-modal.service';
 
 @Component({
   selector: 'app-cadastro',
@@ -16,6 +17,7 @@ export class CadastroComponent extends BaseFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private bibliotecaService: BibliotecaService,
     private router: Router,
+    private alertaModalService: AlertaModalService,
   ) {
     super();
   }
@@ -55,6 +57,9 @@ export class CadastroComponent extends BaseFormComponent implements OnInit {
   submit() {
     this.bibliotecaService.criar(this.formulario.value).subscribe(
       (response) => {
+        this.alertaModalService.mostrarAlertaSucesso(
+          'Conta criada com sucesso',
+        );
         this.redirecionarRota('/login');
       },
       (error) => {},
