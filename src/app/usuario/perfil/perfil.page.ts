@@ -49,12 +49,10 @@ export class PerfilPage implements OnInit {
   }
 
   private verificarAcoes() {
-    const subLivro = this.usuarioService.emissorUsuario$.subscribe(
-      (acaoUsuario) => {
-        console.log(`Acao Usuario: [${acaoUsuario}]`);
-        this.carregarLivrosAlugados();
-      },
-    );
+    const subLivro = this.usuarioService.emissor.subscribe((acaoUsuario) => {
+      console.log(`Acao Usuario: [${acaoUsuario}]`);
+      this.carregarLivrosAlugados();
+    });
 
     this.subs.add(subLivro);
   }
