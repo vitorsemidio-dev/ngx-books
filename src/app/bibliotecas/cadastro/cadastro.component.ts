@@ -12,8 +12,6 @@ import { FormValidations } from 'src/app/shared/form-validations';
   styleUrls: ['./cadastro.component.scss'],
 })
 export class CadastroComponent extends BaseFormComponent implements OnInit {
-  debounceTime = 500;
-
   constructor(
     private formBuilder: FormBuilder,
     private bibliotecaService: BibliotecaService,

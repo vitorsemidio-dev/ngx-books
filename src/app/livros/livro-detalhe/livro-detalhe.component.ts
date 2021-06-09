@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { take, tap } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 
 import { Livro } from 'src/app/livros/livro.model';
 import { LivrosService } from 'src/app/livros/services/livros.service';
