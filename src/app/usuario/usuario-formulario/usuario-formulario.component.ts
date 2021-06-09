@@ -24,7 +24,6 @@ export class UsuarioFormularioComponent
   implements OnInit
 {
   debounceTime = 500;
-  previewImg: any = 'https://via.placeholder.com/150';
   usuario: Usuario;
 
   constructor(

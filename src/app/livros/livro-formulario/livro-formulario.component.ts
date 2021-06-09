@@ -30,7 +30,6 @@ export class LivroFormularioComponent
 {
   debounceTime = 500;
   livro: Livro;
-  previewImg: any = 'https://via.placeholder.com/150';
 
   constructor(
     private bibliotecaService: BibliotecaService,

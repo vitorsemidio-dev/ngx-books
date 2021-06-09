@@ -24,7 +24,6 @@ export class BibliotecaFormularioComponent
   implements OnInit
 {
   debounceTime = 500;
-  previewImg: any = 'https://via.placeholder.com/150';
   biblioteca: Biblioteca;
 
   constructor(
