@@ -1,16 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  AbstractControl,
-  FormBuilder,
-  FormControl,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { of, timer } from 'rxjs';
-import { catchError, mapTo, switchMap } from 'rxjs/operators';
 
+import { BibliotecaService } from 'src/app/bibliotecas/services/biblioteca.service';
 import { BaseFormComponent } from 'src/app/shared/base-form/base-form.component';
-import { BibliotecaService } from '../services/biblioteca.service';
+import { FormValidations } from 'src/app/shared/form-validations';
 
 @Component({
   selector: 'app-cadastro',
@@ -18,8 +12,6 @@ import { BibliotecaService } from '../services/biblioteca.service';
   styleUrls: ['./cadastro.component.scss'],
 })
 export class CadastroComponent extends BaseFormComponent implements OnInit {
-  debounceTime = 500;
-
   constructor(
     private formBuilder: FormBuilder,
     private bibliotecaService: BibliotecaService,
@@ -37,12 +29,24 @@ export class CadastroComponent extends BaseFormComponent implements OnInit {
       name: [
         null,
         [Validators.required],
-        [this.verificarDisponibilidadeCampo('name').bind(this)],
+        [
+          FormValidations.verificarDisponibilidadeCampo(
+            'name',
+            null,
+            this.bibliotecaService,
+          ),
+        ],
       ],
       email: [
         null,
         [Validators.required, Validators.email],
-        [this.verificarDisponibilidadeCampo('email').bind(this)],
+        [
+          FormValidations.verificarDisponibilidadeCampo(
+            'email',
+            null,
+            this.bibliotecaService,
+          ),
+        ],
       ],
       password: [null, [Validators.required]],
     });
@@ -55,31 +59,6 @@ export class CadastroComponent extends BaseFormComponent implements OnInit {
       },
       (error) => {},
     );
-  }
-
-  verificarDisponibilidadeCampo(nomeCampo: string) {
-    const validator = (controle: AbstractControl | FormControl) => {
-      if (!controle) {
-        return null;
-      }
-
-      return timer(this.debounceTime).pipe(
-        switchMap(() => {
-          return this.bibliotecaService
-            .verificarDisponibilidadeCampo(nomeCampo, controle.value)
-            .pipe(
-              mapTo(() => null),
-              catchError((error) =>
-                of({
-                  nomeJaCadastrado: true,
-                }),
-              ),
-            );
-        }),
-      );
-    };
-
-    return validator;
   }
 
   private redirecionarRota(rota: string) {

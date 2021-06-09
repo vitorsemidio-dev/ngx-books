@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { LivroDetalheComponent } from '../livros/livro-detalhe/livro-detalhe.component';
+import { LivroDetalheComponent } from 'src/app/livros/livro-detalhe/livro-detalhe.component';
 
 import { LoginComponent } from './login/login.component';
 import { PerfilDetalheComponent } from './perfil-detalhe/perfil-detalhe.component';
@@ -16,6 +16,7 @@ const routes: Routes = [
   {
     path: 'perfil',
     component: PerfilPage,
+    canActivate: [],
     children: [
       {
         path: '',

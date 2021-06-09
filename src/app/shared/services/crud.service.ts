@@ -32,4 +32,20 @@ export class CrudService<T> {
       ...entidade,
     });
   }
+
+  verificarDisponibilidadeCampo(nomeCampo: string, valor: string) {
+    return this.http.post(
+      `${this.apiUrl}/${this.recurso}/check-availability/${nomeCampo}`,
+      {
+        [nomeCampo]: valor,
+      },
+    );
+  }
+
+  atualizarImagem(imagem: File, id: string) {
+    const formData = new FormData();
+
+    formData.append('image', imagem);
+    return this.http.patch<T>(`${this.apiUrl}/${this.recurso}/${id}`, formData);
+  }
 }

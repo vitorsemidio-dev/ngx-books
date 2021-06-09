@@ -9,6 +9,7 @@ const routes: Routes = [
   {
     path: 'criar-livro',
     component: LivroFormularioComponent,
+    canActivate: [],
     resolve: {
       livro: LivroResolver,
     },
@@ -20,6 +21,7 @@ const routes: Routes = [
   {
     path: ':slug/editar',
     component: LivroFormularioComponent,
+    canActivate: [],
     resolve: {
       livro: LivroResolver,
     },

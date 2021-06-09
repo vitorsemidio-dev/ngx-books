@@ -7,6 +7,8 @@ import { FormArray, FormGroup } from '@angular/forms';
 })
 export abstract class BaseFormComponent {
   formulario: FormGroup;
+  previewImg: any = 'https://via.placeholder.com/150';
+
   constructor() {}
 
   abstract submit(): void;

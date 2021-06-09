@@ -20,7 +20,12 @@ interface IAluguelLivro {
   providedIn: 'root',
 })
 export class UsuarioService extends CrudService<Usuario> {
-  acaoUsuario: Subject<AcaoUsuario> = new Subject();
+  private readonly emissorUsuario$: Subject<AcaoUsuario> = new Subject();
+
+  get emissor() {
+    return this.emissorUsuario$.asObservable();
+  }
+
   constructor(protected http: HttpClient) {
     super(http, 'users');
   }
@@ -39,36 +44,16 @@ export class UsuarioService extends CrudService<Usuario> {
           book_id,
         },
       })
-      .pipe(tap(() => this.acaoUsuario.next(AcaoUsuario.LivroDevolvido)));
+      .pipe(tap(() => this.emissorUsuario$.next(AcaoUsuario.LivroDevolvido)));
   }
 
-  alugarLivro(infoAlugar: IAluguelLivro) {
-    const { bookId: book_id, userId: user_id } = infoAlugar;
+  alugarLivro(infoAluguelLivro: IAluguelLivro) {
+    const { bookId: book_id, userId: user_id } = infoAluguelLivro;
 
-    return this.http.post(
-      `${this.apiUrl}/${this.recurso}/${user_id}/books-rented`,
-      {
+    return this.http
+      .post(`${this.apiUrl}/${this.recurso}/${user_id}/books-rented`, {
         book_id,
-      },
-    );
-  }
-
-  verificarDisponibilidadeCampo(nomeCampo: string, valor: string) {
-    return this.http.post(
-      `${this.apiUrl}/${this.recurso}/check-availability/${nomeCampo}`,
-      {
-        [nomeCampo]: valor,
-      },
-    );
-  }
-
-  atualizarImagem(imagem: File, library_id: string) {
-    const formData = new FormData();
-
-    formData.append('image', imagem);
-    return this.http.patch<Usuario>(
-      `${this.apiUrl}/${this.recurso}/${library_id}`,
-      formData,
-    );
+      })
+      .pipe(tap(() => this.emissorUsuario$.next(AcaoUsuario.LivroAlugado)));
   }
 }

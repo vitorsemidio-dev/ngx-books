@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 import { Chave } from 'src/app/shared/chave';
 import { Biblioteca } from '../biblioteca.model';
@@ -18,7 +19,11 @@ export enum AcaoBiblioteca {
   providedIn: 'root',
 })
 export class BibliotecaService extends CrudService<Biblioteca> {
-  acaoBiblioteca: Subject<AcaoBiblioteca> = new Subject();
+  private readonly emissorBiblioteca$: Subject<AcaoBiblioteca> = new Subject();
+
+  get emissor() {
+    return this.emissorBiblioteca$.asObservable();
+  }
 
   constructor(protected http: HttpClient) {
     super(http, 'libraries');
@@ -34,22 +39,24 @@ export class BibliotecaService extends CrudService<Biblioteca> {
     );
   }
 
-  emitirAcao(acao: AcaoBiblioteca) {
-    this.acaoBiblioteca.next(acao);
-  }
-
-  // TODO: Passar token
   adicionarLivroAoCatalogo({ name, pages, quantity, author }: Livro) {
     const book = { name, pages, author };
     const library_id = this.getLibraryId();
-    return this.http.post(`${this.apiUrl}/${this.recurso}/register-book`, {
-      library_id,
-      book,
-      quantity,
-    });
+    return this.http
+      .post(`${this.apiUrl}/${this.recurso}/register-book`, {
+        library_id,
+        book,
+        quantity,
+      })
+      .pipe(
+        tap(() =>
+          this.emissorBiblioteca$.next(
+            AcaoBiblioteca.LivroAdicionadoAoCatalogo,
+          ),
+        ),
+      );
   }
 
-  // TODO: Refatorar para conseguir de maneira melhor e passar por HEADERS
   private getLibraryId() {
     const dadosLocalStorage = JSON.parse(
       localStorage.getItem(Chave.chaveSessao),
@@ -64,24 +71,5 @@ export class BibliotecaService extends CrudService<Biblioteca> {
     const library_id = dadosLocalStorage.library.id;
 
     return library_id;
-  }
-
-  verificarDisponibilidadeCampo(nomeCampo: string, valor: string) {
-    return this.http.post(
-      `${this.apiUrl}/${this.recurso}/check-availability/${nomeCampo}`,
-      {
-        [nomeCampo]: valor,
-      },
-    );
-  }
-
-  atualizarImagem(imagem: File, library_id: string) {
-    const formData = new FormData();
-
-    formData.append('image', imagem);
-    return this.http.patch<Biblioteca>(
-      `${this.apiUrl}/${this.recurso}/${library_id}`,
-      formData,
-    );
   }
 }
