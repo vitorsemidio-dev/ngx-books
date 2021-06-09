@@ -42,14 +42,13 @@ export class UsuarioService extends CrudService<Usuario> {
       .pipe(tap(() => this.acaoUsuario.next(AcaoUsuario.LivroDevolvido)));
   }
 
-  alugarLivro(infoAlugar: IAluguelLivro) {
-    const { bookId: book_id, userId: user_id } = infoAlugar;
+  alugarLivro(infoAluguelLivro: IAluguelLivro) {
+    const { bookId: book_id, userId: user_id } = infoAluguelLivro;
 
-    return this.http.post(
-      `${this.apiUrl}/${this.recurso}/${user_id}/books-rented`,
-      {
+    return this.http
+      .post(`${this.apiUrl}/${this.recurso}/${user_id}/books-rented`, {
         book_id,
-      },
-    );
+      })
+      .pipe(tap(() => this.acaoUsuario.next(AcaoUsuario.LivroAlugado)));
   }
 }
