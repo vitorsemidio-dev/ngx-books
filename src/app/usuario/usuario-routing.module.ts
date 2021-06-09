@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { LivroDetalheComponent } from 'src/app/livros/livro-detalhe/livro-detalhe.component';
+import { UsuarioAuthGuard } from './guards/usuario-auth.guard';
 
 import { LoginComponent } from './login/login.component';
 import { PerfilDetalheComponent } from './perfil-detalhe/perfil-detalhe.component';
@@ -21,7 +22,7 @@ const routes: Routes = [
   {
     path: 'perfil',
     component: PerfilPage,
-    canActivate: [],
+    canActivate: [UsuarioAuthGuard],
     children: [
       {
         path: '',
