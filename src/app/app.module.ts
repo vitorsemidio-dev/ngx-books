@@ -10,6 +10,7 @@ import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './bibliotecas/login/login.component';
 import { CadastroComponent } from './bibliotecas/cadastro/cadastro.component';
 import { SharedModule } from './shared/shared.module';
+import { AlertaModalService } from './shared/services/alerta-modal.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import { SharedModule } from './shared/shared.module';
     HttpClientModule,
     SharedModule,
   ],
-  providers: [],
+  providers: [AlertaModalService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
