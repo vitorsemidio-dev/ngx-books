@@ -42,8 +42,4 @@ export class LivrosService extends CrudService<Livro> {
   buscarPorSlug(slug: string) {
     return this.http.get<Livro>(`${this.apiUrl}/${this.recurso}/${slug}`);
   }
-
-  private emitirAcao(acao: AcaoLivro) {
-    this.emissorLivro$.next(acao);
-  }
 }
