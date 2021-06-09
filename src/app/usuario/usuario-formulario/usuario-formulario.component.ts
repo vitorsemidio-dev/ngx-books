@@ -11,8 +11,8 @@ import { catchError, mapTo, switchMap } from 'rxjs/operators';
 
 import { BaseFormComponent } from 'src/app/shared/base-form/base-form.component';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { UsuarioService } from '../services/usuario.service';
-import { Usuario } from '../usuario.model';
+import { UsuarioService } from 'src/app/usuario/services/usuario.service';
+import { Usuario } from 'src/app/usuario/usuario.model';
 
 @Component({
   selector: 'app-usuario-formulario',

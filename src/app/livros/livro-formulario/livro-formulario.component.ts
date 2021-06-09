@@ -9,15 +9,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { timer, of } from 'rxjs';
 import { switchMap, mapTo, catchError } from 'rxjs/operators';
 
-import {
-  BibliotecaService,
-  AcaoBiblioteca,
-} from 'src/app/bibliotecas/services/biblioteca.service';
+import { BibliotecaService } from 'src/app/bibliotecas/services/biblioteca.service';
 import { Livro } from 'src/app/livros/livro.model';
-import {
-  AcaoLivro,
-  LivrosService,
-} from 'src/app/livros/services/livros.service';
+import { LivrosService } from 'src/app/livros/services/livros.service';
 import { BaseFormComponent } from 'src/app/shared/base-form/base-form.component';
 @Component({
   selector: 'app-livro-formulario',

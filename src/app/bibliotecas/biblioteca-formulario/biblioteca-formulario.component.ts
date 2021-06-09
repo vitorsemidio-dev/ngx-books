@@ -10,9 +10,9 @@ import { of, timer } from 'rxjs';
 import { catchError, mapTo, switchMap } from 'rxjs/operators';
 
 import { Biblioteca } from 'src/app/bibliotecas/biblioteca.model';
+import { BibliotecaService } from 'src/app/bibliotecas/services/biblioteca.service';
 import { BaseFormComponent } from 'src/app/shared/base-form/base-form.component';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { BibliotecaService } from '../services/biblioteca.service';
 
 @Component({
   selector: 'app-biblioteca-formulario',
