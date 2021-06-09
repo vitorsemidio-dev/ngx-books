@@ -60,8 +60,7 @@ export class LivroDetalheComponent implements OnInit {
 
     confirmacaoExclusao.pipe(take(1)).subscribe((confirmacao) => {
       if (confirmacao) {
-        // this.excluirLivro()
-        console.log('livro excluido com sucesso');
+        this.excluirLivro();
       }
     });
   }
@@ -116,6 +115,9 @@ export class LivroDetalheComponent implements OnInit {
   private excluirLivro() {
     this.livrosService.remover(this.livro.id).subscribe(
       (response) => {
+        this.alertaModalService.mostrarAlertaSucesso(
+          'Livro excluído com sucesso',
+        );
         this.router.navigate(['..'], {
           relativeTo: this.activatedRoute,
         });
