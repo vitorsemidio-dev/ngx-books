@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { tap } from 'rxjs/operators';
 
 import { CrudService } from 'src/app/shared/services/crud.service';
 
@@ -11,8 +10,6 @@ export enum AcaoLivro {
   Criado = 'Criado',
   Atualizado = 'Atualizado',
   Removido = 'Removido',
-  Devolvido = 'Devolvido',
-  Alugado = 'Alugado',
 }
 
 @Injectable({

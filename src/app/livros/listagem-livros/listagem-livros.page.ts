@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { BibliotecaService } from 'src/app/bibliotecas/services/biblioteca.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { UsuarioService } from 'src/app/usuario/services/usuario.service';
 
 import { Livro } from '../livro.model';
 import { LivrosService } from '../services/livros.service';
@@ -17,8 +18,8 @@ export class ListagemLivrosPage implements OnInit {
 
   constructor(
     private livrosService: LivrosService,
-    private bibliotecaService: BibliotecaService,
     private authService: AuthService,
+    private usuarioService: UsuarioService,
   ) {}
 
   ngOnInit(): void {
@@ -42,7 +43,7 @@ export class ListagemLivrosPage implements OnInit {
       return;
     }
 
-    this.bibliotecaService
+    this.usuarioService
       .alugarLivro({
         bookId: evento.id,
         userId: usuario.id,

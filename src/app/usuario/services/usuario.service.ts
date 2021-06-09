@@ -11,6 +11,10 @@ export enum AcaoUsuario {
   LivroAlugado = 'LivroAlugado',
   LivroDevolvido = 'LivroDevolvido',
 }
+interface IAluguelLivro {
+  userId: string;
+  bookId: string;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -35,6 +39,15 @@ export class UsuarioService extends CrudService<Usuario> {
         },
       })
       .pipe(tap(() => this.acaoUsuario.next(AcaoUsuario.LivroDevolvido)));
+  }
+
+  alugarLivro(infoAlugar: IAluguelLivro) {
+    const { bookId: book_id, userId: user_id } = infoAlugar;
+
+    return this.http.post(`${this.apiUrl}/libraries/rent`, {
+      book_id,
+      user_id,
+    });
   }
 
   verificarDisponibilidadeCampo(nomeCampo: string, valor: string) {
