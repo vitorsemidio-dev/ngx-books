@@ -42,14 +42,14 @@ export class ListagemLivrosPage implements OnInit {
     this.esconderBotaoCta = usuario ? false : true;
   }
 
-  onAlugar(evento: Livro) {
+  onAlugar(evento: string) {
     const usuario = this.authService.buscarDadosUsuario();
 
     if (!usuario) {
       return;
     }
 
-    const bookId = evento.id;
+    const bookId = evento;
     const userId = usuario.id;
 
     const confirmacaoAluguel = this.confirmarAluguel();
