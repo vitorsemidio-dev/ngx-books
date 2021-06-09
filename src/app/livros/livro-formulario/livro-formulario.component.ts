@@ -7,6 +7,7 @@ import { Livro } from 'src/app/livros/livro.model';
 import { LivrosService } from 'src/app/livros/services/livros.service';
 import { BaseFormComponent } from 'src/app/shared/base-form/base-form.component';
 import { FormValidations } from 'src/app/shared/form-validations';
+import { AlertaModalService } from 'src/app/shared/services/alerta-modal.service';
 @Component({
   selector: 'app-livro-formulario',
   templateUrl: './livro-formulario.component.html',
@@ -24,6 +25,7 @@ export class LivroFormularioComponent
     private fb: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private router: Router,
+    private alertaModalService: AlertaModalService,
   ) {
     super();
   }
@@ -102,6 +104,9 @@ export class LivroFormularioComponent
       .adicionarLivroAoCatalogo(this.formulario.value)
       .subscribe(
         (response) => {
+          this.alertaModalService.mostrarAlertaSucesso(
+            'Livro adicionado ao catálogo com sucesso',
+          );
           this.router.navigate(['/bibliotecas', 'perfil']);
         },
         (error) => {},
@@ -112,6 +117,9 @@ export class LivroFormularioComponent
     this.livrosService.atualizar(this.formulario.value).subscribe(
       (response) => {
         const { slug } = response;
+        this.alertaModalService.mostrarAlertaSucesso(
+          'Livro atualizado com sucesso',
+        );
         this.router.navigate(['/bibliotecas', 'perfil', slug]);
       },
       (error) => {},
