@@ -32,4 +32,13 @@ export class CrudService<T> {
       ...entidade,
     });
   }
+
+  verificarDisponibilidadeCampo(nomeCampo: string, valor: string) {
+    return this.http.post(
+      `${this.apiUrl}/${this.recurso}/check-availability/${nomeCampo}`,
+      {
+        [nomeCampo]: valor,
+      },
+    );
+  }
 }

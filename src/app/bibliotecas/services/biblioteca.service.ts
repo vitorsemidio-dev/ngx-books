@@ -66,15 +66,6 @@ export class BibliotecaService extends CrudService<Biblioteca> {
     return library_id;
   }
 
-  verificarDisponibilidadeCampo(nomeCampo: string, valor: string) {
-    return this.http.post(
-      `${this.apiUrl}/${this.recurso}/check-availability/${nomeCampo}`,
-      {
-        [nomeCampo]: valor,
-      },
-    );
-  }
-
   atualizarImagem(imagem: File, library_id: string) {
     const formData = new FormData();
 
