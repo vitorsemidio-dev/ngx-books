@@ -10,6 +10,7 @@ import { PerfilDetalheItemComponent } from './perfil-detalhe-item/perfil-detalhe
 import { ListagemItensComponent } from './listagem-itens/listagem-itens.component';
 import { MsgErrorComponent } from './msg-error/msg-error.component';
 import { InputFieldComponent } from './input-field/input-field.component';
+import { ConfirmacaoModalComponent } from './confirmacao-modal/confirmacao-modal.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { InputFieldComponent } from './input-field/input-field.component';
     ListagemItensComponent,
     MsgErrorComponent,
     InputFieldComponent,
+    ConfirmacaoModalComponent,
   ],
   imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
   exports: [
@@ -30,6 +32,7 @@ import { InputFieldComponent } from './input-field/input-field.component';
     ListagemItensComponent,
     MsgErrorComponent,
     InputFieldComponent,
+    ConfirmacaoModalComponent,
   ],
 })
 export class SharedModule {}

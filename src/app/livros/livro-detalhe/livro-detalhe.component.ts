@@ -76,7 +76,8 @@ export class LivroDetalheComponent implements OnInit {
   }
 
   onDevolverLivro() {
-    this.devolverLivro();
+    this.confirmacao();
+    // this.devolverLivro();
   }
 
   private devolverLivro() {
