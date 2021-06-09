@@ -44,10 +44,12 @@ export class UsuarioService extends CrudService<Usuario> {
   alugarLivro(infoAlugar: IAluguelLivro) {
     const { bookId: book_id, userId: user_id } = infoAlugar;
 
-    return this.http.post(`${this.apiUrl}/libraries/rent`, {
-      book_id,
-      user_id,
-    });
+    return this.http.post(
+      `${this.apiUrl}/${this.recurso}/${user_id}/books-rented`,
+      {
+        book_id,
+      },
+    );
   }
 
   verificarDisponibilidadeCampo(nomeCampo: string, valor: string) {
