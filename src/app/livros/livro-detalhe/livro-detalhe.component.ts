@@ -30,24 +30,26 @@ export class LivroDetalheComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.carregarInformacaoAutenticacao();
     this.carregarTela();
   }
 
   carregarTela() {
     this.activatedRoute.params.subscribe((params) => {
       this.slug = params['slug'];
-      this.carregarDadosLivro();
-      const lib = this.authService.buscarDadosBiblioteca();
-      this.isBibliotecaLogada = Boolean(lib);
-
-      const { library, user } = this.authService.buscarDadosSessao();
-
-      this.autenticado = library || user;
+      this.carregarDadosLivro(this.slug);
     });
   }
 
-  private carregarDadosLivro() {
-    this.livrosService.buscarPorSlug(this.slug).subscribe((response) => {
+  private carregarInformacaoAutenticacao() {
+    const { library, user } = this.authService.buscarDadosSessao();
+
+    this.isBibliotecaLogada = Boolean(library);
+    this.autenticado = library || user;
+  }
+
+  private carregarDadosLivro(slug: string) {
+    this.livrosService.buscarPorSlug(slug).subscribe((response) => {
       this.livro = response;
     });
   }
@@ -75,7 +77,7 @@ export class LivroDetalheComponent implements OnInit {
     this.devolverLivro();
   }
 
-  devolverLivro() {
+  private devolverLivro() {
     this.livrosService
       .devolverLivro(this.autenticado.id, this.livro.id)
       .subscribe(
