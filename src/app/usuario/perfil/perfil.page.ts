@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { UsuarioService } from '../services/usuario.service';
@@ -10,6 +11,7 @@ import { UsuarioService } from '../services/usuario.service';
 })
 export class PerfilPage implements OnInit {
   livrosAlugados = [];
+  subs: Subscription = new Subscription();
 
   constructor(
     private authService: AuthService,
@@ -20,9 +22,17 @@ export class PerfilPage implements OnInit {
     this.carregarTela();
   }
 
+  ngOnDestroy() {
+    if (this.subs || !this.subs.closed) {
+      this.subs.unsubscribe();
+    }
+  }
+
   carregarTela() {
     this.carregarLivrosAlugados();
+    this.verificarAcoes();
   }
+
   private carregarLivrosAlugados() {
     const usuario = this.authService.buscarDadosUsuario();
 
@@ -36,5 +46,16 @@ export class PerfilPage implements OnInit {
       },
       (error) => {},
     );
+  }
+
+  private verificarAcoes() {
+    const subLivro = this.usuarioService.acaoUsuario.subscribe(
+      (acaoUsuario) => {
+        console.log(`Acao Usuario: [${acaoUsuario}]`);
+        this.carregarLivrosAlugados();
+      },
+    );
+
+    this.subs.add(subLivro);
   }
 }

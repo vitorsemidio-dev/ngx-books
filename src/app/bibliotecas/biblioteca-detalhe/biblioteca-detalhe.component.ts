@@ -5,6 +5,7 @@ import { Biblioteca } from './../biblioteca.model';
 import { BibliotecaService } from '../services/biblioteca.service';
 import { Livro } from '../../livros/livro.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { UsuarioService } from 'src/app/usuario/services/usuario.service';
 
 @Component({
   selector: 'app-biblioteca-detalhe',
@@ -29,6 +30,7 @@ export class BibliotecaDetalheComponent implements OnInit {
     private bibliotecaService: BibliotecaService,
     private route: ActivatedRoute,
     private authService: AuthService,
+    private usuarioService: UsuarioService,
   ) {}
 
   ngOnInit(): void {
@@ -72,7 +74,7 @@ export class BibliotecaDetalheComponent implements OnInit {
     const bookId = evento;
     const userId = usuario.id;
 
-    this.bibliotecaService
+    this.usuarioService
       .alugarLivro({
         bookId,
         userId,

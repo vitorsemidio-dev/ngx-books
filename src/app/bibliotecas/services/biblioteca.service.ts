@@ -7,11 +7,6 @@ import { Biblioteca } from '../biblioteca.model';
 import { Livro } from '../../livros/livro.model';
 import { CrudService } from '../../shared/services/crud.service';
 
-interface IAluguelLivro {
-  userId: string;
-  bookId: string;
-}
-
 export enum AcaoBiblioteca {
   Criado = 'Criado',
   Atualizado = 'Atualizado',
@@ -41,15 +36,6 @@ export class BibliotecaService extends CrudService<Biblioteca> {
 
   emitirAcao(acao: AcaoBiblioteca) {
     this.acaoBiblioteca.next(acao);
-  }
-
-  alugarLivro(infoAlugar: IAluguelLivro) {
-    const { bookId: book_id, userId: user_id } = infoAlugar;
-
-    return this.http.post(`${this.apiUrl}/${this.recurso}/rent`, {
-      book_id,
-      user_id,
-    });
   }
 
   // TODO: Passar token

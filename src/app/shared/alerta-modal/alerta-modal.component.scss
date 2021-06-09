@@ -1,0 +1,17 @@
+.alert,
+p {
+  margin-bottom: 0;
+}
+
+.alert {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.close {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  opacity: 0.5;
+}

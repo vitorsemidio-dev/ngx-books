@@ -1,0 +1,14 @@
+<div class="alert alert-{{ type }}" role="alert">
+  <p>
+    {{ mensagem }}
+  </p>
+  <button
+    type="button"
+    class="btn close"
+    data-dismiss="alert"
+    aria-label="Close"
+    (click)="onClose()"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>

@@ -1,0 +1,28 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title">
+      {{ titulo }}
+    </h5>
+    <button type="button" class="btn close" (click)="onCancelar()">
+      <span>&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>
+      {{ msg }}
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button
+      (click)="onCancelar()"
+      type="button"
+      class="btn btn-secondary"
+      data-dismiss="modal"
+    >
+      {{ btnTxtCancelar }}
+    </button>
+    <button (click)="onConfirmar()" type="button" class="btn btn-primary">
+      {{ btnTxtConfirmar }}
+    </button>
+  </div>
+</div>
