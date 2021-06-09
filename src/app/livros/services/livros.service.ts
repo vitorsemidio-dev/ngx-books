@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 import { CrudService } from 'src/app/shared/services/crud.service';
 
@@ -20,6 +21,12 @@ export class LivrosService extends CrudService<Livro> {
 
   constructor(protected http: HttpClient) {
     super(http, 'books');
+  }
+
+  remover(livroId: string) {
+    return super
+      .remover(livroId)
+      .pipe(tap(() => this.acaoLivro.next(AcaoLivro.Removido)));
   }
 
   buscarPorSlug(slug: string) {

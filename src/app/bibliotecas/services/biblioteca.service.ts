@@ -38,7 +38,6 @@ export class BibliotecaService extends CrudService<Biblioteca> {
     this.acaoBiblioteca.next(acao);
   }
 
-  // TODO: Passar token
   adicionarLivroAoCatalogo({ name, pages, quantity, author }: Livro) {
     const book = { name, pages, author };
     const library_id = this.getLibraryId();
@@ -49,7 +48,6 @@ export class BibliotecaService extends CrudService<Biblioteca> {
     });
   }
 
-  // TODO: Refatorar para conseguir de maneira melhor e passar por HEADERS
   private getLibraryId() {
     const dadosLocalStorage = JSON.parse(
       localStorage.getItem(Chave.chaveSessao),

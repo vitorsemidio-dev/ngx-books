@@ -3,10 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { take, tap } from 'rxjs/operators';
 
 import { Livro } from 'src/app/livros/livro.model';
-import {
-  AcaoLivro,
-  LivrosService,
-} from 'src/app/livros/services/livros.service';
+import { LivrosService } from 'src/app/livros/services/livros.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { Biblioteca } from 'src/app/bibliotecas/biblioteca.model';
 import { Usuario } from 'src/app/usuario/usuario.model';
@@ -60,17 +57,14 @@ export class LivroDetalheComponent implements OnInit {
 
   onExcluir() {
     this.confirmacao();
-    this.livrosService
-      .remover(this.livro.id)
-      .pipe(tap(() => this.livrosService.emitirAcao(AcaoLivro.Removido)))
-      .subscribe(
-        (response) => {
-          this.router.navigate(['..'], {
-            relativeTo: this.activatedRoute,
-          });
-        },
-        (error) => {},
-      );
+    this.livrosService.remover(this.livro.id).subscribe(
+      (response) => {
+        this.router.navigate(['..'], {
+          relativeTo: this.activatedRoute,
+        });
+      },
+      (error) => {},
+    );
   }
 
   private confirmacao() {
