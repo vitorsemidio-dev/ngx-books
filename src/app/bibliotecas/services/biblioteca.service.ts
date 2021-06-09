@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 import { Chave } from 'src/app/shared/chave';
 import { Biblioteca } from '../biblioteca.model';
@@ -34,18 +35,22 @@ export class BibliotecaService extends CrudService<Biblioteca> {
     );
   }
 
-  emitirAcao(acao: AcaoBiblioteca) {
+  private emitirAcao(acao: AcaoBiblioteca) {
     this.acaoBiblioteca.next(acao);
   }
 
   adicionarLivroAoCatalogo({ name, pages, quantity, author }: Livro) {
     const book = { name, pages, author };
     const library_id = this.getLibraryId();
-    return this.http.post(`${this.apiUrl}/${this.recurso}/register-book`, {
-      library_id,
-      book,
-      quantity,
-    });
+    return this.http
+      .post(`${this.apiUrl}/${this.recurso}/register-book`, {
+        library_id,
+        book,
+        quantity,
+      })
+      .pipe(
+        tap(() => this.emitirAcao(AcaoBiblioteca.LivroAdicionadoAoCatalogo)),
+      );
   }
 
   private getLibraryId() {

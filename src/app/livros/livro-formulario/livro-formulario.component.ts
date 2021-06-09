@@ -114,7 +114,6 @@ export class LivroFormularioComponent
       .adicionarLivroAoCatalogo(this.formulario.value)
       .subscribe(
         (response) => {
-          this.bibliotecaService.emitirAcao(AcaoBiblioteca.Criado);
           this.router.navigate(['/bibliotecas', 'perfil']);
         },
         (error) => {},
@@ -125,7 +124,6 @@ export class LivroFormularioComponent
     this.livrosService.atualizar(this.formulario.value).subscribe(
       (response) => {
         const { slug } = response;
-        this.livrosService.emitirAcao(AcaoLivro.Atualizado);
         this.router.navigate(['/bibliotecas', 'perfil', slug]);
       },
       (error) => {},

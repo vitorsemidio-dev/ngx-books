@@ -29,11 +29,17 @@ export class LivrosService extends CrudService<Livro> {
       .pipe(tap(() => this.acaoLivro.next(AcaoLivro.Removido)));
   }
 
+  atualizar(livro: Livro) {
+    return super
+      .atualizar(livro)
+      .pipe(tap(() => this.acaoLivro.next(AcaoLivro.Atualizado)));
+  }
+
   buscarPorSlug(slug: string) {
     return this.http.get<Livro>(`${this.apiUrl}/${this.recurso}/${slug}`);
   }
 
-  emitirAcao(acao: AcaoLivro) {
+  private emitirAcao(acao: AcaoLivro) {
     this.acaoLivro.next(acao);
   }
 }
