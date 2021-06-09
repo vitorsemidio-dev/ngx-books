@@ -98,7 +98,10 @@ export class LivroDetalheComponent implements OnInit {
 
   private devolverLivro() {
     this.usuarioService
-      .devolverLivro(this.autenticado.id, this.livro.id)
+      .devolverLivro({
+        userId: this.autenticado.id,
+        bookId: this.livro.id,
+      })
       .subscribe(
         (response) => {
           this.alertaModalService.mostrarAlertaSucesso(

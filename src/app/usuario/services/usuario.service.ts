@@ -31,11 +31,12 @@ export class UsuarioService extends CrudService<Usuario> {
     );
   }
 
-  devolverLivro(userId: string, bookId: string) {
+  devolverLivro(infoAluguelLivro: IAluguelLivro) {
+    const { bookId: book_id, userId: user_id } = infoAluguelLivro;
     return this.http
-      .delete(`${this.apiUrl}/${this.recurso}/${userId}/books-rented`, {
+      .delete(`${this.apiUrl}/${this.recurso}/${user_id}/books-rented`, {
         params: {
-          book_id: bookId,
+          book_id,
         },
       })
       .pipe(tap(() => this.acaoUsuario.next(AcaoUsuario.LivroDevolvido)));
