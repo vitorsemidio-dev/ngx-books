@@ -12,7 +12,7 @@ import { Usuario } from '../usuario/usuario.model';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  private acaoLogin$: Subscription;
+  private subs: Subscription;
   usuarioLogado: Biblioteca | Usuario;
   rotaPerfil: string;
 
@@ -27,13 +27,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.acaoLogin$ || !this.acaoLogin$.closed) {
-      this.acaoLogin$.unsubscribe();
+    if (this.subs || !this.subs.closed) {
+      this.subs.unsubscribe();
     }
   }
 
   private verificacarLogin() {
-    this.acaoLogin$ = this.loginService.acaoLogin$.subscribe((acao) => {
+    this.subs = this.loginService.emissor.subscribe((acao) => {
       this.carregarDadosUsuarioAutenticado();
     });
   }

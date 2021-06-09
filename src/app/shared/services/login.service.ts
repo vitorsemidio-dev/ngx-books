@@ -3,8 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
-import { Biblioteca } from '../../bibliotecas/biblioteca.model';
-import { Chave } from '../../shared/chave';
+
+import { Biblioteca } from 'src/app/bibliotecas/biblioteca.model';
+import { Chave } from 'src/app/shared/chave';
+import { Usuario } from 'src/app/usuario/usuario.model';
 
 interface ICredencial {
   email: string;
@@ -14,6 +16,7 @@ interface ICredencial {
 interface ILoginResponse {
   token: string;
   library: Biblioteca;
+  user: Usuario;
 }
 
 export enum AcaoLogin {
@@ -25,7 +28,11 @@ export enum AcaoLogin {
   providedIn: 'root',
 })
 export class LoginService {
-  acaoLogin$: Subject<AcaoLogin> = new Subject();
+  emissorLogin$: Subject<AcaoLogin> = new Subject();
+
+  get emissor() {
+    return this.emissorLogin$.asObservable();
+  }
 
   private readonly baseUrl = environment.baseApiUrl;
 
@@ -58,6 +65,6 @@ export class LoginService {
   }
 
   emitirAutenticacao(acao: AcaoLogin) {
-    this.acaoLogin$.next(acao);
+    this.emissorLogin$.next(acao);
   }
 }
