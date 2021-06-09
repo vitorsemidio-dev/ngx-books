@@ -6,12 +6,17 @@ import { LivroDetalheComponent } from 'src/app/livros/livro-detalhe/livro-detalh
 import { LoginComponent } from './login/login.component';
 import { PerfilDetalheComponent } from './perfil-detalhe/perfil-detalhe.component';
 import { PerfilPage } from './perfil/perfil.page';
+import { UsuarioCadastroComponent } from './usuario-cadastro/usuario-cadastro.component';
 import { UsuarioFormularioComponent } from './usuario-formulario/usuario-formulario.component';
 
 const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'cadastro',
+    component: UsuarioCadastroComponent,
   },
   {
     path: 'perfil',

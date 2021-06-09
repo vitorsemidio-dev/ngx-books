@@ -8,9 +8,10 @@ import { SharedModule } from '../shared/shared.module';
 import { PerfilDetalheComponent } from './perfil-detalhe/perfil-detalhe.component';
 import { PerfilPage } from './perfil/perfil.page';
 import { UsuarioFormularioComponent } from './usuario-formulario/usuario-formulario.component';
+import { UsuarioCadastroComponent } from './usuario-cadastro/usuario-cadastro.component';
 
 @NgModule({
-  declarations: [LoginComponent, PerfilDetalheComponent, PerfilPage, UsuarioFormularioComponent],
+  declarations: [LoginComponent, PerfilDetalheComponent, PerfilPage, UsuarioFormularioComponent, UsuarioCadastroComponent],
   imports: [
     CommonModule,
     UsuarioRoutingModule,
