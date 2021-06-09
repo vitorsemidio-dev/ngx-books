@@ -5,7 +5,6 @@ import { BibliotecaService } from 'src/app/bibliotecas/services/biblioteca.servi
 import { Livro } from 'src/app/livros/livro.model';
 import { LivrosService } from 'src/app/livros/services/livros.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { Biblioteca } from '../biblioteca.model';
 
 @Component({
   selector: 'app-perfil',
@@ -13,9 +12,9 @@ import { Biblioteca } from '../biblioteca.model';
   styleUrls: ['./perfil.component.scss'],
 })
 export class PerfilComponent implements OnInit, OnDestroy {
-  biblioteca: Biblioteca;
+  private readonly subs: Subscription = new Subscription();
+
   catalogo: Livro[];
-  subs: Subscription = new Subscription();
 
   constructor(
     private bibliotecaService: BibliotecaService,
@@ -34,7 +33,6 @@ export class PerfilComponent implements OnInit, OnDestroy {
   }
 
   carregarTela() {
-    this.carregarDadosPerfil();
     this.carregarCatalogo();
     this.verificarAcoes();
   }
@@ -56,18 +54,14 @@ export class PerfilComponent implements OnInit, OnDestroy {
     this.subs.add(subBiblioteca);
   }
 
-  private carregarDadosPerfil() {
+  private carregarCatalogo() {
     const biblioteca = this.authService.buscarDadosBiblioteca();
 
     if (!biblioteca) {
       return;
     }
 
-    this.biblioteca = biblioteca;
-  }
-
-  private carregarCatalogo() {
-    this.bibliotecaService.listarCatalogo(this.biblioteca.id).subscribe(
+    this.bibliotecaService.listarCatalogo(biblioteca.id).subscribe(
       (response) => (this.catalogo = response),
       (error) => {},
     );

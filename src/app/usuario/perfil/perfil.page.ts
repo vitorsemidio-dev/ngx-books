@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { UsuarioService } from '../services/usuario.service';
+import { UsuarioService } from 'src/app/usuario/services/usuario.service';
 
 @Component({
   selector: 'app-perfil',
@@ -10,8 +10,9 @@ import { UsuarioService } from '../services/usuario.service';
   styleUrls: ['./perfil.page.scss'],
 })
 export class PerfilPage implements OnInit {
+  private readonly subs: Subscription = new Subscription();
+
   livrosAlugados = [];
-  subs: Subscription = new Subscription();
 
   constructor(
     private authService: AuthService,
