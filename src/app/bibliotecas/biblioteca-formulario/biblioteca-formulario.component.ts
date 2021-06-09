@@ -6,6 +6,7 @@ import { Biblioteca } from 'src/app/bibliotecas/biblioteca.model';
 import { BibliotecaService } from 'src/app/bibliotecas/services/biblioteca.service';
 import { BaseFormComponent } from 'src/app/shared/base-form/base-form.component';
 import { FormValidations } from 'src/app/shared/form-validations';
+import { AlertaModalService } from 'src/app/shared/services/alerta-modal.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
@@ -24,6 +25,7 @@ export class BibliotecaFormularioComponent
     private bibliotecaService: BibliotecaService,
     private router: Router,
     private authService: AuthService,
+    private alertaModalService: AlertaModalService,
   ) {
     super();
   }
@@ -70,6 +72,9 @@ export class BibliotecaFormularioComponent
   submit() {
     this.bibliotecaService.atualizar(this.formulario.value).subscribe(
       (response) => {
+        this.alertaModalService.mostrarAlertaSucesso(
+          'Perfil atualizado com sucesso',
+        );
         this.salvarDadosAtualizados(response);
         this.redirecionarRota('/bibliotecas/perfil');
       },
