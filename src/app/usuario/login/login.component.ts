@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { AcaoLogin, LoginService } from 'src/app/shared/services/login.service';
+import { BaseFormComponent } from 'src/app/shared/base-form/base-form.component';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { AcaoLogin, LoginService } from 'src/app/shared/services/login.service';
 import { RotasUrlApp } from 'src/app/shared/rotas-url-app';
 
 @Component({
@@ -11,8 +12,7 @@ import { RotasUrlApp } from 'src/app/shared/rotas-url-app';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
-  formulario: FormGroup;
+export class LoginComponent extends BaseFormComponent implements OnInit {
   rotasUrlApp = RotasUrlApp;
 
   constructor(
@@ -20,7 +20,9 @@ export class LoginComponent implements OnInit {
     private loginService: LoginService,
     private router: Router,
     private authService: AuthService,
-  ) {}
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
     this.montarFormulario();
@@ -28,15 +30,12 @@ export class LoginComponent implements OnInit {
 
   private montarFormulario() {
     this.formulario = this.formBuilder.group({
-      email: [
-        'herbert-pacocha@test.com',
-        [Validators.required, Validators.email],
-      ],
-      password: ['123456', [Validators.required]],
+      email: [null, [Validators.required, Validators.email]],
+      password: [null, [Validators.required]],
     });
   }
 
-  onSubmit() {
+  submit() {
     this.loginService.fazerLoginUsuario(this.formulario.value).subscribe(
       (response) => {
         this.authService.salvarDadosSessao(response);
