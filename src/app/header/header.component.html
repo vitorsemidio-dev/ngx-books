@@ -17,7 +17,10 @@
     </ul>
   </nav>
 
-  <a *ngIf="!usuarioLogado" class="btn btn-info" [routerLink]="['login']"
+  <a
+    *ngIf="!usuarioLogado"
+    class="btn btn-info"
+    [routerLink]="[rotasUrlApp.loginUsuario]"
     >Login/Cadastro</a
   >
   <a *ngIf="usuarioLogado" class="avatar-usuario" [routerLink]="[rotaPerfil]">
