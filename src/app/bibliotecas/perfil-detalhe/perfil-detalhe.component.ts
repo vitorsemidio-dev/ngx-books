@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 import { Livro } from 'src/app/livros/livro.model';
 import { LoginService } from 'src/app/shared/services/login.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { Biblioteca } from '../biblioteca.model';
+import { RotasUrlApp } from 'src/app/shared/rotas-url-app';
+import { Biblioteca } from 'src/app/bibliotecas/biblioteca.model';
 
 @Component({
   selector: 'app-perfil-detalhe',
@@ -14,6 +15,7 @@ import { Biblioteca } from '../biblioteca.model';
 export class PerfilDetalheComponent implements OnInit {
   biblioteca: Biblioteca;
   catalogo: Livro[];
+  rotasUrlApp = RotasUrlApp;
 
   constructor(
     private router: Router,
@@ -41,7 +43,7 @@ export class PerfilDetalheComponent implements OnInit {
 
   onSair() {
     this.loginService.fazerLogout();
-    this.redirecionarRota('/login');
+    this.redirecionarRota(this.rotasUrlApp.loginUsuario);
   }
 
   private redirecionarRota(rota: string) {

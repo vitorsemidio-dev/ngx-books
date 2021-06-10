@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
+import { RotasUrlApp } from 'src/app/shared/rotas-url-app';
 import { Biblioteca } from '../bibliotecas/biblioteca.model';
 import { LoginService } from '../shared/services/login.service';
 import { AuthService } from '../shared/services/auth.service';
@@ -15,6 +16,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private subs: Subscription;
   usuarioLogado: Biblioteca | Usuario;
   rotaPerfil: string;
+  rotasUrlApp = RotasUrlApp;
 
   constructor(
     private authService: AuthService,

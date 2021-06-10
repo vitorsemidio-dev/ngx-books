@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { take } from 'rxjs/operators';
 
-import { Biblioteca } from './../biblioteca.model';
-import { BibliotecaService } from '../services/biblioteca.service';
-import { Livro } from '../../livros/livro.model';
+import { Biblioteca } from 'src/app/bibliotecas/biblioteca.model';
+import { BibliotecaService } from 'src/app/bibliotecas/services/biblioteca.service';
+import { Livro } from 'src/app/livros/livro.model';
+import { AlertaModalService } from 'src/app/shared/services/alerta-modal.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { UsuarioService } from 'src/app/usuario/services/usuario.service';
 
@@ -31,6 +33,7 @@ export class BibliotecaDetalheComponent implements OnInit {
     private route: ActivatedRoute,
     private authService: AuthService,
     private usuarioService: UsuarioService,
+    private alertaModalService: AlertaModalService,
   ) {}
 
   ngOnInit(): void {
@@ -64,7 +67,12 @@ export class BibliotecaDetalheComponent implements OnInit {
     );
   }
 
-  handleAlugar(evento: string) {
+  private verificarTipoUsuarioLogado() {
+    const usuario = this.authService.buscarDadosUsuario();
+    this.esconderBotaoCta = usuario ? false : true;
+  }
+
+  onAlugar(evento: string) {
     const usuario = this.authService.buscarDadosUsuario();
 
     if (!usuario) {
@@ -74,19 +82,37 @@ export class BibliotecaDetalheComponent implements OnInit {
     const bookId = evento;
     const userId = usuario.id;
 
+    const confirmacaoAluguel = this.confirmarAluguel();
+
+    confirmacaoAluguel.pipe(take(1)).subscribe((confirmacao) => {
+      if (confirmacao) {
+        this.alugarLivro(userId, bookId);
+      }
+    });
+  }
+
+  private confirmarAluguel() {
+    return this.alertaModalService.mostrarAlertaConfirmacao(
+      'Aluguel livro',
+      'Deseja realmente lugar o livro?',
+      'Sim, quero alugar',
+      'Não',
+    );
+  }
+
+  private alugarLivro(userId: string, bookId: string) {
     this.usuarioService
       .alugarLivro({
         bookId,
         userId,
       })
       .subscribe(
-        (response) => console.log(response),
+        (response) => {
+          this.alertaModalService.mostrarAlertaSucesso(
+            'Livro alugado com sucesso',
+          );
+        },
         (error) => {},
       );
-  }
-
-  private verificarTipoUsuarioLogado() {
-    const usuario = this.authService.buscarDadosUsuario();
-    this.esconderBotaoCta = usuario ? false : true;
   }
 }

@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 
 import { LoginService } from 'src/app/shared/services/login.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { Usuario } from '../usuario.model';
+import { RotasUrlApp } from 'src/app/shared/rotas-url-app';
+import { Usuario } from 'src/app/usuario/usuario.model';
 
 @Component({
   selector: 'app-perfil-detalhe',
@@ -12,6 +13,7 @@ import { Usuario } from '../usuario.model';
 })
 export class PerfilDetalheComponent implements OnInit {
   usuario: Usuario;
+  rotasUrlApp = RotasUrlApp;
 
   constructor(
     private router: Router,
@@ -39,7 +41,7 @@ export class PerfilDetalheComponent implements OnInit {
 
   onSair() {
     this.loginService.fazerLogout();
-    this.redirecionarRota('/login');
+    this.redirecionarRota(this.rotasUrlApp.loginUsuario);
   }
 
   private redirecionarRota(rota: string) {

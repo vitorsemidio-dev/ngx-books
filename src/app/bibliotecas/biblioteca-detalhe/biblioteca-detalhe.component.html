@@ -21,13 +21,14 @@
         >
           <li *ngFor="let livro of catalogo">
             <app-card-item
+              [key]="livro.id"
               [titulo]="livro.name"
               subtitulo="{{ 'Escrito por ' + livro.author }}"
               [imgUrl]="livro.imgUrl"
               [url]="livro.slug"
               [textoBotao]="'alugar'"
               [tipoBotaoCta]="esconderBotaoCta ? 'Desativado' : 'Botao'"
-              (onClickCta)="handleAlugar($event)"
+              (onClickCta)="onAlugar($event)"
             >
             </app-card-item>
           </li>

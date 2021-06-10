@@ -1,23 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { LoginComponent } from './bibliotecas/login/login.component';
-import { CadastroComponent } from './bibliotecas/cadastro/cadastro.component';
 import { ListagemLivrosPage } from './livros/listagem-livros/listagem-livros.page';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/login',
+    redirectTo: 'livros',
     pathMatch: 'full',
-  },
-  {
-    path: 'login',
-    component: LoginComponent,
-  },
-  {
-    path: 'cadastro',
-    component: CadastroComponent,
   },
   {
     path: 'livros',

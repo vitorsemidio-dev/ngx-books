@@ -1,9 +1,9 @@
 <div class="grid">
   <app-aside-item
-    [imgUrl]="'assets/img-cadastro-biblioteca.svg'"
+    [imgUrl]="'assets/img-usuario-nova-conta.svg'"
     [imgAltTexto]="'Cadastro Biblioteca'"
     [texto]="'Já criou sua conta?'"
-    [url]="rotasUrlApp.loginBiblioteca"
+    [url]="rotasUrlApp.loginUsuario"
     [linkTexto]="'Entrar agora'"
   >
   </app-aside-item>
@@ -56,6 +56,6 @@
       Cadastrar
     </button>
 
-    <a [routerLink]="[rotasUrlApp.loginUsuario]"> Entrar como usuário </a>
+    <a [routerLink]="[rotasUrlApp.loginBiblioteca]"> Entrar como biblioteca </a>
   </form>
 </div>

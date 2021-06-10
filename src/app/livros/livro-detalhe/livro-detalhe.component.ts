@@ -56,28 +56,13 @@ export class LivroDetalheComponent implements OnInit {
   }
 
   onExcluir() {
-    this.confirmacao();
-    this.livrosService.remover(this.livro.id).subscribe(
-      (response) => {
-        this.router.navigate(['..'], {
-          relativeTo: this.activatedRoute,
-        });
-      },
-      (error) => {},
-    );
-  }
+    const confirmacaoExclusao = this.confirmarExclusao();
 
-  private confirmacao() {
-    console.log('Deseja realmente excluir?');
-  }
-
-  private confirmarDevolucao() {
-    return this.alertaModalService.mostrarAlertaConfirmacao(
-      'Devolução livro',
-      'Deseja realmente devolver o livro?',
-      'Sim, quero devolver',
-      'Não',
-    );
+    confirmacaoExclusao.pipe(take(1)).subscribe((confirmacao) => {
+      if (confirmacao) {
+        this.excluirLivro();
+      }
+    });
   }
 
   onDevolverLivro() {
@@ -88,6 +73,24 @@ export class LivroDetalheComponent implements OnInit {
         this.devolverLivro();
       }
     });
+  }
+
+  private confirmarExclusao() {
+    return this.alertaModalService.mostrarAlertaConfirmacao(
+      'Exclusão livro',
+      'Deseja realmente excluir o livro?',
+      'Sim, quero excluir',
+      'Não',
+    );
+  }
+
+  private confirmarDevolucao() {
+    return this.alertaModalService.mostrarAlertaConfirmacao(
+      'Devolução livro',
+      'Deseja realmente devolver o livro?',
+      'Sim, quero devolver',
+      'Não',
+    );
   }
 
   private devolverLivro() {
@@ -107,5 +110,19 @@ export class LivroDetalheComponent implements OnInit {
         },
         (error) => {},
       );
+  }
+
+  private excluirLivro() {
+    this.livrosService.remover(this.livro.id).subscribe(
+      (response) => {
+        this.alertaModalService.mostrarAlertaSucesso(
+          'Livro excluído com sucesso',
+        );
+        this.router.navigate(['..'], {
+          relativeTo: this.activatedRoute,
+        });
+      },
+      (error) => {},
+    );
   }
 }

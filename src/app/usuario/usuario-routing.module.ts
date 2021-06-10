@@ -2,10 +2,12 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { LivroDetalheComponent } from 'src/app/livros/livro-detalhe/livro-detalhe.component';
+import { UsuarioAuthGuard } from './guards/usuario-auth.guard';
 
 import { LoginComponent } from './login/login.component';
 import { PerfilDetalheComponent } from './perfil-detalhe/perfil-detalhe.component';
 import { PerfilPage } from './perfil/perfil.page';
+import { UsuarioCadastroComponent } from './usuario-cadastro/usuario-cadastro.component';
 import { UsuarioFormularioComponent } from './usuario-formulario/usuario-formulario.component';
 
 const routes: Routes = [
@@ -14,9 +16,13 @@ const routes: Routes = [
     component: LoginComponent,
   },
   {
+    path: 'cadastro',
+    component: UsuarioCadastroComponent,
+  },
+  {
     path: 'perfil',
     component: PerfilPage,
-    canActivate: [],
+    canActivate: [UsuarioAuthGuard],
     children: [
       {
         path: '',
