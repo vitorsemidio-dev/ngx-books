@@ -148,7 +148,11 @@ export class LivroFormularioComponent
 
   private atualizarImagemLivro(imagem: File) {
     this.livrosService.atualizarImagem(imagem, this.livro.id).subscribe(
-      (response) => {},
+      (response) => {
+        this.alertaModalService.mostrarAlertaSucesso(
+          'Imagem do livro atualizado com sucesso',
+        );
+      },
       (error) => {},
     );
   }

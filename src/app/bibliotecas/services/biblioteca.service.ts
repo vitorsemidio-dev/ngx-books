@@ -41,10 +41,8 @@ export class BibliotecaService extends CrudService<Biblioteca> {
 
   adicionarLivroAoCatalogo({ name, pages, quantity, author }: Livro) {
     const book = { name, pages, author };
-    const library_id = this.getLibraryId();
     return this.http
-      .post(`${this.apiUrl}/${this.recurso}/register-book`, {
-        library_id,
+      .post(`${this.apiUrl}/${this.recurso}/stock`, {
         book,
         quantity,
       })
@@ -55,21 +53,5 @@ export class BibliotecaService extends CrudService<Biblioteca> {
           ),
         ),
       );
-  }
-
-  private getLibraryId() {
-    const dadosLocalStorage = JSON.parse(
-      localStorage.getItem(Chave.chaveSessao),
-    ) as {
-      library: Biblioteca;
-    };
-
-    if (!dadosLocalStorage) {
-      return null;
-    }
-
-    const library_id = dadosLocalStorage.library.id;
-
-    return library_id;
   }
 }
