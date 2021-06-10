@@ -38,7 +38,7 @@ export class LoginService {
 
   constructor(private http: HttpClient) {}
 
-  fazerLogin({ email, password }: ICredencial) {
+  fazerLoginBiblioteca({ email, password }: ICredencial) {
     return this.http.post<ILoginResponse>(
       `${this.baseUrl}/libraries/sessions`,
       {
@@ -49,7 +49,7 @@ export class LoginService {
   }
 
   fazerLoginUsuario({ email, password }: ICredencial) {
-    return this.http.post<ILoginResponse>(`${this.baseUrl}/sessions`, {
+    return this.http.post<ILoginResponse>(`${this.baseUrl}/users/sessions`, {
       email,
       password,
     });
