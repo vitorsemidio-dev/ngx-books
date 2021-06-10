@@ -39,6 +39,12 @@ export class LivrosService extends CrudService<Livro> {
       .pipe(tap(() => this.emissorLivro$.next(AcaoLivro.Atualizado)));
   }
 
+  atualizarImagem(imagem: File, id: string) {
+    return super
+      .atualizarImagem(imagem, id)
+      .pipe(tap(() => this.emissorLivro$.next(AcaoLivro.Atualizado)));
+  }
+
   buscarPorSlug(slug: string) {
     return this.http.get<Livro>(`${this.apiUrl}/${this.recurso}/${slug}`);
   }
